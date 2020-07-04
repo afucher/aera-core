@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using aera_core.Domain;
 using aera_core.Persistencia;
+using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,9 +25,9 @@ namespace aera_core.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ClienteDTO> Get()
+        public POUIListResponse<ClienteDTO> Get()
         {
-            return _clientesServiço.ObterClientes().Select(cliente => new ClienteDTO
+            var clientes = _clientesServiço.ObterClientes().Take(10).Select(cliente => new ClienteDTO
             {
                 id = cliente.Id,
                 nome = cliente.Nome,
@@ -49,7 +50,9 @@ namespace aera_core.Controllers
                 telefone = cliente.Telefone,
                 telefone_comercial = cliente.TelefoneComercial
 
-            });
+            }).ToArray();
+
+            return new POUIListResponse<ClienteDTO>(clientes);
         }
     }
 }
