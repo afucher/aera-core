@@ -28,7 +28,7 @@ namespace AeraIntegrationTest
             {
                 id = 1
             }});
-            var result = await _client.GetAsync("/clientes");
+            var result = await _client.GetAsync("/api/clientes");
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             result.Content.ReadAsStringAsync().Result.Should().Be(clientes);
         }

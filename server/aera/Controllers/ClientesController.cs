@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace aera_core.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
 
