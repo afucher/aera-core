@@ -15,18 +15,41 @@ namespace aera_core.Controllers
     {
 
         private readonly ILogger<ClientesController> _logger;
-        private readonly ClienteRepositório _repositório;
+        private readonly ClientesServiço _clientesServiço;
 
-        public ClientesController(ILogger<ClientesController> logger, ClienteRepositório repositório)
+        public ClientesController(ILogger<ClientesController> logger, ClientesServiço clientesServiço)
         {
             _logger = logger;
-            _repositório = repositório;
+            _clientesServiço = clientesServiço;
         }
 
         [HttpGet]
-        public IEnumerable<Cliente> Get()
+        public IEnumerable<ClienteDTO> Get()
         {
-            return _repositório.ObterClientes();
+            return _clientesServiço.ObterClientes().Select(cliente => new ClienteDTO
+            {
+                id = cliente.Id,
+                nome = cliente.Nome,
+                address1 =  cliente.address1,
+                address2 =  cliente.address2,
+                address3 =  cliente.address3,
+                celular = cliente.Celular,
+                cep = cliente.CEP,
+                cidade = cliente.Cidade,
+                cpf = cliente.CPF,
+                data_nascimento = cliente.DataNascimento,
+                profissao = cliente.Profissão,
+                professor = cliente.ÉProfessor,
+                email = cliente.Email,
+                estado = cliente.Estado,
+                hora_nascimento = cliente.HorárioNascimento,
+                local_ascimento = cliente.LocalNascimento,
+                nivel_educacao = cliente.NívelEducação,
+                observacao = cliente.Observação,
+                telefone = cliente.Telefone,
+                telefone_comercial = cliente.TelefoneComercial
+
+            });
         }
     }
 }

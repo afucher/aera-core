@@ -19,23 +19,23 @@ namespace aera_core.Persistencia
         public string name { get; set; }
         public string cpf { get; set; }
         public string email { get; set; }
-        public string phone;
-        public bool teacher;
-        public string cel_phone;
-        public string com_phone;
-        public string address1;
-        public string address2;
-        public string address3;
-        public string city;
-        public string state;
-        public string zip_code;
-        public string profession;
-        public string edu_lvl;
-        public string old_code;
-        public DateTime birthDate;
-        public TimeSpan birthTime;
-        public string birthPlace;
-        public string note;
+        public string phone{ get; set; }
+        public bool teacher{ get; set; }
+        public string cel_phone{ get; set; }
+        public string com_phone{ get; set; }
+        public string address1{ get; set; }
+        public string address2{ get; set; }
+        public string address3{ get; set; }
+        public string city{ get; set; }
+        public string state{ get; set; }
+        public string zip_code{ get; set; }
+        public string profession{ get; set; }
+        public string edu_lvl{ get; set; }
+        public string old_code{ get; set; }
+        public DateTime? birth_date{ get; set; }
+        public TimeSpan? birth_hour{ get; set; }
+        public string birth_place{ get; set; }
+        public string note{ get; set; }
 
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }

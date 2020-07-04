@@ -4,8 +4,7 @@ namespace aera_core.Domain
 {
     public class Cliente
     {
-        public int id { get; set; }
-
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
@@ -22,8 +21,8 @@ namespace aera_core.Domain
         public string Profissão { get; set; }
         public string NívelEducação { get; set; }
         public string CódigoAntigo { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public TimeSpan HorárioNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
+        public TimeSpan? HorárioNascimento { get; set; }
         public string LocalNascimento { get; set; }
         public string Observação { get; set; }
     }

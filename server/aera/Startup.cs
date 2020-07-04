@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aera_core.Domain;
 using aera_core.Persistencia;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace aera_core
             services.AddDbContext<ClientesContexto>(options => 
                 options.UseNpgsql("Server=localhost;Port=5432;User Id=postgres;Password=root;Database=aera_development"));
             services.AddScoped(provider => new ClienteRepositório(provider.GetService<ClientesContexto>()));
+            services.AddScoped(provider => new ClientesServiço(provider.GetService<ClienteRepositório>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +44,7 @@ namespace aera_core
             }
             else
             {
-                app.UseHttpsRedirection();
+               // app.UseHttpsRedirection();
 
             }
 
