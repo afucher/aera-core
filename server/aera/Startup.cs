@@ -1,19 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using aera_core.Domain;
 using aera_core.Persistencia;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace aera_core
 {
@@ -35,7 +29,7 @@ namespace aera_core
                 configuration.RootPath = "../../AeraWebApp/dist";
             });
             services.AddDbContext<ClientesContexto>(options => 
-                options.UseNpgsql("Server=localhost;Port=5432;User Id=postgres;Password=root;Database=aera_development"));
+                options.UseNpgsql(Configuration.GetConnectionString("default")));
             services.AddScoped(provider => new ClienteRepositório(provider.GetService<ClientesContexto>()));
             services.AddScoped(provider => new ClientesServiço(provider.GetService<ClienteRepositório>()));
         }
