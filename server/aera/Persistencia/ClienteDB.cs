@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using aera_core.Domain;
 
 namespace aera_core.Persistencia
 {
@@ -39,5 +40,62 @@ namespace aera_core.Persistencia
 
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
+
+
+        public Cliente ParaCliente()
+        {
+            return new Cliente
+            {
+                Id = id,
+                Nome = name,
+                CPF = cpf,
+                Email = email,
+                Telefone = phone,
+                ÉProfessor = teacher,
+                Celular = cel_phone,
+                TelefoneComercial = com_phone,
+                address1 = address1,
+                address2 = address2,
+                address3 = address3,
+                Cidade = city,
+                Estado = state,
+                CEP = zip_code,
+                Profissão = profession,
+                NívelEducação = edu_lvl,
+                CódigoAntigo = old_code,
+                DataNascimento = birth_date,
+                HorárioNascimento = birth_hour,
+                LocalNascimento = birth_place,
+                Observação = note
+            };
+        }
+
+        public static ClienteDB DeCliente(Cliente cliente)
+        {
+            return new ClienteDB
+            {
+                id = cliente.Id,
+                name = cliente.Nome,
+                cpf = cliente.CPF,
+                email = cliente.Email,
+                phone = cliente.Telefone,
+                teacher = cliente.ÉProfessor,
+                cel_phone = cliente.Celular,
+                com_phone = cliente.TelefoneComercial,
+                address1 = cliente.address1,
+                address2 = cliente.address2,
+                address3 = cliente.address3,
+                city = cliente.Cidade,
+                state = cliente.Estado,
+                zip_code = cliente.CEP,
+                profession = cliente.Profissão,
+                edu_lvl = cliente.NívelEducação,
+                old_code = cliente.CódigoAntigo,
+                birth_date = cliente.DataNascimento,
+                birth_hour = cliente.HorárioNascimento,
+                birth_place = cliente.LocalNascimento,
+                note = cliente.Observação
+            };
+        }
     }
 }
