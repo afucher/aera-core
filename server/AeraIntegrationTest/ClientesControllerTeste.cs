@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -29,9 +30,21 @@ namespace AeraIntegrationTest
             {
                 id = 1
             }}));
-            var result = await _client.GetAsync("/api/clientes?pageSize=10");
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
-            result.Content.ReadAsStringAsync().Result.Should().Be(clientes);
+            var resposta = await _client.GetAsync("/api/clientes?pageSize=10");
+            var conteúdo = await resposta.Content.ReadAsStringAsync();
+            conteúdo.Should().Be(clientes);
+        }
+        
+        
+        [Test]
+        public async Task NãoRetornaClientesQuandoPaginaçãoForMaiorQueQuantidadeDeRegistros()
+        {
+            var clientes = JsonSerializer.Serialize(new POUIListResponse<ClienteDTO>(ArraySegment<ClienteDTO>.Empty));
+            var resposta = await _client.GetAsync("/api/clientes?page=2&pageSize=10");
+            resposta.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var conteúdo = await resposta.Content.ReadAsStringAsync();
+            conteúdo.Should().Be(clientes);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace aera_core.Controllers
         [HttpGet]
         public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var clientes = _clientesServiço.ObterClientes(pageSize).Select(cliente => new ClienteDTO
+            var clientes = _clientesServiço.ObterClientes(pageSize, page).Select(cliente => new ClienteDTO
             {
                 id = cliente.Id,
                 nome = cliente.Nome,

@@ -39,7 +39,7 @@ namespace AeraIntegrationTest
         {
             var repositório = new ClienteRepositório(contexto);
 
-            var clientes = repositório.ObterClientes(100);
+            var clientes = repositório.ObterClientes(100, 1);
 
             clientes.Should().BeEmpty();
         }
@@ -53,7 +53,7 @@ namespace AeraIntegrationTest
             entityEntry.State = EntityState.Detached;
             var repositório = new ClienteRepositório(contexto);
 
-            var clientes = repositório.ObterClientes(100);
+            var clientes = repositório.ObterClientes(100, 1);
 
             clientes.Should().BeEquivalentTo(cliente.ParaCliente());
         }
@@ -67,7 +67,7 @@ namespace AeraIntegrationTest
             
             var repositório = new ClienteRepositório(contexto);
 
-            var clientes = repositório.ObterClientes(5);
+            var clientes = repositório.ObterClientes(5, 1);
 
             clientes.Should().HaveCount(5);
         }
