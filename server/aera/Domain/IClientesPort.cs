@@ -4,6 +4,6 @@ namespace aera_core.Domain
 {
     public interface IClientesPort
     {
-        public IReadOnlyCollection<Cliente> ObterClientes(int quantidade, int pagina);
+        public ListaPaginada<Cliente> ObterClientes(int quantidade, int pagina);
     }
 }
