@@ -10,9 +10,9 @@ namespace aera_core.Domain
         {
             this._clientesPort = _clientesPort;
         }
-        public IReadOnlyCollection<Cliente> ObterClientes()
+        public IReadOnlyCollection<Cliente> ObterClientes(int quantidade)
         {
-            return _clientesPort.ObterClientes();
+            return _clientesPort.ObterClientes(quantidade);
         }
     }
 }

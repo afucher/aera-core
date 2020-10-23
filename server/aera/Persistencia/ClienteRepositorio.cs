@@ -45,9 +45,9 @@ namespace aera_core.Persistencia
             };
             return cliente;
         }
-        public IReadOnlyCollection<Cliente> ObterClientes()
+        public IReadOnlyCollection<Cliente> ObterClientes(int quantidade)
         {
-            return _contexto.Clientes.Select(x => retornaCliente(x)).ToArray();
+            return _contexto.Clientes.Take(quantidade).Select(x => retornaCliente(x)).ToArray();
         }
     }
 }

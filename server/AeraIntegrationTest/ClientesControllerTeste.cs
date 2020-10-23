@@ -23,13 +23,13 @@ namespace AeraIntegrationTest
         }
         
         [Test]
-        public async Task RetornaAlohaMundoNaRotaPadrão()
+        public async Task RetornaClientes()
         {
             var clientes = JsonSerializer.Serialize(new POUIListResponse<ClienteDTO>(new []{new ClienteDTO
             {
                 id = 1
             }}));
-            var result = await _client.GetAsync("/api/clientes");
+            var result = await _client.GetAsync("/api/clientes?pageSize=10");
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             result.Content.ReadAsStringAsync().Result.Should().Be(clientes);
         }
