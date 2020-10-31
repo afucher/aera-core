@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using aera_core.Domain;
+using aera_core.Helpers;
 
 namespace aera_core.Persistencia
 {
@@ -45,11 +46,14 @@ namespace aera_core.Persistencia
             };
             return cliente;
         }
-        public ListaPaginada<Cliente> ObterClientes(int quantidade, int pagina)
+        public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opções)
         {
             var total = _contexto.Clientes.Count();
-            var clientes =  _contexto.Clientes.Skip((pagina - 1) * quantidade).Take(quantidade).Select(x => retornaCliente(x)).ToList();
-            return new ListaPaginada<Cliente>(clientes, total, pagina, quantidade);
+            var clientes =  _contexto.Clientes
+                .Skip((opções.Página-1) * opções.LimitePágina)
+                .Take(opções.LimitePágina)
+                .Select(x => retornaCliente(x)).ToList();
+            return new ListaPaginada<Cliente>(clientes, total, opções.Página, opções.LimitePágina);
         }
     }
 }

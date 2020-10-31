@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using aera_core.Helpers;
 
 namespace aera_core.Domain
 {
@@ -10,9 +11,9 @@ namespace aera_core.Domain
         {
             this._clientesPort = _clientesPort;
         }
-        public IReadOnlyCollection<Cliente> ObterClientes(int quantidade, int pagina)
+        public IReadOnlyCollection<Cliente> ObterClientes(OpçõesBusca opções)
         {
-            return _clientesPort.ObterClientes(quantidade, pagina);
+            return _clientesPort.ObterClientes(opções);
         }
     }
 }

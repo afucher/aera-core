@@ -22,6 +22,12 @@ namespace AeraIntegrationTest
             _factory = new APIWebApplicationFactory();
             _client = _factory.CreateClient();
         }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            _factory.Dispose();
+        }
         
         [Test]
         public async Task RetornaClientes()

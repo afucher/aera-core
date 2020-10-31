@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using aera_core.Domain;
+using aera_core.Helpers;
 using aera_core.Persistencia;
 using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,12 @@ namespace aera_core.Controllers
         [HttpGet]
         public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var clientes = _clientesServiço.ObterClientes(pageSize, page).Select(cliente => new ClienteDTO
+            var opções = new OpçõesBusca
+            {
+                Página = page,
+                LimitePágina = pageSize,
+            };
+            var clientes = _clientesServiço.ObterClientes(opções).Select(cliente => new ClienteDTO
             {
                 id = cliente.Id,
                 nome = cliente.Nome,

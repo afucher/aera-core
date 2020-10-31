@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using aera_core.Domain;
+using aera_core.Helpers;
 using aera_core.Persistencia;
 using AeraIntegrationTest.Builders;
 using FluentAssertions;
@@ -38,8 +39,13 @@ namespace AeraIntegrationTest
         public void DeveRetornarListaDeClientesVazias()
         {
             var repositório = new ClienteRepositório(contexto);
+            var opções = new OpçõesBusca
+            {
+                LimitePágina = 100,
+                Página = 1
+            };
 
-            var clientes = repositório.ObterClientes(100, 1);
+            var clientes = repositório.ObterClientes(opções);
 
             clientes.Should().BeEmpty();
         }
@@ -52,8 +58,13 @@ namespace AeraIntegrationTest
             contexto.SaveChanges();
             entityEntry.State = EntityState.Detached;
             var repositório = new ClienteRepositório(contexto);
-
-            var clientes = repositório.ObterClientes(100, 1);
+            var opções = new OpçõesBusca
+            {
+                LimitePágina = 100,
+                Página = 1
+            };
+            
+            var clientes = repositório.ObterClientes(opções);
 
             clientes.Should().BeEquivalentTo(cliente.ParaCliente());
         }
@@ -64,10 +75,15 @@ namespace AeraIntegrationTest
             var clientesDB = new ClienteDBBuilder().Generate(10); 
             contexto.Clientes.AddRange(clientesDB);
             contexto.SaveChanges();
+            var opções = new OpçõesBusca
+            {
+                LimitePágina = 5,
+                Página = 1
+            };
             
             var repositório = new ClienteRepositório(contexto);
 
-            var clientes = repositório.ObterClientes(5, 1);
+            var clientes = repositório.ObterClientes(opções);
 
             clientes.Should().HaveCount(5);
         }
