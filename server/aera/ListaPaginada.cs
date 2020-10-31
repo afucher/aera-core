@@ -14,6 +14,6 @@ namespace aera_core
             AddRange(itens);
         }
 
-        private bool TemMaisItens => Página < TotalDePáginas;
+        public bool TemMaisItens => Página < TotalDePáginas;
     }
 }

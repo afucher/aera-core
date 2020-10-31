@@ -33,7 +33,8 @@ namespace aera_core.Controllers
                 Página = page,
                 LimitePágina = pageSize,
             };
-            var clientes = _clientesServiço.ObterClientes(opções).Select(cliente => new ClienteDTO
+            var clientes = _clientesServiço.ObterClientes(opções);
+            var clientesDTO = clientes.Select(cliente => new ClienteDTO
             {
                 id = cliente.Id,
                 nome = cliente.Nome,
@@ -58,7 +59,7 @@ namespace aera_core.Controllers
 
             }).ToArray();
 
-            return new POUIListResponse<ClienteDTO>(clientes);
+            return new POUIListResponse<ClienteDTO>(clientesDTO, clientes.TemMaisItens);
         }
     }
 }

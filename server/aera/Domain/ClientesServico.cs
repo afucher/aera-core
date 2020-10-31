@@ -11,7 +11,7 @@ namespace aera_core.Domain
         {
             this._clientesPort = _clientesPort;
         }
-        public IReadOnlyCollection<Cliente> ObterClientes(OpçõesBusca opções)
+        public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opções)
         {
             return _clientesPort.ObterClientes(opções);
         }
