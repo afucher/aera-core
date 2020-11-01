@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {
+  PoPageDynamicTableCustomTableAction
+} from '@po-ui/ng-templates';
 
 @Component({
   selector: 'app-client-list',
@@ -6,15 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(private router: Router) { }
+  tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
+    { label: 'Alterar', action: ({id}) => this.router.navigate([`/clientes/${id}`]) }
+  ];
 
   public readonly fields: Array<any> = [
     { property: 'id', key: true },
     { property: 'nome', label: 'Nome', filter: true, gridColumns: 6 }
   ];
+
+  ngOnInit(): void {
+  }
 
 }

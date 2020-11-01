@@ -19,8 +19,8 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
-    "@po-ui/ng-components": "3.9.2",
-    "@po-ui/ng-templates": "3.9.2",
+    "@po-ui/ng-components": "3.10.0",
+    "@po-ui/ng-templates": "3.10.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

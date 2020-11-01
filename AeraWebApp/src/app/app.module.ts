@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ClientListComponent } from './client-list/client-list.component';
 import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
 import { ClienteComponent } from './cliente/cliente.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import { ClienteComponent } from './cliente/cliente.component';
     BrowserModule,
     AppRoutingModule,
     PoModule,
-    PoPageDynamicTableModule
+    PoPageDynamicTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
