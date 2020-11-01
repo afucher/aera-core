@@ -48,8 +48,6 @@ namespace aera_core.Persistencia
 
         public Cliente ParaCliente()
         {
-            System.Console.WriteLine(">>>>>>>>>>>>>>>>>");
-            Console.WriteLine(Turmas.Count);
             return new Cliente
             {
                 Id = id,

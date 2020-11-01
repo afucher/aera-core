@@ -6,5 +6,6 @@ namespace aera_core.Domain
     public interface IClientesPort
     {
         public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opçõesBusca);
+        public Cliente Obter(int id);
     }
 }

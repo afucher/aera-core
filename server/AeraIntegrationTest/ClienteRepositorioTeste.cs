@@ -87,6 +87,20 @@ namespace AeraIntegrationTest
 
             clientes.Should().HaveCount(5);
         }
+
+        [Test]
+        public void DeveRetornarClientePeloId()
+        {
+            var clientesDB = new ClienteDBBuilder().Generate(10); 
+            contexto.Clientes.AddRange(clientesDB);
+            contexto.SaveChanges();
+            
+            var repositório = new ClienteRepositório(contexto);
+
+            var cliente = repositório.Obter(clientesDB[2].id);
+
+            cliente.Should().BeEquivalentTo(clientesDB[2].ParaCliente());
+        }
         
     }
 }

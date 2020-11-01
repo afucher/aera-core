@@ -25,6 +25,12 @@ namespace aera_core.Controllers
             _clientesServiço = clientesServiço;
         }
 
+        [HttpGet("{id}")]
+        public Cliente Get(int id)
+        {
+            return _clientesServiço.Obter(id);
+        }
+
         [HttpGet]
         public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
         {

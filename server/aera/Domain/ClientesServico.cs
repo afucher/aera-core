@@ -11,6 +11,11 @@ namespace aera_core.Domain
         {
             this._clientesPort = _clientesPort;
         }
+
+        public Cliente Obter(int id)
+        {
+            return _clientesPort.Obter(id);
+        }
         public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opções)
         {
             return _clientesPort.ObterClientes(opções);

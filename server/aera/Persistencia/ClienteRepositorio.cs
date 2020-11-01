@@ -54,5 +54,10 @@ namespace aera_core.Persistencia
                 .Select(x => retornaCliente(x)).ToList();
             return new ListaPaginada<Cliente>(clientes, total, opções.Página, opções.LimitePágina);
         }
+
+        public Cliente Obter(int id)
+        {
+            return _contexto.Clientes.Find(id).ParaCliente();
+        }
     }
 }
