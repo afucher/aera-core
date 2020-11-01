@@ -35,7 +35,7 @@ namespace AeraIntegrationTest
             var clientes = JsonSerializer.Serialize(new POUIListResponse<ClienteDTO>(new []{new ClienteDTO
             {
                 id = 1
-            }}));
+            }}, true));
             var resposta = await _client.GetAsync("/api/clientes?pageSize=10");
             var conteúdo = await resposta.Content.ReadAsStringAsync();
             conteúdo.Should().Be(clientes);

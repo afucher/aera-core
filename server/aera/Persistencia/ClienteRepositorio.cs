@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace aera_core.Persistencia
 {
     public class ClienteRepositório : IClientesPort
     {
-        private readonly ClientesContexto _contexto;
+        private readonly AplicaçãoContexto _contexto;
 
-        public ClienteRepositório(ClientesContexto contexto)
+        public ClienteRepositório(AplicaçãoContexto contexto)
         {
             _contexto = contexto;
         }
-
-
 
         private static Cliente retornaCliente(ClienteDB x)
         {
@@ -42,7 +41,6 @@ namespace aera_core.Persistencia
                 HorárioNascimento = x.birth_hour,
                 LocalNascimento = x.birth_place,
                 Observação = x.note
-
             };
             return cliente;
         }
@@ -50,6 +48,7 @@ namespace aera_core.Persistencia
         {
             var total = _contexto.Clientes.Count();
             var clientes =  _contexto.Clientes
+                .Include(c => c.Turmas)
                 .Skip((opções.Página-1) * opções.LimitePágina)
                 .Take(opções.LimitePágina)
                 .Select(x => retornaCliente(x)).ToList();

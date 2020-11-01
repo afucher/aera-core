@@ -11,7 +11,7 @@ using Respawn;
 
 namespace AeraIntegrationTest
 {
-    public class ClienteRepositórioTeste
+    public class TurmaRepositórioTeste
     {
         private static string parametrosConexão =
             "Server=localhost;Port=5432;User Id=postgres;Password=root;Database=aera_test";
@@ -38,14 +38,9 @@ namespace AeraIntegrationTest
         [Test]
         public void DeveRetornarListaDeClientesVazias()
         {
-            var repositório = new ClienteRepositório(contexto);
-            var opções = new OpçõesBusca
-            {
-                LimitePágina = 100,
-                Página = 1
-            };
+            var repositório = new TurmaRepositorio(contexto);
 
-            var clientes = repositório.ObterClientes(opções);
+            var clientes = repositório.Obter();
 
             clientes.Should().BeEmpty();
         }
@@ -53,39 +48,15 @@ namespace AeraIntegrationTest
         [Test]
         public void DeveRetornarClientesJáExistentes()
         {
-            var cliente = new ClienteDBBuilder().Generate(); 
-            var entityEntry = contexto.Clientes.Add(cliente);
+            var cliente = new TurmaDBBuilder().Generate(); 
+            var entityEntry = contexto.Turmas.Add(cliente);
             contexto.SaveChanges();
             entityEntry.State = EntityState.Detached;
-            var repositório = new ClienteRepositório(contexto);
-            var opções = new OpçõesBusca
-            {
-                LimitePágina = 100,
-                Página = 1
-            };
+            var repositório = new TurmaRepositorio(contexto);
             
-            var clientes = repositório.ObterClientes(opções);
+            var clientes = repositório.Obter();
 
-            clientes.Should().BeEquivalentTo(cliente.ParaCliente());
-        }
-        
-        [Test]
-        public void DeveRetornarClientesRespeitandoQuantidade()
-        {
-            var clientesDB = new ClienteDBBuilder().Generate(10); 
-            contexto.Clientes.AddRange(clientesDB);
-            contexto.SaveChanges();
-            var opções = new OpçõesBusca
-            {
-                LimitePágina = 5,
-                Página = 1
-            };
-            
-            var repositório = new ClienteRepositório(contexto);
-
-            var clientes = repositório.ObterClientes(opções);
-
-            clientes.Should().HaveCount(5);
+            clientes.Should().BeEquivalentTo(clientes, options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation)).WhenTypeIs<DateTime>());
         }
         
     }

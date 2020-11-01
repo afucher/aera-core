@@ -31,14 +31,14 @@ namespace AeraIntegrationTest
             {
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType ==
-                         typeof(DbContextOptions<ClientesContexto>));
+                         typeof(DbContextOptions<AplicaçãoContexto>));
 
                 if (descriptor != null)
                 {
                     services.Remove(descriptor);
                 }
                 
-                services.AddDbContext<ClientesContexto>(options =>
+                services.AddDbContext<AplicaçãoContexto>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
@@ -51,7 +51,7 @@ namespace AeraIntegrationTest
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<ClientesContexto>();
+                    var db = scopedServices.GetRequiredService<AplicaçãoContexto>();
                     var logger = scopedServices
                         .GetRequiredService<ILogger<APIWebApplicationFactory>>();
 

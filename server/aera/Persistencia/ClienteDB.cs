@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using aera_core.Domain;
@@ -38,12 +39,17 @@ namespace aera_core.Persistencia
         public string birth_place{ get; set; }
         public string note{ get; set; }
 
+        public ICollection<TurmaDB> Turmas { get; set; }
+        
+        public List<TurmaAluno> TurmaAlunos { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
 
 
         public Cliente ParaCliente()
         {
+            System.Console.WriteLine(">>>>>>>>>>>>>>>>>");
+            Console.WriteLine(Turmas.Count);
             return new Cliente
             {
                 Id = id,

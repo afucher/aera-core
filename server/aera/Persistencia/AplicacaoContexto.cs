@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace aera_core.Persistencia
 {
-    public class ClientesContexto : DbContext
+    public class AplicaçãoContexto : DbContext
     {
         public DbSet<ClienteDB> Clientes { get; set; }
         public DbSet<TurmaDB> Turmas { get; set; }
-        public ClientesContexto(DbContextOptions opções) : base(opções) { }
+        public AplicaçãoContexto(DbContextOptions opções) : base(opções) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,19 +17,6 @@ namespace aera_core.Persistencia
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<ClienteDB>()
-            //     .HasMany(p => p.Turmas)
-            //     .WithMany(c => c.Alunos)
-            //     .UsingEntity<TurmaAluno>(
-            //         j => j
-            //             .HasOne(ta => ta.Turma)
-            //             .WithMany(t => t.TurmaAlunos)
-            //             .HasForeignKey(ta => ta.TurmaId),
-            //         j => j
-            //             .HasOne(ta => ta.Cliente)
-            //             .WithMany(c => c.TurmaAlunos)
-            //             .HasForeignKey(ta => ta.ClienteId),
-            //         j => j.HasKey(t => new {t.TurmaId, t.ClienteId}));
             modelBuilder.Entity<TurmaDB>()
                 .HasMany(p => p.Alunos)
                 .WithMany(c => c.Turmas)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using aera_core.Domain;
 using aera_core.Persistencia;
 using AutoBogus;
@@ -18,7 +19,9 @@ namespace AeraIntegrationTest.Builders
                 .RuleFor(x => x.phone, () => null)
                 .RuleFor(x => x.old_code, () => "O5000")
                 .RuleFor(x => x.birth_date, () => DateTime.Today)
-                .RuleFor(x => x.birth_hour, () => new TimeSpan(11, 50, 0));
+                .RuleFor(x => x.birth_hour, () => new TimeSpan(11, 50, 0))
+                .RuleFor(x => x.Turmas, () => new List<TurmaDB>())
+                .RuleFor(x => x.TurmaAlunos, () => new List<TurmaAluno>());
 
         }
     }

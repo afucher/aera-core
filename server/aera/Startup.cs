@@ -28,9 +28,9 @@ namespace aera_core
             {
                 configuration.RootPath = "../../AeraWebApp/dist";
             });
-            services.AddDbContext<ClientesContexto>(options => 
+            services.AddDbContext<AplicaçãoContexto>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("default")));
-            services.AddScoped(provider => new ClienteRepositório(provider.GetService<ClientesContexto>()));
+            services.AddScoped(provider => new ClienteRepositório(provider.GetService<AplicaçãoContexto>()));
             services.AddScoped(provider => new ClientesServiço(provider.GetService<ClienteRepositório>()));
         }
 
