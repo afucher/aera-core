@@ -1,4 +1,7 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using aera_core.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -32,4 +35,21 @@ namespace aera_core.Persistencia
 
         }
     }
+}
+
+[Table("ClientGroups")]
+public class TurmaAluno
+{
+    [Key]
+    public int id { get; set; }
+    
+    [Column("client_id")]
+    public int ClienteId { get; set; }
+    
+    public ClienteDB Cliente { get; set; }
+    
+    [Column("group_id")]
+    public int TurmaId { get; set; }
+    
+    public TurmaDB Turma { get; set; }
 }
