@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
 
 namespace aera_core
 {
@@ -26,8 +27,25 @@ namespace aera_core
             services.AddControllers();
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "../../AeraWebApp/dist";
+                configuration.RootPath = ".";
             });
+            // var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+            // Console.WriteLine(">>>>>> " + databaseUrl);
+            // var databaseUri = new Uri(databaseUrl);
+            // var userInfo = databaseUri.UserInfo.Split(':');
+            //
+            // var builder = new NpgsqlConnectionStringBuilder
+            // {
+            //     Host = databaseUri.Host,
+            //     Port = databaseUri.Port,
+            //     Username = userInfo[0],
+            //     Password = userInfo[1],
+            //     Database = databaseUri.LocalPath.TrimStart('/')
+            // };
+            //
+            // services.AddDbContext<AplicaçãoContexto>(options => 
+            //     options.UseNpgsql(builder.ToString()));
+            // return ;
             services.AddDbContext<AplicaçãoContexto>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("default")));
             services.AddScoped(provider => new ClienteRepositório(provider.GetService<AplicaçãoContexto>()));
@@ -46,8 +64,7 @@ namespace aera_core
             }
             else
             {
-               // app.UseHttpsRedirection();
-
+               app.UseHttpsRedirection();
             }
 
 
@@ -59,16 +76,16 @@ namespace aera_core
             {
                 endpoints.MapControllers();
             });
+            app.UseSpaStaticFiles();
             
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "../../AeraWebApp";
-
                 if (env.IsDevelopment())
                 {
+                    spa.Options.SourcePath = "../../AeraWebApp";
                     spa.UseAngularCliServer(npmScript: "start");
                     spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
                 }
