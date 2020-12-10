@@ -49,6 +49,7 @@ namespace aera_core.Persistencia
             var total = _contexto.Clientes.Count();
             var clientes =  _contexto.Clientes
                 .Include(c => c.Turmas)
+                .ThenInclude(t => t.Curso)
                 .Skip((opções.Página-1) * opções.LimitePágina)
                 .Take(opções.LimitePágina)
                 .Select(x => retornaCliente(x)).ToList();

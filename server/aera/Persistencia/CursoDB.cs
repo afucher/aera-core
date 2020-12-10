@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aera_core.Persistencia
 {
-    [Table("Groups")]
-    public class TurmaDB
+    [Table("Courses")]
+    public class CursoDB
     {
         
-        public TurmaDB()
+        public CursoDB()
         { 
             createdAt = DateTime.Now; 
             updatedAt = DateTime.Now;
@@ -17,14 +17,9 @@ namespace aera_core.Persistencia
         [Key]
         public int id { get; set; }
 
-        public int course_id { get; set; }
-        
-        public DateTime start_date { get; set; }
-        public DateTime end_date { get; set; }
-        
-        public ICollection<ClienteDB> Alunos { get; set; }
-        public List<TurmaAluno> TurmaAlunos { get; set; }
-        public CursoDB Curso { get; set; } 
+        public string name { get; set; }
+
+        public List<TurmaDB> Turmas { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
     }

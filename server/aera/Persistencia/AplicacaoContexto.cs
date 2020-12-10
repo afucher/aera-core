@@ -33,6 +33,11 @@ namespace aera_core.Persistencia
                         .WithMany(t => t.TurmaAlunos)
                         .HasForeignKey(ta => ta.TurmaId));
 
+            modelBuilder.Entity<TurmaDB>()
+                .HasOne(t => t.Curso)
+                .WithMany(t => t.Turmas)
+                .HasForeignKey(x => x.course_id);
+
         }
     }
 }
