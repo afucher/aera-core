@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace aera_core.Controllers
 {
@@ -24,5 +25,7 @@ namespace aera_core.Controllers
         public TimeSpan? hora_nascimento { get; set; }
         public string local_ascimento { get; set; }
         public string observacao { get; set; }
+        
+        public List<TurmaDTO> turmas { get; set; }
     }
 }

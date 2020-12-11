@@ -3,4 +3,9 @@
     [p-fields]= "fields"
     [p-value]="cliente">
   </po-dynamic-form>
+  <div *ngIf="cliente">
+    <p *ngFor="let turma of cliente.turmas">
+      {{turma.curso}}
+    </p>
+  </div>
 </po-page-default>

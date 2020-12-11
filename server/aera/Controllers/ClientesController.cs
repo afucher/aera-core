@@ -26,9 +26,38 @@ namespace aera_core.Controllers
         }
 
         [HttpGet("{id}")]
-        public Cliente Get(int id)
+        public ClienteDTO Get(int id)
         {
-            return _clientesServiço.Obter(id);
+            var cliente = _clientesServiço.Obter(id);
+            return new ClienteDTO
+            {
+                id = cliente.Id,
+                nome = cliente.Nome,
+                address1 =  cliente.address1,
+                address2 =  cliente.address2,
+                address3 =  cliente.address3,
+                celular = cliente.Celular,
+                cep = cliente.CEP,
+                cidade = cliente.Cidade,
+                cpf = cliente.CPF,
+                data_nascimento = cliente.DataNascimento,
+                profissao = cliente.Profissão,
+                professor = cliente.ÉProfessor,
+                email = cliente.Email,
+                estado = cliente.Estado,
+                hora_nascimento = cliente.HorárioNascimento,
+                local_ascimento = cliente.LocalNascimento,
+                nivel_educacao = cliente.NívelEducação,
+                observacao = cliente.Observação,
+                telefone = cliente.Telefone,
+                telefone_comercial = cliente.TelefoneComercial,
+                turmas = cliente.Turmas.Select(t => new TurmaDTO
+                {
+                    Curso = t.Curso.name,
+                    DataIncial = t.start_date,
+                    DataFinal = t.end_date
+                }).ToList()
+            };
         }
 
         [HttpGet]

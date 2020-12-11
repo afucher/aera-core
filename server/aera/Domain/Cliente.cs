@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using aera_core.Persistencia;
 
 namespace aera_core.Domain
 {
@@ -25,5 +27,6 @@ namespace aera_core.Domain
         public TimeSpan? HorárioNascimento { get; set; }
         public string LocalNascimento { get; set; }
         public string Observação { get; set; }
+        public List<TurmaDB> Turmas { get; set; }
     }
 }

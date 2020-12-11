@@ -58,7 +58,11 @@ namespace aera_core.Persistencia
 
         public Cliente Obter(int id)
         {
-            return _contexto.Clientes.Find(id).ParaCliente();
+            return _contexto.Clientes
+                .Include(c => c.Turmas)
+                .ThenInclude(t => t.Curso)
+                .FirstOrDefault(c => c.id == id)?
+                .ParaCliente();
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using aera_core.Domain;
 
 namespace aera_core.Persistencia
@@ -70,7 +71,8 @@ namespace aera_core.Persistencia
                 DataNascimento = birth_date,
                 HorárioNascimento = birth_hour,
                 LocalNascimento = birth_place,
-                Observação = note
+                Observação = note,
+                Turmas = Turmas.ToList()
             };
         }
 
