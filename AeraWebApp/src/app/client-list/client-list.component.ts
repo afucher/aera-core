@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  PoPageDynamicTableActions,
   PoPageDynamicTableCustomTableAction
 } from '@po-ui/ng-templates';
 
@@ -10,6 +11,7 @@ import {
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+  readonly actions: PoPageDynamicTableActions = {};
   constructor(private router: Router) { }
   tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
     { label: 'Alterar', action: ({id}) => this.router.navigate([`/clientes/${id}`]) }
