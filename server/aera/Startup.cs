@@ -50,6 +50,8 @@ namespace aera_core
                 options.UseNpgsql(Configuration.GetConnectionString("default")));
             services.AddScoped(provider => new ClienteRepositório(provider.GetService<AplicaçãoContexto>()));
             services.AddScoped(provider => new ClientesServiço(provider.GetService<ClienteRepositório>()));
+            services.AddScoped(provider => new TurmaRepositorio(provider.GetService<AplicaçãoContexto>()));
+            services.AddScoped(provider => new TurmasServiço(provider.GetService<TurmaRepositorio>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

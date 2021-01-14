@@ -36,27 +36,37 @@ namespace AeraIntegrationTest
         }
 
         [Test]
-        public void DeveRetornarListaDeClientesVazias()
+        public void DeveRetornarListaDeTurmasVazias()
         {
             var repositório = new TurmaRepositorio(contexto);
+            
+            var opções = new OpçõesBusca
+            {
+                LimitePágina = 100,
+                Página = 1
+            };
 
-            var clientes = repositório.Obter();
+            var clientes = repositório.ObterTurmas(opções);
 
             clientes.Should().BeEmpty();
         }
 
         [Test]
-        public void DeveRetornarClientesJáExistentes()
+        public void DeveRetornarTurmasExistentes()
         {
-            var cliente = new TurmaDBBuilder().Generate(); 
-            var entityEntry = contexto.Turmas.Add(cliente);
+            var turma = new TurmaDBBuilder().Generate(); 
+            var entityEntry = contexto.Turmas.Add(turma);
             contexto.SaveChanges();
             entityEntry.State = EntityState.Detached;
             var repositório = new TurmaRepositorio(contexto);
-            
-            var clientes = repositório.Obter();
+            var opções = new OpçõesBusca
+            {
+                LimitePágina = 100,
+                Página = 1
+            };
+            var turmas = repositório.ObterTurmas(opções);
 
-            clientes.Should().BeEquivalentTo(clientes, options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation)).WhenTypeIs<DateTime>());
+            turmas.Should().BeEquivalentTo(turmas, options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation)).WhenTypeIs<DateTime>());
         }
         
     }

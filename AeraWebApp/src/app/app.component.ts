@@ -11,11 +11,7 @@ export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'AERA', link: '/' },
-    {label: 'Clientes', link: '/clientes'}
+    {label: 'Clientes', link: '/clientes'},
+    {label: 'Turmas', link: '/turmas'}
   ];
-
-  private onClick() {
-    alert('Clicked in menu item')
-  }
-
 }
