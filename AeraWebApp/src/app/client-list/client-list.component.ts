@@ -19,7 +19,10 @@ export class ClientListComponent implements OnInit {
 
   public readonly fields: Array<any> = [
     { property: 'id', key: true },
-    { property: 'nome', label: 'Nome', filter: true, gridColumns: 6 }
+    { property: 'nome', label: 'Nome', filter: true},
+    { property: 'cpf', label: 'CPF', filter: true},
+    { property: 'email', label: 'Email', filter: true},
+    { property: 'celular', label: 'Celular'}
   ];
 
   ngOnInit(): void {

@@ -32,7 +32,23 @@ export class ClienteComponent implements OnInit {
       gridSmColumns: 12,
       order: 1
     },
-    { property: 'cpf', label: 'CPF', mask: '999.999.999-99', gridColumns: 6, gridSmColumns: 12}]
+    { property: 'cpf', label: 'CPF', mask: '999.999.999-99', gridColumns: 6, gridSmColumns: 12},
+    { property: 'email', label: 'email', gridColumns: 6, gridSmColumns: 12},
+    { property: 'telefone', label: 'Telefone', gridColumns: 6, gridSmColumns: 12},
+    { property: 'celular', label: 'Celular', gridColumns: 6, gridSmColumns: 12},
+    { property: 'telefone_comercial', label: 'Comercial', gridColumns: 6, gridSmColumns: 12},
+    { property: 'address1', label: 'Endereço', gridColumns: 6, gridSmColumns: 12},
+    { property: 'address2', label: 'End. Compl. 1', gridColumns: 6, gridSmColumns: 12},
+    { property: 'address3', label: 'End. Compl. 2', gridColumns: 6, gridSmColumns: 12},
+    { property: 'cidade', label: 'Cidade', gridColumns: 6, gridSmColumns: 12},
+    { property: 'estado', label: 'Estado', gridColumns: 6, gridSmColumns: 12},
+    { property: 'cep', label: 'CEP', gridColumns: 6, gridSmColumns: 12},
+    { property: 'profissao', label: 'Profissão', gridColumns: 6, gridSmColumns: 12},
+    { property: 'nivel_educacao', label: 'Nível Educação', gridColumns: 6, gridSmColumns: 12},
+    { property: 'data_nascimento', label: 'Data de Nascimento', gridColumns: 6, gridSmColumns: 12},
+    { property: 'hora_nascimento', label: 'Hora de Nascimento', gridColumns: 6, gridSmColumns: 12},
+    { property: 'local_nascimento', label: 'Local de Nascimento', gridColumns: 6, gridSmColumns: 12},
+    { property: 'observacao', label: 'Observação', gridColumns: 6, gridSmColumns: 12},]
 
   constructor(
     private route: ActivatedRoute,
