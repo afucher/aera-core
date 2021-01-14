@@ -40,7 +40,8 @@ namespace aera_core.Persistencia
                 DataNascimento = x.birth_date,
                 HorárioNascimento = x.birth_hour,
                 LocalNascimento = x.birth_place,
-                Observação = x.note
+                Observação = x.note,
+                Turmas = x.Turmas.ToList()
             };
             return cliente;
         }

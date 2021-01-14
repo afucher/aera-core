@@ -66,7 +66,7 @@ namespace AeraIntegrationTest
             };
             var turmas = repositório.ObterTurmas(opções);
 
-            turmas.Should().BeEquivalentTo(turmas, options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation)).WhenTypeIs<DateTime>());
+            turmas.Should().BeEquivalentTo(new [] {turma}, options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation)).WhenTypeIs<DateTime>());
         }
         
     }
