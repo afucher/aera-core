@@ -8,5 +8,7 @@ namespace aera_core.Domain
     {
         public ListaPaginada<TurmaDB> ObterTurmas(OpçõesBusca opçõesBusca);
         public TurmaDB Obter(int id);
+        public TurmaDB Criar(TurmaDB turma);
+        public TurmaDB Atualizar(TurmaDB turma);
     }
 }

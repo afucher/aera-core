@@ -22,6 +22,20 @@ export class TurmaService {
     );
   }
 
+  salvar(turma: Turma): Observable<Turma> {
+    return this.http.put<Turma>(`${this.url}/${turma.id}`, turma)
+      .pipe(
+        catchError(this.handleError('salvarTurma', turma))
+      );
+  }
+
+  criar(turma: Turma): Observable<Turma> {
+    return this.http.post<Turma>(this.url, turma)
+      .pipe(
+        catchError(this.handleError('criarTurma', turma))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

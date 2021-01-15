@@ -11,6 +11,7 @@ namespace aera_core.Persistencia
     {
         public DbSet<ClienteDB> Clientes { get; set; }
         public DbSet<TurmaDB> Turmas { get; set; }
+        public DbSet<CursoDB> Cursos { get; set; }
         public AplicaçãoContexto(DbContextOptions opções) : base(opções) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

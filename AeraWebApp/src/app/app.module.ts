@@ -12,6 +12,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
+import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
 
 @NgModule({
 
@@ -20,7 +21,8 @@ import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
     ClientListComponent,
     ClienteComponent,
     TurmaListComponent,
-    TurmaEditComponent
+    TurmaEditComponent,
+    TurmaNovaComponent
   ],
   imports: [
     BrowserModule,

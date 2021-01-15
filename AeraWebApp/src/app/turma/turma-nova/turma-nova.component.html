@@ -1,4 +1,4 @@
-<po-page-default p-title="Alterar">
+<po-page-default p-title="Nova turma">
   <po-dynamic-form #dynamicForm
     [p-fields]= "fields"
     [p-value]="turma">
@@ -6,9 +6,9 @@
   <div class="po-row">
     <po-button
       class="po-md-3"
-      p-label="Save"
+      p-label="Criar"
       [p-disabled]="dynamicForm?.form.invalid"
-      (p-click)="onSubmit();"
+      (p-click)="onSubmit(dynamicForm);"
     >
     </po-button>
   </div>

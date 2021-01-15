@@ -4,12 +4,14 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
+import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
 
 
 const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
   {path: 'clientes/:id', component: ClienteComponent},
   {path: 'turmas', component: TurmaListComponent},
+  {path: 'turmas/nova', component: TurmaNovaComponent},
   {path: 'turmas/:id', component: TurmaEditComponent},
 ];
 

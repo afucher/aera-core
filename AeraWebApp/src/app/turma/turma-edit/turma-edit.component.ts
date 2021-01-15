@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PoDynamicFormField } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoNotificationService } from '@po-ui/ng-components';
 import { Turma } from 'src/app/models/turma';
 import { TurmaService } from 'src/app/turma.service';
 
@@ -33,12 +33,30 @@ export class TurmaEditComponent implements OnInit {
       order: 2,
       disabled: true
     },
-    { property: 'dataInicial', label: 'Início', gridColumns: 6, gridSmColumns: 12, type: 'date', format: 'yyyy-MM-dd'},
-    { property: 'dataFinal', label: 'Término', gridColumns: 6, gridSmColumns: 12, type: 'date', format: 'yyyy-MM-dd'}];
+    { property: 'dataInicial', label: 'Início', gridColumns: 2, gridSmColumns: 12, type: 'date', format: 'yyyy-MM-dd', required: true},
+    { property: 'dataFinal', label: 'Término', gridColumns: 2, gridSmColumns: 12, type: 'date', format: 'yyyy-MM-dd', required: true},
+    { property: 'horárioInicial', label: 'Horário Inicial', gridColumns: 2, gridSmColumns: 12, type: 'time',
+      required: true},
+    { property: 'horárioFinal', label: 'Horário Final', gridColumns: 2, gridSmColumns: 12, type: 'time', required: true},
+    { property: 'quantidadeDeAulas', label: 'Aulas', gridColumns: 2, gridSmColumns: 12, type: 'number', required: true}];
 
   constructor(
+    public poNotification: PoNotificationService,
     private route: ActivatedRoute,
     private turmaService: TurmaService) { }
+
+  formataHorário(horario: string) {
+    if (horario.length === 4) { return horario.slice(0, 2) + ':' + horario.slice(2); }
+    return horario;
+  }
+
+  onSubmit() {
+    this.turmaService
+      .salvar({...this.turma,
+        horárioInicial: this.formataHorário(this.turma.horárioInicial),
+        horárioFinal: this.formataHorário(this.turma.horárioFinal)})
+      .subscribe((_) => this.poNotification.success('Turma salva com sucesso!'));
+   }
 
   ngOnInit(): void {
     // tslint:disable-next-line: radix

@@ -22,6 +22,10 @@ namespace aera_core.Persistencia
         public DateTime start_date { get; set; }
         public DateTime end_date { get; set; }
         
+        public TimeSpan start_hour { get; set; }
+        public TimeSpan end_hour { get; set; }
+        public int classes { get; set; }
+        
         public ICollection<ClienteDB> Alunos { get; set; }
         public List<TurmaAluno> TurmaAlunos { get; set; }
         public CursoDB Curso { get; set; } 

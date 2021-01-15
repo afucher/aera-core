@@ -17,6 +17,16 @@ namespace aera_core.Domain
         {
             return _turmasPort.Obter(id);
         }
+
+        public TurmaDB Criar(TurmaDB turma)
+        {
+            return _turmasPort.Criar(turma);
+        }
+
+        public TurmaDB Atualizar(TurmaDB turma)
+        {
+            return _turmasPort.Atualizar(turma);
+        }
         public ListaPaginada<TurmaDB> ObterTurmas(OpçõesBusca opções)
         {
             return _turmasPort.ObterTurmas(opções);
