@@ -28,7 +28,9 @@ namespace aera_core.Persistencia
 
         public TurmaDB Obter(int id)
         {
-            throw new System.NotImplementedException();
+            return _contexto.Turmas
+                .Include(t => t.Curso)
+                .FirstOrDefault(t => t.id == id);
         }
     }
 }

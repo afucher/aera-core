@@ -11,6 +11,7 @@ import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
 import { ClienteComponent } from './cliente/cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
+import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 
 @NgModule({
 
@@ -18,7 +19,8 @@ import { TurmaListComponent } from './turma/turma-list/turma-list.component';
     AppComponent,
     ClientListComponent,
     ClienteComponent,
-    TurmaListComponent
+    TurmaListComponent,
+    TurmaEditComponent
   ],
   imports: [
     BrowserModule,

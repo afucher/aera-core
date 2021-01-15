@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
-using aera_core.Persistencia;
 using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace aera_core.Controllers
 {
@@ -28,9 +23,10 @@ namespace aera_core.Controllers
             var turma = _turmasServiço.Obter(id);
             return new TurmaDTO
             {
+                id = turma.id,
                 Curso = turma.Curso.name,
-                DataInicial = turma.start_date,
-                DataFinal = turma.end_date
+                DataInicial = turma.start_date.ToString("yyyy-MM-dd"),
+                DataFinal = turma.end_date.ToString("yyyy-MM-dd")
             };
         }
 
@@ -47,8 +43,8 @@ namespace aera_core.Controllers
             {
                 id = turma.id,
                 Curso = turma.Curso.name,
-                DataInicial = turma.start_date,
-                DataFinal = turma.end_date
+                DataInicial = turma.start_date.ToString("yyyy-MM-dd"),
+                DataFinal = turma.end_date.ToString("yyyy-MM-dd")
             }).ToArray();
 
             return new POUIListResponse<TurmaDTO>(turmasDTO, turmas.TemMaisItens);

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
-using aera_core.Persistencia;
 using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,8 +50,8 @@ namespace aera_core.Controllers
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
                     Curso = t.Curso.name,
-                    DataInicial = t.start_date,
-                    DataFinal = t.end_date
+                    DataInicial = t.start_date.ToString("yyyy-MM-dd"),
+                    DataFinal = t.end_date.ToString("yyyy-MM-dd")
                 }).ToList()
             };
         }

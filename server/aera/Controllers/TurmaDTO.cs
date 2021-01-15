@@ -1,4 +1,6 @@
 using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace aera_core.Controllers
 {
@@ -6,7 +8,7 @@ namespace aera_core.Controllers
     {
         public int id { get; set; }
         public String Curso { get; set; }
-        public DateTime DataInicial { get; set; }
-        public DateTime DataFinal { get; set; }
+        public String DataInicial { get; set; }
+        public String DataFinal { get; set; }
     }
 }
