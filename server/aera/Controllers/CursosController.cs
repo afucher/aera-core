@@ -32,5 +32,24 @@ namespace aera_core.Controllers
 
             return new POUIListResponse<CursoDTO>(cursosDTO, cursos.TemMaisItens);
         }
+        
+        [HttpGet("{id}")]
+        public CursoDTO Get(int id)
+        {
+            var curso = _cursosServiço.Obter(id);
+            return CursoDTO.De(curso);
+        }
+        
+        [HttpPut("{id}")]
+        public ActionResult<CursoDTO> Put(int id, [FromBody] CursoDTO curso)
+        {
+            if (!id.Equals(curso.id)) return BadRequest("Id não é válido");
+            
+            var cursoAtualizado = _cursosServiço.Atualizar(curso.ParaModelo());
+            
+            if (cursoAtualizado == null) return BadRequest("Erro ao salvar");
+            
+            return CursoDTO.De(cursoAtualizado);
+        }
     }
 }

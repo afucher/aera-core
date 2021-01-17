@@ -21,5 +21,10 @@ namespace aera_core.Domain
         {
             return _cursosPort.ObterCursos(opções);
         }
+        
+        public CursoDB Atualizar(CursoDB curso)
+        {
+            return _cursosPort.Atualizar(curso);
+        }
     }
 }

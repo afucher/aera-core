@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
+import { CursoListComponent } from './curso/curso-list/curso-list.component';
+import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 
 @NgModule({
 
@@ -22,7 +24,9 @@ import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
     ClienteComponent,
     TurmaListComponent,
     TurmaEditComponent,
-    TurmaNovaComponent
+    TurmaNovaComponent,
+    CursoListComponent,
+    CursoEditComponent
   ],
   imports: [
     BrowserModule,

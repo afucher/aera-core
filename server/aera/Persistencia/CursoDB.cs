@@ -18,6 +18,8 @@ namespace aera_core.Persistencia
         public int id { get; set; }
 
         public string name { get; set; }
+        public string description { get; set; }
+        public int courseLoad { get; set; }
 
         public List<TurmaDB> Turmas { get; set; }
         public DateTime createdAt { get; set; }

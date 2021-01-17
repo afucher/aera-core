@@ -5,7 +5,8 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
-
+import { CursoListComponent } from './curso/curso-list/curso-list.component';
+import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 
 const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
@@ -13,6 +14,8 @@ const routes: Routes = [
   {path: 'turmas', component: TurmaListComponent},
   {path: 'turmas/nova', component: TurmaNovaComponent},
   {path: 'turmas/:id', component: TurmaEditComponent},
+  {path: 'cursos', component: CursoListComponent},
+  {path: 'cursos/:id', component: CursoEditComponent},
 ];
 
 @NgModule({

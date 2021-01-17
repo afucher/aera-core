@@ -19,6 +19,7 @@ namespace aera_core.Persistencia
         {
             var total = _contexto.Cursos.Count();
             var cursos =  _contexto.Cursos
+                .OrderBy(c => c.id)
                 .Skip((opções.Página-1) * opções.LimitePágina)
                 .Take(opções.LimitePágina)
                 .ToList();
@@ -29,6 +30,20 @@ namespace aera_core.Persistencia
         {
             return _contexto.Cursos
                 .FirstOrDefault(c => c.id == id);
+        }
+        
+        public CursoDB Atualizar(CursoDB cursoParaAtualizar)
+        {
+            var curso = Obter(cursoParaAtualizar.id);
+            if (curso == null) return null;
+
+            curso.description = cursoParaAtualizar.description;
+            curso.courseLoad = cursoParaAtualizar.courseLoad;
+            
+            _contexto.Cursos.Update(curso);
+            _contexto.SaveChanges();
+
+            return curso;
         }
     }
 }

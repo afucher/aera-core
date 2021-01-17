@@ -9,12 +9,26 @@ namespace aera_core.Controllers
     {
         public int id { get; set; }
         public String Nome { get; set; }
+        public String Descrição { get; set; }
+        public int CargaHorária { get; set; }
 
         public static CursoDTO De(CursoDB curso){
             return new CursoDTO
             {
                 id = curso.id,
-                Nome = curso.name
+                Nome = curso.name,
+                Descrição = curso.description,
+                CargaHorária = curso.courseLoad
+            };
+        }
+
+        public CursoDB ParaModelo()
+        {
+            return new CursoDB
+            {
+                id = id,
+                description = Descrição,
+                courseLoad = CargaHorária
             };
         }
     }
