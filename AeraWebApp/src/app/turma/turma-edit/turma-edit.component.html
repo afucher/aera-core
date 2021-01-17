@@ -12,4 +12,15 @@
     >
     </po-button>
   </div>
+  <po-divider
+    p-label="Alunos" >
+  </po-divider>
+  <po-table
+    p-hide-columns-manager
+    p-sort="true"
+    p-auto-collapse
+    [p-items]="turma.alunos"
+    [p-striped]="true"
+  ></po-table>
 </po-page-default>
+

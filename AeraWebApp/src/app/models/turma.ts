@@ -1,3 +1,5 @@
+import { Cliente } from './cliente';
+
 export interface Turma {
   id?: number;
   curso?: string;
@@ -7,4 +9,5 @@ export interface Turma {
   dataInicial?: string;
   dataFinal?: string;
   quantidadeDeAulas?: number;
+  alunos?: Cliente[];
 }

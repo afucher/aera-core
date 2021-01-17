@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PoDynamicFormField, PoNotificationService } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoNotificationService, PoTableColumn } from '@po-ui/ng-components';
 import { Turma } from 'src/app/models/turma';
 import { TurmaService } from 'src/app/turma.service';
 
@@ -12,6 +12,9 @@ import { TurmaService } from 'src/app/turma.service';
 export class TurmaEditComponent implements OnInit {
 
   turma: Turma;
+  columns: Array<PoTableColumn> = [{
+    property: 'nome'
+  }];
   fields: Array<PoDynamicFormField> = [
     {
       property: 'id',
