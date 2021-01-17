@@ -42,7 +42,7 @@ export class TurmaEditComponent implements OnInit {
       required: true},
     { property: 'horárioFinal', label: 'Horário Final', gridColumns: 2, gridSmColumns: 12, type: 'time', required: true},
     { property: 'quantidadeDeAulas', label: 'Aulas', gridColumns: 2, gridSmColumns: 12, type: 'number', required: true},
-    { property: 'professorId', label: 'Professor', gridColumns: 2, gridSmColumns: 12, required: true,
+    { property: 'professorId', label: 'Professor', gridColumns: 3, gridSmColumns: 12, required: true,
     optionsService: '/api/professores', fieldLabel: 'nome', fieldValue: 'id'}];
 
   constructor(
