@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aera_core.Persistencia
 {
-    public class ClienteRepositório : IClientesPort
+    public class ClienteRepositório : IClientesPort, IProfessoresPort
     {
         private readonly AplicaçãoContexto _contexto;
 
@@ -41,7 +41,7 @@ namespace aera_core.Persistencia
                 HorárioNascimento = x.birth_hour,
                 LocalNascimento = x.birth_place,
                 Observação = x.note,
-                Turmas = x.Turmas.ToList()
+                Turmas = x.Turmas?.ToList()
             };
             return cliente;
         }
@@ -55,6 +55,28 @@ namespace aera_core.Persistencia
                 .Take(opções.LimitePágina)
                 .Select(x => retornaCliente(x)).ToList();
             return new ListaPaginada<Cliente>(clientes, total, opções.Página, opções.LimitePágina);
+        }
+        
+        public ListaPaginada<Cliente> ObterProfessores(OpçõesBusca opções)
+        {
+            var total = _contexto.Clientes
+                .OrderBy(c => c.id)
+                .Count(c => c.teacher);
+            var clientes =  _contexto.Clientes
+                .OrderBy(c => c.id)
+                .Where(c => c.teacher)
+                .Skip((opções.Página-1) * opções.LimitePágina)
+                .Take(opções.LimitePágina)
+                .Select(x => retornaCliente(x)).ToList();
+            return new ListaPaginada<Cliente>(clientes, total, opções.Página, opções.LimitePágina);
+        }
+        
+        public Cliente ObterProfessor(int id)
+        { 
+            var professor = _contexto.Clientes
+                .FirstOrDefault(c => c.teacher && c.id == id);
+
+            return retornaCliente(professor);
         }
 
         public Cliente Obter(int id)

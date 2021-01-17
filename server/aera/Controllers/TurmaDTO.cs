@@ -1,4 +1,5 @@
 using System;
+using aera_core.Domain;
 using aera_core.Persistencia;
 
 namespace aera_core.Controllers
@@ -13,8 +14,10 @@ namespace aera_core.Controllers
         public String HorárioInicial { get; set; }
         public String HorárioFinal { get; set; }
         public int QuantidadeDeAulas { get; set; }
+        public int ProfessorId { get; set; }
+        public String Professor { get; set; }
         
-        public static TurmaDTO De(TurmaDB turma){
+        public static TurmaDTO De(TurmaDB turma, Cliente professor){
             return new TurmaDTO
             {
                 id = turma.id,
@@ -24,7 +27,9 @@ namespace aera_core.Controllers
                 DataFinal = turma.end_date.ToString("yyyy-MM-dd"),
                 HorárioInicial = turma.start_hour.ToString(@"hh\:mm"),
                 HorárioFinal = turma.end_hour.ToString(@"hh\:mm"),
-                QuantidadeDeAulas = turma.classes
+                QuantidadeDeAulas = turma.classes,
+                Professor = professor?.Nome,
+                ProfessorId = turma.teacher_id
             };
         }
 
@@ -39,7 +44,8 @@ namespace aera_core.Controllers
                 end_date = DateTime.ParseExact(DataFinal, "yyyy-MM-dd",
                     System.Globalization.CultureInfo.InvariantCulture),
                 start_hour = TimeSpan.Parse(HorárioInicial),
-                end_hour = TimeSpan.Parse(HorárioFinal)
+                end_hour = TimeSpan.Parse(HorárioFinal),
+                teacher_id = ProfessorId
             };
         }
     }

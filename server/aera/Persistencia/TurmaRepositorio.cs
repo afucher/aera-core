@@ -50,6 +50,7 @@ namespace aera_core.Persistencia
             turma.end_date = turmaParaAtualizar.end_date;
             turma.start_hour = turmaParaAtualizar.start_hour;
             turma.end_hour = turmaParaAtualizar.end_hour;
+            turma.teacher_id = turmaParaAtualizar.teacher_id;
             _contexto.Turmas.Update(turma);
             _contexto.SaveChanges();
 

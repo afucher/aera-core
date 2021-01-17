@@ -54,6 +54,7 @@ namespace aera_core
             services.AddScoped(provider => new TurmasServiço(provider.GetService<TurmaRepositorio>()));
             services.AddScoped(provider => new CursoRepositório(provider.GetService<AplicaçãoContexto>()));
             services.AddScoped(provider => new CursosServiço(provider.GetService<CursoRepositório>()));
+            services.AddScoped(provider => new ProfessoresServiço(provider.GetService<ClienteRepositório>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

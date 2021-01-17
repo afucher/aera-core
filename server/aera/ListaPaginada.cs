@@ -7,7 +7,7 @@ namespace aera_core
     {
         public int Página { get; }
         public int TotalDePáginas { get; }
-        public ListaPaginada(List<T> itens, int total, int página, int quantidade)
+        public ListaPaginada(IList<T> itens, int total, int página, int quantidade)
         {
             Página = página;
             TotalDePáginas = (int) Math.Ceiling(total / (double) quantidade);

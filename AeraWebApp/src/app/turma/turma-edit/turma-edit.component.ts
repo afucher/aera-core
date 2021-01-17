@@ -38,7 +38,9 @@ export class TurmaEditComponent implements OnInit {
     { property: 'horárioInicial', label: 'Horário Inicial', gridColumns: 2, gridSmColumns: 12, type: 'time',
       required: true},
     { property: 'horárioFinal', label: 'Horário Final', gridColumns: 2, gridSmColumns: 12, type: 'time', required: true},
-    { property: 'quantidadeDeAulas', label: 'Aulas', gridColumns: 2, gridSmColumns: 12, type: 'number', required: true}];
+    { property: 'quantidadeDeAulas', label: 'Aulas', gridColumns: 2, gridSmColumns: 12, type: 'number', required: true},
+    { property: 'professorId', label: 'Professor', gridColumns: 2, gridSmColumns: 12, required: true,
+    optionsService: '/api/professores', fieldLabel: 'nome', fieldValue: 'id'}];
 
   constructor(
     public poNotification: PoNotificationService,
