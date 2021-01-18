@@ -21,7 +21,7 @@ namespace aera_core.Controllers
         }
 
         [HttpGet]
-        public POUIListResponse<PagamentoDB> Get([FromQuery] int page, [FromQuery] int pageSize)
+        public POUIListResponse<PagamentoDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
         {
             var opções = new OpçõesBusca
             {
@@ -29,9 +29,9 @@ namespace aera_core.Controllers
                 LimitePágina = pageSize,
             };
             var pagamentos = _pagamentosServiço.ObterPagamentos(opções);
-            // var cursosDTO = pagamentos.Select(curso => CursoDTO.De(curso)).ToArray();
+            var pagamentosDTO = pagamentos.Select(PagamentoDTO.De).ToArray();
 
-            return new POUIListResponse<PagamentoDB>(pagamentos, pagamentos.TemMaisItens);
+            return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
         }
     }
 }

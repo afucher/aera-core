@@ -3,6 +3,7 @@ using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
 using aera_core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace aera_core.Persistencia
 {
@@ -22,6 +23,8 @@ namespace aera_core.Persistencia
                 .OrderBy(p => p.DueDate)
                 .Skip((opções.Página-1) * opções.LimitePágina)
                 .Take(opções.LimitePágina)
+                .Include(p => p.TurmaAluno)
+                .ThenInclude(ta => ta.Cliente)
                 .ToList();
             return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
         }

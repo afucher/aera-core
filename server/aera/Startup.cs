@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using aera_core.Domain;
 using aera_core.Persistencia;
 using Microsoft.AspNetCore.Builder;

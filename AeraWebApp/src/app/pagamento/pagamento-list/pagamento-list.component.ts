@@ -16,9 +16,11 @@ export class PagamentoListComponent implements OnInit {
   ];
 
   public readonly fields: Array<any> = [
-    { property: 'value', label: 'Valor', type: 'currency', format: 'BRL'},
-    { property: 'installment', label: 'Parcela' },
-    { property: 'numberInstallments', label: 'Total de parcelas' },
+    { property: 'nomeAluno', label: 'Aluno'},
+    { property: 'valor', label: 'Valor', type: 'currency', format: 'BRL'},
+    { property: 'parcela', label: 'Parcela' },
+    { property: 'totalDeParcelas', label: 'Total de parcelas' },
+    { property: 'pago', label: 'Pago', type: 'boolean' },
   ];
 
   ngOnInit(): void {

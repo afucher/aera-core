@@ -17,7 +17,7 @@ namespace aera_core.Models
         public string Note { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public int? NumberInstallments { get; set; }
+        public int NumberInstallments { get; set; }
 
         public virtual TurmaAluno TurmaAluno { get; set; }
     }
