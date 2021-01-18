@@ -14,12 +14,14 @@ namespace aera_core.Controllers
         private readonly TurmasServiço _turmasServiço;
         private readonly CursosServiço _cursoServiço;
         private readonly ProfessoresServiço _professoresServiço;
+        private readonly ClientesServiço _clientesServiço;
 
-        public TurmasController(TurmasServiço turmasServiço, CursosServiço cursoServiço, ProfessoresServiço professoresServiço)
+        public TurmasController(TurmasServiço turmasServiço, CursosServiço cursoServiço, ProfessoresServiço professoresServiço, ClientesServiço clientesServiço)
         {
             _turmasServiço = turmasServiço;
             _cursoServiço = cursoServiço;
             _professoresServiço = professoresServiço;
+            _clientesServiço = clientesServiço;
         }
 
         [HttpGet("{id}")]
@@ -71,6 +73,22 @@ namespace aera_core.Controllers
             var turmasDTO = turmas.Select(t => TurmaDTO.De(t, null)).ToArray();
 
             return new POUIListResponse<TurmaDTO>(turmasDTO, turmas.TemMaisItens);
+        }
+        
+        [HttpPost("{id}/matricular")]
+        public ActionResult<TurmaDTO> Matricular(int id, [FromBody] int alunoId)
+        {
+            var aluno = _clientesServiço.Obter(alunoId);
+            if (aluno == null) return BadRequest("Aluno não existe");
+
+            var turma = _turmasServiço.Obter(id);
+            if (turma == null) return BadRequest("Turma não existe");
+            var turmaAtualizada = _turmasServiço.MatricularAluno(turma, aluno);
+            
+            if (turmaAtualizada == null) return BadRequest("Erro ao salvar");
+            var professor = _professoresServiço.Obter(turmaAtualizada.teacher_id);
+            
+            return TurmaDTO.De(turmaAtualizada, professor);
         }
     }
 }

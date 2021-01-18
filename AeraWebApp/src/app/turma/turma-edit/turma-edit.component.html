@@ -15,12 +15,32 @@
   <po-divider
     p-label="Alunos" >
   </po-divider>
+  <div class="po-row">
+    <po-button p-label="Matricular aluno" (p-click)="abreMatricular()"> </po-button>
+  </div>
   <po-table
     p-hide-columns-manager
     p-sort="true"
     p-auto-collapse
-    [p-items]="turma.alunos"
+    [p-items]="turma?.alunos"
     [p-striped]="true"
   ></po-table>
 </po-page-default>
+<po-modal p-title="Matricular" [p-primary-action]="confirm" [p-secondary-action]="close">
+  <div >
+    <div class="po-row">
+      <p>Procura aluno</p>
+      <po-lookup
+      [(ngModel)]="alunoParaMatricular"
+        name="lookup"
+        p-field-label="nome"
+        p-field-value="id"
+        p-filter-service="/api/clientes"
+        p-label="Alunos"
+        [p-columns]="colunasLookup"
+      >
+      </po-lookup>
+    </div>
+  </div>
+</po-modal>
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PoDynamicFormField, PoNotificationService, PoTableColumn } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoLookupColumn, PoModalAction, PoModalComponent, PoNotificationService, PoTableColumn } from '@po-ui/ng-components';
 import { Turma } from 'src/app/models/turma';
 import { TurmaService } from 'src/app/turma.service';
 
@@ -10,7 +11,29 @@ import { TurmaService } from 'src/app/turma.service';
   styleUrls: ['./turma-edit.component.css']
 })
 export class TurmaEditComponent implements OnInit {
+  alunoParaMatricular: number = undefined;
+  colunasLookup: Array<PoLookupColumn> = [{property: 'nome'}];
+  close: PoModalAction = {
+    action: () => {
+      this.closeModal();
+    },
+    label: 'Cancelar'
+  };
 
+  confirm: PoModalAction = {
+    action: () => {
+      if (this.alunoParaMatricular !== undefined) {
+        this.turmaService
+          .matricular(this.turma, this.alunoParaMatricular)
+          .subscribe(t => {
+            this.turma = t;
+            this.closeModal();
+            this.poNotification.success('Aluno matriculado');
+          });
+     }
+    },
+    label: 'Matricular'
+  };
   turma: Turma;
   columns: Array<PoTableColumn> = [{
     property: 'nome'
@@ -45,10 +68,22 @@ export class TurmaEditComponent implements OnInit {
     { property: 'professorId', label: 'Professor', gridColumns: 3, gridSmColumns: 12, required: true,
     optionsService: '/api/professores', fieldLabel: 'nome', fieldValue: 'id'}];
 
+  @ViewChild('optionsForm', { static: true }) form: NgForm;
+  @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
+
   constructor(
     public poNotification: PoNotificationService,
     private route: ActivatedRoute,
     private turmaService: TurmaService) { }
+
+  closeModal() {
+    this.alunoParaMatricular = undefined;
+    this.poModal.close();
+  }
+
+  abreMatricular() {
+    this.poModal.open();
+  }
 
   formataHorário(horario: string) {
     if (horario.length === 4) { return horario.slice(0, 2) + ':' + horario.slice(2); }

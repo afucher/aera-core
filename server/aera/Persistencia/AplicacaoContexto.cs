@@ -46,6 +46,12 @@ namespace aera_core.Persistencia
 [Table("ClientGroups")]
 public class TurmaAluno
 {
+    
+    public TurmaAluno()
+    { 
+        createdAt = DateTime.Now; 
+        updatedAt = DateTime.Now;
+    }
     [Key]
     public int id { get; set; }
     
@@ -58,4 +64,6 @@ public class TurmaAluno
     public int TurmaId { get; set; }
     
     public TurmaDB Turma { get; set; }
+    public DateTime createdAt { get; set; }
+    public DateTime updatedAt { get; set; }
 }

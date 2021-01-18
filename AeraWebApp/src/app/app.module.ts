@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { PoModule } from '@po-ui/ng-components';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { ClientListComponent } from './client-list/client-list.component';
 import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
 import { ClienteComponent } from './cliente/cliente.component';
@@ -34,7 +34,8 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
     PoModule,
     PoPageDynamicTableModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -57,5 +57,19 @@ namespace aera_core.Persistencia
 
             return turma;
         }
+
+        public TurmaDB MatricularAluno(TurmaDB turmaParaMatricular, int clienteId)
+        {
+            var turma = Obter(turmaParaMatricular.id);
+            if (turma == null) return null;
+            var aluno = _contexto.Clientes.FirstOrDefault(c => c.id == clienteId);
+            if (aluno == null) return null;
+            turma.Alunos.Add(aluno);
+            
+            _contexto.Turmas.Update(turma);
+            _contexto.SaveChanges();
+
+            return turma;
+        }
     }
 }

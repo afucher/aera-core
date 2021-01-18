@@ -10,5 +10,6 @@ namespace aera_core.Domain
         public TurmaDB Obter(int id);
         public TurmaDB Criar(TurmaDB turma);
         public TurmaDB Atualizar(TurmaDB turma);
+        public TurmaDB MatricularAluno(TurmaDB turma, int clienteId);
     }
 }

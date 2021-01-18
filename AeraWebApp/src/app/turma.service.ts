@@ -36,6 +36,13 @@ export class TurmaService {
       );
   }
 
+  matricular(turma: Turma, alunoId: number): Observable<Turma> {
+    return this.http.post<Turma>(`${this.url}/${turma.id}/matricular`, alunoId)
+      .pipe(
+        catchError(this.handleError('matricularAluno', turma))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
