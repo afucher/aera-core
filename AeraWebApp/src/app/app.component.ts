@@ -15,6 +15,7 @@ export class AppComponent {
     {label: 'Cursos', link: '/cursos'},
     {label: 'Turmas', link: '/turmas',
       subItems: [{label: 'Todas', link: '/turmas'},
-                 {label: 'Nova', link: '/turmas/nova'}]}
+                 {label: 'Nova', link: '/turmas/nova'}]},
+    {label: 'Pagamentos', link: '/pagamentos'},
   ];
 }

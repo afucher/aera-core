@@ -15,6 +15,7 @@ import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
 import { CursoListComponent } from './curso/curso-list/curso-list.component';
 import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
+import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
 
 @NgModule({
 
@@ -26,7 +27,8 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
     TurmaEditComponent,
     TurmaNovaComponent,
     CursoListComponent,
-    CursoEditComponent
+    CursoEditComponent,
+    PagamentoListComponent
   ],
   imports: [
     BrowserModule,
