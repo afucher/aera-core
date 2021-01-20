@@ -1,0 +1,15 @@
+<po-page-default p-title="Novo cliente">
+  <po-dynamic-form #clienteForm
+    [p-fields]= "fields"
+    [p-value]="cliente">
+  </po-dynamic-form>
+  <div class="po-row">
+    <po-button
+      class="po-md-3"
+      p-label="Criar"
+      [p-disabled]="clienteForm?.form.invalid"
+      (p-click)="onSubmit(clienteForm);"
+    >
+    </po-button>
+  </div>
+</po-page-default>

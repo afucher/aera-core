@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
+using aera_core.Persistencia;
 using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,13 +39,13 @@ namespace aera_core.Controllers
                 cep = cliente.CEP,
                 cidade = cliente.Cidade,
                 cpf = cliente.CPF,
-                data_nascimento = cliente.DataNascimento,
+                data_nascimento = cliente.DataNascimento?.ToString("yyyy-MM-dd"),
                 profissao = cliente.Profissão,
                 professor = cliente.ÉProfessor,
                 email = cliente.Email,
                 estado = cliente.Estado,
-                hora_nascimento = cliente.HorárioNascimento,
-                local_ascimento = cliente.LocalNascimento,
+                hora_nascimento = cliente.HorárioNascimento?.ToString(@"hh\:mm"),
+                local_nascimento = cliente.LocalNascimento,
                 nivel_educacao = cliente.NívelEducação,
                 observacao = cliente.Observação,
                 telefone = cliente.Telefone,
@@ -76,13 +79,13 @@ namespace aera_core.Controllers
                 cep = cliente.CEP,
                 cidade = cliente.Cidade,
                 cpf = cliente.CPF,
-                data_nascimento = cliente.DataNascimento,
+                data_nascimento = cliente.DataNascimento?.ToString("yyyy-MM-dd"),
                 profissao = cliente.Profissão,
                 professor = cliente.ÉProfessor,
                 email = cliente.Email,
                 estado = cliente.Estado,
-                hora_nascimento = cliente.HorárioNascimento,
-                local_ascimento = cliente.LocalNascimento,
+                hora_nascimento = cliente.HorárioNascimento?.ToString(@"hh\:mm"),
+                local_nascimento = cliente.LocalNascimento,
                 nivel_educacao = cliente.NívelEducação,
                 observacao = cliente.Observação,
                 telefone = cliente.Telefone,
@@ -91,6 +94,13 @@ namespace aera_core.Controllers
             }).ToArray();
 
             return new POUIListResponse<ClienteDTO>(clientesDTO, clientes.TemMaisItens);
+        }
+
+        [HttpPost]
+        public ClienteDTO Post([FromBody] ClienteDTO cliente)
+        {
+            _clientesServiço.Criar(ClienteDB.DeCliente(cliente.ParaModelo()));
+            return cliente;
         }
     }
 }

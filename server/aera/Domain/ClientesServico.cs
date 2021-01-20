@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using aera_core.Helpers;
+using aera_core.Persistencia;
 
 namespace aera_core.Domain
 {
@@ -19,6 +20,11 @@ namespace aera_core.Domain
         public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opções)
         {
             return _clientesPort.ObterClientes(opções);
+        }
+
+        public ClienteDB Criar(ClienteDB cliente)
+        {
+            return _clientesPort.Criar(cliente);
         }
     }
 }

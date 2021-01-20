@@ -22,6 +22,12 @@ export class ClienteService {
     );
   }
 
+  criar(cliente: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(this.url, cliente).pipe(
+      catchError(this.handleError<Cliente>(`criar cliente`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

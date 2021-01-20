@@ -87,5 +87,13 @@ namespace aera_core.Persistencia
                 .FirstOrDefault(c => c.id == id)?
                 .ParaCliente();
         }
+
+        public ClienteDB Criar(ClienteDB cliente)
+        {
+            var clienteCriado = _contexto.Clientes.Add(cliente);
+            _contexto.SaveChanges();
+
+            return clienteCriado.Entity;
+        }
     }
 }
