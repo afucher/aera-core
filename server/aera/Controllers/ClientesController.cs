@@ -99,7 +99,15 @@ namespace aera_core.Controllers
         [HttpPost]
         public ClienteDTO Post([FromBody] ClienteDTO cliente)
         {
-            _clientesServiço.Criar(ClienteDB.DeCliente(cliente.ParaModelo()));
+            var clienteCriado = _clientesServiço.Criar(ClienteDB.DeCliente(cliente.ParaModelo()));
+            return ClienteDTO.DoModelo(clienteCriado.ParaCliente());
+        }
+        
+        [HttpPut("{id}")]
+        public ActionResult<ClienteDTO> Put(int id, [FromBody] ClienteDTO cliente)
+        {
+            if (!id.Equals(cliente.id)) return BadRequest("Id não é válido");
+            _clientesServiço.Atualizar(ClienteDB.DeCliente(cliente.ParaModelo()));
             return cliente;
         }
     }

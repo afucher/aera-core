@@ -95,5 +95,33 @@ namespace aera_core.Persistencia
 
             return clienteCriado.Entity;
         }
+        public ClienteDB Atualizar(ClienteDB clienteParaAtualizar)
+        {
+            var cliente = _contexto.Clientes.First(c => c.id == clienteParaAtualizar.id);
+            cliente.name = clienteParaAtualizar.name;
+            cliente.cpf = clienteParaAtualizar.cpf;
+            cliente.email = clienteParaAtualizar.email;
+            cliente.phone = clienteParaAtualizar.phone;
+            cliente.teacher = clienteParaAtualizar.teacher;
+            cliente.cel_phone = clienteParaAtualizar.cel_phone;
+            cliente.com_phone = clienteParaAtualizar.com_phone;
+            cliente.address1 = clienteParaAtualizar.address1;
+            cliente.address2 = clienteParaAtualizar.address2;
+            cliente.address3 = clienteParaAtualizar.address3;
+            cliente.city = clienteParaAtualizar.city;
+            cliente.state = clienteParaAtualizar.state;
+            cliente.zip_code = clienteParaAtualizar.zip_code;
+            cliente.profession = clienteParaAtualizar.profession;
+            cliente.edu_lvl = clienteParaAtualizar.edu_lvl;
+            cliente.old_code = clienteParaAtualizar.old_code;
+            cliente.birth_date = clienteParaAtualizar.birth_date;
+            cliente.birth_hour = clienteParaAtualizar.birth_hour;
+            cliente.birth_place = clienteParaAtualizar.birth_place;
+            cliente.note = clienteParaAtualizar.note;
+            _contexto.Clientes.Update(cliente);
+            _contexto.SaveChanges();
+
+            return cliente;
+        }
     }
 }

@@ -28,6 +28,12 @@ export class ClienteService {
     );
   }
 
+  salvar(cliente: Cliente): Observable<Cliente> {
+    return this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente).pipe(
+      catchError(this.handleError<Cliente>(`alterar cliente`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

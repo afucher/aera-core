@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientListComponent } from './client-list/client-list.component';
-import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.component';
 import { ClienteNovoComponent } from './cliente/cliente-novo/cliente-novo.component';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
@@ -13,7 +13,7 @@ import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-lis
 const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
   {path: 'clientes/novo', component: ClienteNovoComponent},
-  {path: 'clientes/:id', component: ClienteComponent},
+  {path: 'clientes/:id', component: ClienteAlteraComponent},
   {path: 'turmas', component: TurmaListComponent},
   {path: 'turmas/nova', component: TurmaNovaComponent},
   {path: 'turmas/:id', component: TurmaEditComponent},

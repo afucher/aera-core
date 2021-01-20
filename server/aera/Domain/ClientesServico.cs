@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using aera_core.Controllers;
 using aera_core.Helpers;
 using aera_core.Persistencia;
 
@@ -25,6 +26,11 @@ namespace aera_core.Domain
         public ClienteDB Criar(ClienteDB cliente)
         {
             return _clientesPort.Criar(cliente);
+        }
+
+        public ClienteDB Atualizar(ClienteDB cliente)
+        {
+            return _clientesPort.Atualizar(cliente);
         }
     }
 }

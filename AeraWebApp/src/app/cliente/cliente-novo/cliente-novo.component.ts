@@ -26,7 +26,6 @@ export class ClienteNovoComponent implements OnInit {
     }
 
   onSubmit(e) {
-    console.log(e.value);
     this.clienteService
       .criar({...e.value, hora_nascimento: this.formataHorário(e.value.hora_nascimento)})
       .subscribe((_) => this.poNotification.success('Turma criada com sucesso!'));

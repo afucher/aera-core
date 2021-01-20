@@ -11,7 +11,9 @@ export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'AERA', link: '/' },
-    {label: 'Clientes', link: '/clientes'},
+    {label: 'Clientes', link: '/clientes',
+      subItems: [{label: 'Todos', link: '/clientes'},
+                 {label: 'Novo', link: '/clientes/novo'}]},
     {label: 'Cursos', link: '/cursos'},
     {label: 'Turmas', link: '/turmas',
       subItems: [{label: 'Todas', link: '/turmas'},
