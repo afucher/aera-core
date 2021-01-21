@@ -47,8 +47,13 @@ namespace aera_core.Persistencia
         }
         public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opções)
         {
-            var total = _contexto.Clientes.Count();
-            var clientes =  _contexto.Clientes
+            IQueryable<ClienteDB> consultaClientes = _contexto.Clientes.OrderBy(c => c.name);
+            if (opções.Filtros.ContainsKey("search") && opções.Filtros["search"] != null)
+            {
+                consultaClientes = consultaClientes.Where(c => c.name.ToLower().Contains(opções.Filtros["search"].ToLower()));
+            }
+            var total = consultaClientes.Count();
+            var clientes =  consultaClientes
                 .Include(c => c.Turmas)
                 .ThenInclude(t => t.Curso)
                 .Skip((opções.Página-1) * opções.LimitePágina)

@@ -61,7 +61,7 @@ namespace aera_core.Controllers
 
         public static ClienteDTO DoModelo(Cliente cliente)
         {
-            return new()
+            return new ClienteDTO()
             {
                             id = cliente.Id,
                             nome = cliente.Nome,

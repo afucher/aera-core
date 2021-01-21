@@ -7,6 +7,6 @@ namespace aera_core.Helpers
         public int Página { get; set; }
         public int LimitePágina { get; set; }
 
-        public Dictionary<string, object> Filtros; 
+        public Dictionary<string, string> Filtros = new Dictionary<string, string>(); 
     }
 }

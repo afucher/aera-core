@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using aera_core.Domain;
@@ -60,12 +61,16 @@ namespace aera_core.Controllers
         }
 
         [HttpGet]
-        public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
+        public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string search)
         {
             var opções = new OpçõesBusca
             {
                 Página = page,
                 LimitePágina = pageSize,
+                Filtros = new Dictionary<string, string>
+                {
+                    { "search", search }
+                }
             };
             var clientes = _clientesServiço.ObterClientes(opções);
             var clientesDTO = clientes.Select(cliente => new ClienteDTO
