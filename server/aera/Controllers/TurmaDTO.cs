@@ -24,6 +24,8 @@ namespace aera_core.Controllers
         {
             public int id { get; set; }
             public string nome { get; set; }
+            public string email { get; set; }
+            public string celular { get; set; }
         }
 
         public static TurmaDTO De(TurmaDB turma, Cliente professor){
@@ -42,7 +44,9 @@ namespace aera_core.Controllers
                 Alunos = turma.Alunos?.Select(a => new TurmaClienteDTO
                 {
                     id = a.id,
-                    nome = a.name
+                    nome = a.name,
+                    celular = a.cel_phone,
+                    email = a.email
                 }).ToList()
             };
         }
