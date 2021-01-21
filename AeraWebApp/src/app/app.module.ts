@@ -8,7 +8,6 @@ import { PoModule } from '@po-ui/ng-components';
 import { FormsModule } from '@angular/forms';
 import { ClientListComponent } from './client-list/client-list.component';
 import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
-import { ClienteComponent } from './cliente/cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
@@ -24,7 +23,6 @@ import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.
   declarations: [
     AppComponent,
     ClientListComponent,
-    ClienteComponent,
     TurmaListComponent,
     TurmaEditComponent,
     TurmaNovaComponent,
