@@ -12,6 +12,7 @@ namespace aera_core.Controllers
         public int Parcela { get; set; }
         public int TotalDeParcelas { get; set; }
         public bool Pago { get; set; }
+        public int IdMatricula { get; set; }
         public String NomeAluno { get; set; }
 
         public static PagamentoDTO De(PagamentoDB pagamento){
@@ -21,7 +22,8 @@ namespace aera_core.Controllers
                 Parcela = pagamento.Installment,
                 TotalDeParcelas = pagamento.NumberInstallments,
                 Pago = pagamento.Paid.GetValueOrDefault(false),
-                NomeAluno = pagamento.TurmaAluno.Cliente.name
+                NomeAluno = pagamento.TurmaAluno.Cliente.name,
+                IdMatricula = pagamento.ClientGroupId
             };
         }
     }

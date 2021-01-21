@@ -33,7 +33,17 @@ namespace aera_core.Persistencia
         {
             throw new NotImplementedException();
         }
-        
-        
+
+        public PagamentoDB Pagar(int clientGroupId, int installment)
+        {
+            var pagamento = _contexto.Pagamentos
+                .First(p => p.ClientGroupId == clientGroupId && p.Installment == installment);
+
+            pagamento.Paid = true;
+            _contexto.Pagamentos.Update(pagamento);
+            _contexto.SaveChanges();
+
+            return pagamento;
+        }
     }
 }

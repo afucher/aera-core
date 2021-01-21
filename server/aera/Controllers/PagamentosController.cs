@@ -33,5 +33,13 @@ namespace aera_core.Controllers
 
             return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
         }
+
+        [HttpPost]
+        public PagamentoDTO Pagar([FromBody] PagamentoDTO pagamento)
+        {
+             var pagamentoPago = _pagamentosServiço.Pagar(pagamento.IdMatricula, pagamento.Parcela);
+             return PagamentoDTO.De(pagamentoPago);
+
+        }
     }
 }

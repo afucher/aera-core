@@ -19,6 +19,11 @@ namespace aera_core.Domain
         {
             return _pagamentosPort.ObterPagamentos(opções);
         }
+
+        public PagamentoDB Pagar(int clientGroupId, int installment)
+        {
+            return _pagamentosPort.Pagar(clientGroupId, installment);
+        }
         
     }
 }
