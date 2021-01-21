@@ -33,7 +33,7 @@ export class ClienteAlteraComponent implements OnInit {
   onSubmit(e) {
     this.clienteService
       .salvar({...e.value, hora_nascimento: this.formataHorário(e.value.hora_nascimento)})
-      .subscribe((_) => this.poNotification.success('Turma criada com sucesso!'));
+      .subscribe((_) => this.poNotification.success('Cliente atualizado com sucesso!'));
   }
 
 
