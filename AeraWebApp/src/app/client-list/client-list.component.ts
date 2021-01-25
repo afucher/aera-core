@@ -14,6 +14,7 @@ export class ClientListComponent implements OnInit {
   readonly actions: PoPageDynamicTableActions = {};
   constructor(private router: Router) { }
   tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
+    { label: 'Detalhes', action: ({id}) => this.router.navigate([`/clientes/${id}/detalhes`]) },
     { label: 'Alterar', action: ({id}) => this.router.navigate([`/clientes/${id}`]) }
   ];
 

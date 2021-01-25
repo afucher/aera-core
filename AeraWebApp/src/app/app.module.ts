@@ -17,6 +17,8 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
 import { ClienteNovoComponent } from './cliente/cliente-novo/cliente-novo.component';
 import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.component';
+import { PagamentoDetalhesComponent } from './cliente/pagamento-detalhes/pagamento-detalhes.component';
+import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
 
 @NgModule({
 
@@ -30,7 +32,9 @@ import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.
     CursoEditComponent,
     PagamentoListComponent,
     ClienteNovoComponent,
-    ClienteAlteraComponent
+    ClienteAlteraComponent,
+    PagamentoDetalhesComponent,
+    ClienteResumoComponent
   ],
   imports: [
     BrowserModule,

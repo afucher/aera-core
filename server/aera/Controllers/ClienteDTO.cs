@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using aera_core.Domain;
+using aera_core.Models;
 using aera_core.Persistencia;
 
 namespace aera_core.Controllers
@@ -30,6 +31,7 @@ namespace aera_core.Controllers
         public string observacao { get; set; }
         
         public List<TurmaDTO> turmas { get; set; }
+        public List<PagamentoDTO> pagamentos { get; set; }
 
         public Cliente ParaModelo()
         {
@@ -86,10 +88,18 @@ namespace aera_core.Controllers
                             turmas = cliente.Turmas.Select(t => new TurmaDTO
                             {
                                 Curso = t.Curso.name,
+                                EmAndamento = t.end_date < DateTime.Now,
                                 DataInicial = t.start_date.ToString("yyyy-MM-dd"),
                                 DataFinal = t.end_date.ToString("yyyy-MM-dd")
                             }).ToList()
                         };
-        } 
+        }
+
+        public static ClienteDTO DoModelo(Cliente cliente, IReadOnlyCollection<PagamentoDB> pagamentos)
+        {
+            var clienteDTO = DoModelo(cliente);
+            clienteDTO.pagamentos = pagamentos.Select(PagamentoDTO.De).ToList();
+            return clienteDTO;
+        }
     }
 }

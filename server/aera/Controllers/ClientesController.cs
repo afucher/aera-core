@@ -15,14 +15,13 @@ namespace aera_core.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-
-        private readonly ILogger<ClientesController> _logger;
         private readonly ClientesServiço _clientesServiço;
+        private readonly PagamentosServiço _pagamentosServiço;
 
-        public ClientesController(ILogger<ClientesController> logger, ClientesServiço clientesServiço)
+        public ClientesController(ClientesServiço clientesServiço, PagamentosServiço pagamentosServiço)
         {
-            _logger = logger;
             _clientesServiço = clientesServiço;
+            _pagamentosServiço = pagamentosServiço;
         }
 
         [HttpGet("{id}")]
@@ -53,6 +52,7 @@ namespace aera_core.Controllers
                 telefone_comercial = cliente.TelefoneComercial,
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
+                    Id = t.id,
                     Curso = t.Curso.name,
                     DataInicial = t.start_date.ToString("yyyy-MM-dd"),
                     DataFinal = t.end_date.ToString("yyyy-MM-dd")

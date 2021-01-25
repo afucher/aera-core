@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
@@ -28,7 +30,15 @@ namespace aera_core.Persistencia
                 .ToList();
             return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
         }
-        
+
+        public IReadOnlyCollection<PagamentoDB> ObterDoAlunoDaTurma(int turmaId, int alunoId)
+        {
+            return  _contexto.Pagamentos
+                .OrderBy(p => p.DueDate)
+                .Where(p => p.TurmaAluno.TurmaId == turmaId && p.TurmaAluno.ClienteId == alunoId)
+                .ToList();
+        }
+
         public PagamentoDB Obter(int id)
         {
             throw new NotImplementedException();

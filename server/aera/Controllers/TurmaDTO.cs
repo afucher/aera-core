@@ -8,7 +8,7 @@ namespace aera_core.Controllers
 {
     public class TurmaDTO
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public String Curso { get; set; }
         public int CursoId { get; set; }
         public String DataInicial { get; set; }
@@ -18,6 +18,7 @@ namespace aera_core.Controllers
         public int QuantidadeDeAulas { get; set; }
         public int ProfessorId { get; set; }
         public String Professor { get; set; }
+        public bool EmAndamento { get; set; }
         public List<TurmaClienteDTO> Alunos { get; set; }
 
         public class TurmaClienteDTO
@@ -31,7 +32,7 @@ namespace aera_core.Controllers
         public static TurmaDTO De(TurmaDB turma, Cliente professor){
             return new TurmaDTO
             {
-                id = turma.id,
+                Id = turma.id,
                 Curso = turma.Curso.name,
                 CursoId = turma.Curso.id,
                 DataInicial = turma.start_date.ToString("yyyy-MM-dd"),
@@ -55,7 +56,7 @@ namespace aera_core.Controllers
         {
             return new TurmaDB
             {
-                id = id,
+                id = Id,
                 classes = QuantidadeDeAulas,
                 start_date = DateTime.ParseExact(DataInicial, "yyyy-MM-dd",
                     System.Globalization.CultureInfo.InvariantCulture),

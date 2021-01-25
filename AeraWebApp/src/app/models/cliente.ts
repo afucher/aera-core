@@ -4,6 +4,7 @@ export interface Cliente {
   id?: number;
   nome: string;
   turmas?: any[];
+  pagamentos?: any[];
 }
 
 export const clienteFields: Array<PoDynamicFormField> = [

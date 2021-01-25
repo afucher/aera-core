@@ -25,5 +25,9 @@ namespace aera_core.Domain
             return _pagamentosPort.Pagar(clientGroupId, installment);
         }
         
+        public IReadOnlyCollection<PagamentoDB> ObterDoAlunoDaTurma(int turmaId, int alunoId)
+        {
+            return _pagamentosPort.ObterDoAlunoDaTurma(turmaId, alunoId);
+        }
     }
 }

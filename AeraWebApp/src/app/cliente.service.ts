@@ -8,7 +8,6 @@ import { Cliente } from './models/cliente';
   providedIn: 'root',
 })
 export class ClienteService {
-
   private url = '/api/clientes';
 
   constructor(private http: HttpClient) { }
@@ -22,6 +21,14 @@ export class ClienteService {
     );
   }
 
+  teste(id: number, clienteId: number): Observable<any> {
+    const url = `/api/pagamentos/turma/${id}/aluno/${clienteId}`;
+    return this.http.get<any>(url).pipe(
+      tap(_ => console.log(`fetched cliente id=${id}`)),
+      catchError(this.handleError<any>(`obter cliente id=${id}`))
+    );
+  }
+
   criar(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.url, cliente).pipe(
       catchError(this.handleError<Cliente>(`criar cliente`))
@@ -31,6 +38,14 @@ export class ClienteService {
   salvar(cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente).pipe(
       catchError(this.handleError<Cliente>(`alterar cliente`))
+    );
+  }
+
+  obterDetalhePagamentos(id: number) {
+    const url = `${this.url}/${id}/pagamentos`;
+    return this.http.get<Cliente>(url).pipe(
+      tap(_ => console.log(`fetched clientePagamentos id=${id}`)),
+      catchError(this.handleError<Cliente>(`obter clientePagamentos id=${id}`))
     );
   }
 

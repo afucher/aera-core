@@ -51,7 +51,7 @@ namespace aera_core.Controllers
         [HttpPut("{id}")]
         public ActionResult<TurmaDTO> Put(int id, [FromBody] TurmaDTO turma)
         {
-            if (!id.Equals(turma.id)) return BadRequest("Id não é válido");
+            if (!id.Equals(turma.Id)) return BadRequest("Id não é válido");
             var professor = _professoresServiço.Obter(turma.ProfessorId);
             if (professor == null) return BadRequest("Professor não existe");
             var turmaAtualizada = _turmasServiço.Atualizar(turma.ParaModelo());

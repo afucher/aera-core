@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.component';
 import { ClienteNovoComponent } from './cliente/cliente-novo/cliente-novo.component';
+import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
   {path: 'clientes/novo', component: ClienteNovoComponent},
   {path: 'clientes/:id', component: ClienteAlteraComponent},
+  {path: 'clientes/:id/detalhes', component: ClienteResumoComponent},
   {path: 'turmas', component: TurmaListComponent},
   {path: 'turmas/nova', component: TurmaNovaComponent},
   {path: 'turmas/:id', component: TurmaEditComponent},

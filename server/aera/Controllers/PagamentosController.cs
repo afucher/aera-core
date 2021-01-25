@@ -23,7 +23,7 @@ namespace aera_core.Controllers
         }
 
         [HttpGet]
-        public POUIListResponse<PagamentoDTO> Get([FromQuery] int page, [FromQuery] int pageSize)
+        public POUIListResponse<PagamentoDTO> Get([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string search)
         {
             var opções = new OpçõesBusca
             {
@@ -34,6 +34,13 @@ namespace aera_core.Controllers
             var pagamentosDTO = pagamentos.Select(PagamentoDTO.De).ToArray();
 
             return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
+        }
+        
+        [HttpGet("turma/{turmaId}/aluno/{alunoId}")]
+        public List<PagamentoDTO> Get(int turmaId, int alunoId)
+        {
+            var pagamentos = _pagamentosServiço.ObterDoAlunoDaTurma(turmaId, alunoId);
+            return pagamentos.Select(PagamentoDTO.De).ToList();
         }
 
         [HttpPost]
