@@ -29,6 +29,7 @@ namespace aera_core.Controllers
         public String hora_nascimento { get; set; }
         public string local_nascimento { get; set; }
         public string observacao { get; set; }
+        public string CodigoAuxiliar { get; set; }
         
         public List<TurmaDTO> turmas { get; set; }
         public List<PagamentoDTO> pagamentos { get; set; }
@@ -57,7 +58,8 @@ namespace aera_core.Controllers
                     System.Globalization.CultureInfo.InvariantCulture),
                 HorárioNascimento = hora_nascimento == null ? (TimeSpan?)null : TimeSpan.Parse(hora_nascimento),
                 LocalNascimento = local_nascimento,
-                Observação = observacao
+                Observação = observacao,
+                CódigoAntigo = CodigoAuxiliar
             };
         }
 
@@ -65,34 +67,35 @@ namespace aera_core.Controllers
         {
             return new ClienteDTO()
             {
-                            id = cliente.Id,
-                            nome = cliente.Nome,
-                            address1 =  cliente.address1,
-                            address2 =  cliente.address2,
-                            address3 =  cliente.address3,
-                            celular = cliente.Celular,
-                            cep = cliente.CEP,
-                            cidade = cliente.Cidade,
-                            cpf = cliente.CPF,
-                            data_nascimento = cliente.DataNascimento?.ToString("yyyy-MM-dd"),
-                            profissao = cliente.Profissão,
-                            professor = cliente.ÉProfessor,
-                            email = cliente.Email,
-                            estado = cliente.Estado,
-                            hora_nascimento = cliente.HorárioNascimento?.ToString(@"hh\:mm"),
-                            local_nascimento = cliente.LocalNascimento,
-                            nivel_educacao = cliente.NívelEducação,
-                            observacao = cliente.Observação,
-                            telefone = cliente.Telefone,
-                            telefone_comercial = cliente.TelefoneComercial,
-                            turmas = cliente.Turmas.Select(t => new TurmaDTO
-                            {
-                                Curso = t.Curso.name,
-                                EmAndamento = t.end_date < DateTime.Now,
-                                DataInicial = t.start_date.ToString("yyyy-MM-dd"),
-                                DataFinal = t.end_date.ToString("yyyy-MM-dd")
-                            }).ToList()
-                        };
+                id = cliente.Id,
+                nome = cliente.Nome,
+                address1 =  cliente.address1,
+                address2 =  cliente.address2,
+                address3 =  cliente.address3,
+                celular = cliente.Celular,
+                cep = cliente.CEP,
+                cidade = cliente.Cidade,
+                cpf = cliente.CPF,
+                data_nascimento = cliente.DataNascimento?.ToString("yyyy-MM-dd"),
+                profissao = cliente.Profissão,
+                professor = cliente.ÉProfessor,
+                email = cliente.Email,
+                estado = cliente.Estado,
+                hora_nascimento = cliente.HorárioNascimento?.ToString(@"hh\:mm"),
+                local_nascimento = cliente.LocalNascimento,
+                nivel_educacao = cliente.NívelEducação,
+                observacao = cliente.Observação,
+                telefone = cliente.Telefone,
+                telefone_comercial = cliente.TelefoneComercial,
+                CodigoAuxiliar = cliente.CódigoAntigo,
+                turmas = cliente.Turmas.Select(t => new TurmaDTO
+                {
+                    Curso = t.Curso.name,
+                    EmAndamento = t.end_date < DateTime.Now,
+                    DataInicial = t.start_date.ToString("yyyy-MM-dd"),
+                    DataFinal = t.end_date.ToString("yyyy-MM-dd")
+                }).ToList()
+            };
         }
 
         public static ClienteDTO DoModelo(Cliente cliente, IReadOnlyCollection<PagamentoDB> pagamentos)

@@ -50,6 +50,7 @@ namespace aera_core.Controllers
                 observacao = cliente.Observação,
                 telefone = cliente.Telefone,
                 telefone_comercial = cliente.TelefoneComercial,
+                CodigoAuxiliar = cliente.CódigoAntigo,
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
                     Id = t.id,
