@@ -14,7 +14,7 @@ import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-lis
 const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
   {path: 'clientes/novo', component: ClienteNovoComponent},
-  {path: 'clientes/:id', component: ClienteAlteraComponent},
+  {path: 'clientes/:id/alterar', component: ClienteAlteraComponent},
   {path: 'clientes/:id/detalhes', component: ClienteResumoComponent},
   {path: 'turmas', component: TurmaListComponent},
   {path: 'turmas/nova', component: TurmaNovaComponent},

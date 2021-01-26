@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PoModalComponent, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { ClienteService } from 'src/app/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
 import { Turma } from 'src/app/models/turma';
@@ -11,6 +11,10 @@ import { Turma } from 'src/app/models/turma';
   styleUrls: ['./cliente-resumo.component.css']
 })
 export class ClienteResumoComponent implements OnInit {
+  public readonly pageActions: Array<PoPageAction> = [{
+    label: 'Alterar',
+    action: () => this.router.navigate([`/clientes/${this.cliente.id}/alterar`])
+  }];
   cliente: Cliente;
   turma: Turma;
   pagamentos: any[];
@@ -36,7 +40,8 @@ export class ClienteResumoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

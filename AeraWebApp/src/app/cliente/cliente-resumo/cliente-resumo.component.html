@@ -1,9 +1,16 @@
-<po-page-default>
-  <h1>{{cliente.nome}}</h1>
+<po-page-default [p-actions]="pageActions" p-title={{cliente?.nome}}>
+  <div *ngIf="cliente">
+    <div class="container-info">
+      <po-info p-label="E-mail" p-orientation="horizontal" p-value={{cliente.email}}> </po-info>
+      <po-info p-label="Celular" p-orientation="horizontal" p-value={{cliente.celular}}> </po-info>
+      <po-info p-label="CPF" p-orientation="horizontal" p-value={{cliente.cpf}}> </po-info>
+    </div>
+  </div>
+  <po-divider></po-divider>
   <po-table
     p-container="shadow"
     [p-columns]="columns"
-    [p-items]="cliente.turmas"
+    [p-items]="cliente?.turmas"
     [p-actions]="actions"
 ></po-table>
 <po-modal p-click-out="true" p-title="{{turma?.curso}}">

@@ -3,6 +3,9 @@ import { PoDynamicFormField } from '@po-ui/ng-components';
 export interface Cliente {
   id?: number;
   nome: string;
+  email?: string;
+  celular?: string;
+  cpf?: string;
   turmas?: any[];
   pagamentos?: any[];
 }
