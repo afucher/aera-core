@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoModalComponent, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoModalComponent, PoNotificationService, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { ClienteService } from 'src/app/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
 import { Turma } from 'src/app/models/turma';
+import { PagamentoService } from 'src/app/pagamento.service';
 
 @Component({
   selector: 'app-cliente-resumo',
@@ -33,7 +34,7 @@ export class ClienteResumoComponent implements OnInit {
     {property: 'pago', label: 'Pago?', type: 'boolean', boolean: {trueLabel: 'Pago', falseLabel: 'Em aberto'}},
   ];
   pagamentoActions: Array<PoTableAction> = [
-    { action: () => {}, label: 'Pagar', disabled: pagamento => pagamento.pago }
+    { action: this.pagar.bind(this), label: 'Pagar', disabled: pagamento => pagamento.pago }
   ];
 
   @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
@@ -41,7 +42,9 @@ export class ClienteResumoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private clienteService: ClienteService,
-    private router: Router
+    private pagamentoService: PagamentoService,
+    private router: Router,
+    public poNotification: PoNotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +58,14 @@ export class ClienteResumoComponent implements OnInit {
     this.clienteService.teste(turma.id, this.cliente.id).subscribe(p => this.pagamentos = p);
     this.turma = turma;
     this.poModal.open();
+  }
+
+  pagar(pagamento) {
+    this.pagamentoService.pagar(pagamento)
+      .subscribe(() => {
+        this.poNotification.success(`Parcela ${pagamento.parcela} de ${pagamento.totalDeParcelas} paga!`);
+        this.poModal.close();
+      }, this.poNotification.error);
   }
 
 }
