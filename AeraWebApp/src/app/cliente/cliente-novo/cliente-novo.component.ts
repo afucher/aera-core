@@ -28,7 +28,10 @@ export class ClienteNovoComponent implements OnInit {
   onSubmit(e) {
     this.clienteService
       .criar({...e.value, hora_nascimento: this.formataHorário(e.value.hora_nascimento)})
-      .subscribe((_) => this.poNotification.success('Turma criada com sucesso!'));
+      .subscribe(
+        (_) => this.poNotification.success('Cliente criado com sucesso!'),
+        (err) => this.poNotification.error('Erro ao criar o cliente')
+      );
    }
 
   ngOnInit(): void {}

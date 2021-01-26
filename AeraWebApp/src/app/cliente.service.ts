@@ -57,7 +57,7 @@ export class ClienteService {
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
-
+      throw(error);
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
