@@ -30,7 +30,7 @@ export class ClienteNovoComponent implements OnInit {
       .criar({...e.value, hora_nascimento: this.formataHorário(e.value.hora_nascimento)})
       .subscribe(
         (_) => this.poNotification.success('Cliente criado com sucesso!'),
-        (err) => this.poNotification.error('Erro ao criar o cliente')
+        (err) => this.poNotification.error((err.error as string).split('/n')[0])
       );
    }
 

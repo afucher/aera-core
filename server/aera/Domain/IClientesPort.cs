@@ -8,6 +8,7 @@ namespace aera_core.Domain
     {
         public ListaPaginada<Cliente> ObterClientes(OpçõesBusca opçõesBusca);
         public Cliente Obter(int id);
+        public ClienteDB ObterPorCpf(string cpf);
         public ClienteDB Criar(ClienteDB cliente);
         public ClienteDB Atualizar(ClienteDB cliente);
     }

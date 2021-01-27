@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using aera_core.Controllers;
 using aera_core.Helpers;
@@ -25,6 +26,8 @@ namespace aera_core.Domain
 
         public ClienteDB Criar(ClienteDB cliente)
         {
+            var mesmoCPF = _clientesPort.ObterPorCpf(cliente.cpf);
+            if (mesmoCPF != null) throw new Exception($"CPF já cadastrado: {mesmoCPF.id}");
             return _clientesPort.Criar(cliente);
         }
 

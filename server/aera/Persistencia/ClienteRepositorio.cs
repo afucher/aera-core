@@ -83,6 +83,13 @@ namespace aera_core.Persistencia
 
             return retornaCliente(professor);
         }
+        
+        public ClienteDB ObterPorCpf(string cpf)
+        { 
+            return _contexto.Clientes
+                .FirstOrDefault(c => c.cpf == cpf);
+
+        }
 
         public Cliente Obter(int id)
         {

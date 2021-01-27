@@ -104,10 +104,23 @@ namespace aera_core.Controllers
         }
 
         [HttpPost]
-        public ClienteDTO Post([FromBody] ClienteDTO cliente)
+        public ActionResult<ClienteDTO> Post([FromBody] ClienteDTO cliente)
         {
-            var clienteCriado = _clientesServiço.Criar(ClienteDB.DeCliente(cliente.ParaModelo()));
-            return ClienteDTO.DoModelo(clienteCriado.ParaCliente());
+            try
+            {
+                var clienteCriado = _clientesServiço.Criar(ClienteDB.DeCliente(cliente.ParaModelo()));
+                return ClienteDTO.DoModelo(clienteCriado.ParaCliente());
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("CPF já cadastrado"))
+                {
+                    return BadRequest(e.Message);
+                }
+
+                throw;
+            }
+            
         }
         
         [HttpPut("{id}")]
