@@ -17,6 +17,7 @@
   </po-divider>
   <div class="po-row">
     <po-button p-label="Matricular aluno" (p-click)="abreMatricular()"> </po-button>
+    <po-button p-label="Gerar pagamentos" (p-click)="abrePagamentos()"> </po-button>
   </div>
   <po-table
     p-hide-columns-manager
@@ -26,7 +27,7 @@
     [p-striped]="true"
   ></po-table>
 </po-page-default>
-<po-modal p-title="Matricular" [p-primary-action]="confirm" [p-secondary-action]="close">
+<po-modal p-title="Matricular" [p-primary-action]="confirm" [p-secondary-action]="close" #modalMatricula>
   <div >
     <div class="po-row">
       <p>Procura aluno</p>
@@ -44,3 +45,8 @@
   </div>
 </po-modal>
 
+<po-modal p-title="Matricular" [p-primary-action]="geraPagamentos" [p-secondary-action]="fechaPagamentos" #modalPagamentos>
+  <div >
+    <p>Teste</p>
+  </div>
+</po-modal>

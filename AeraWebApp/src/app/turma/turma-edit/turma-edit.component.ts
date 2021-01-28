@@ -34,6 +34,21 @@ export class TurmaEditComponent implements OnInit {
     },
     label: 'Matricular'
   };
+
+  fechaPagamentos: PoModalAction = {
+    action: () => {
+      this.modalPagamentos.close();
+    },
+    label: 'Cancelar'
+  };
+
+  geraPagamentos: PoModalAction = {
+    action: () => {
+      this.modalPagamentos.close();
+    },
+    label: 'Gerar'
+  };
+
   turma: Turma;
   columns: Array<PoTableColumn> = [{
     property: 'nome'
@@ -69,7 +84,8 @@ export class TurmaEditComponent implements OnInit {
     optionsService: '/api/professores', fieldLabel: 'nome', fieldValue: 'id'}];
 
   @ViewChild('optionsForm', { static: true }) form: NgForm;
-  @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
+  @ViewChild('modalMatricula', { static: true }) poModal: PoModalComponent;
+  @ViewChild('modalPagamentos', { static: true }) modalPagamentos: PoModalComponent;
 
   constructor(
     public poNotification: PoNotificationService,
@@ -83,6 +99,10 @@ export class TurmaEditComponent implements OnInit {
 
   abreMatricular() {
     this.poModal.open();
+  }
+
+  abrePagamentos() {
+    this.modalPagamentos.open();
   }
 
   formataHorário(horario: string) {
