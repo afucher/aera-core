@@ -20,8 +20,8 @@
     <po-button p-label="Gerar pagamentos" (p-click)="abrePagamentos()"> </po-button>
   </div>
   <po-table
-    p-hide-columns-manager
     p-sort="true"
+    [p-columns]="turmaColumns"
     p-auto-collapse
     [p-items]="turma?.alunos"
     [p-striped]="true"

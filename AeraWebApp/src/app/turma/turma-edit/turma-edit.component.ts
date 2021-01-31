@@ -53,6 +53,14 @@ export class TurmaEditComponent implements OnInit {
   columns: Array<PoTableColumn> = [{
     property: 'nome'
   }];
+  turmaColumns: Array<PoTableColumn> = [
+    { property: 'id' },
+    { property: 'nome' },
+    { property: 'turmas', type: 'detail', detail: { columns: [
+      {property: 'curso'},
+      {property: 'dataFinal'}
+    ]}}
+  ];
   fields: Array<PoDynamicFormField> = [
     {
       property: 'id',

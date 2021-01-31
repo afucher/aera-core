@@ -15,6 +15,7 @@ namespace aera_core.Persistencia
         public DbSet<TurmaDB> Turmas { get; set; }
         public DbSet<CursoDB> Cursos { get; set; }
         public DbSet<PagamentoDB> Pagamentos { get; set; }
+        public DbSet<TurmaAluno> Matriculas { get; set; }
         public AplicaçãoContexto(DbContextOptions opções) : base(opções) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

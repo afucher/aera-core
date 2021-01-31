@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PoDynamicFormField, PoNotificationService } from '@po-ui/ng-components';
 import { Turma } from 'src/app/models/turma';
 import { TurmaService } from 'src/app/turma.service';
@@ -36,7 +37,8 @@ export class TurmaNovaComponent implements OnInit {
 
   constructor(
     public poNotification: PoNotificationService,
-    private turmaService: TurmaService) { }
+    private turmaService: TurmaService,
+    private router: Router) { }
 
     formataHorário(horario: string) {
       if (horario.length === 4) { return horario.slice(0, 2) + ':' + horario.slice(2); }
@@ -48,7 +50,10 @@ export class TurmaNovaComponent implements OnInit {
       .criar({...e.value,
         horárioInicial: this.formataHorário(e.value.horárioInicial),
         horárioFinal: this.formataHorário(e.value.horárioFinal)})
-      .subscribe((_) => this.poNotification.success('Turma criada com sucesso!'));
+      .subscribe((t: Turma) => {
+        this.router.navigate([`/turmas/${t.id}/alterar`]);
+        this.poNotification.success('Turma criada com sucesso!');
+      });
    }
 
   ngOnInit(): void {}

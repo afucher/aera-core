@@ -91,7 +91,7 @@ namespace aera_core.Controllers
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
                     Curso = t.Curso.name,
-                    EmAndamento = t.end_date < DateTime.Now,
+                    EmAndamento = t.end_date >= DateTime.Now,
                     DataInicial = t.start_date.ToString("yyyy-MM-dd"),
                     DataFinal = t.end_date.ToString("yyyy-MM-dd")
                 }).ToList()

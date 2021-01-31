@@ -32,6 +32,11 @@ namespace aera_core.Domain
             return _turmasPort.ObterTurmas(opções);
         }
 
+        public IReadOnlyCollection<TurmaDB> ObterTurmasDosAlunos(List<int> idsAlunos)
+        {
+            return _turmasPort.ObterTurmasDosAlunos(idsAlunos);
+        }
+
         public TurmaDB MatricularAluno(TurmaDB turma, Cliente aluno)
         {
             return _turmasPort.MatricularAluno(turma, aluno.Id);

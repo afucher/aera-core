@@ -19,11 +19,23 @@ namespace aera_core.Persistencia
         {
             var total = _contexto.Turmas.Count();
             var turmas =  _contexto.Turmas
+                .OrderByDescending(t => t.end_date)
                 .Include(t => t.Curso)
                 .Skip((opções.Página-1) * opções.LimitePágina)
                 .Take(opções.LimitePágina)
                 .ToList();
             return new ListaPaginada<TurmaDB>(turmas, total, opções.Página, opções.LimitePágina);
+        }
+
+        public IReadOnlyCollection<TurmaDB> ObterTurmasDosAlunos(List<int> idsAlunos)
+        {
+            return _contexto.Matriculas
+                .Include(m => m.Turma)
+                    .ThenInclude(t => t.Alunos)
+                .Include(m => m.Turma.Curso)
+                .Where(m => idsAlunos.Contains(m.ClienteId))
+                .Select(m => m.Turma)
+                .ToList();
         }
 
         public TurmaDB Obter(int id)

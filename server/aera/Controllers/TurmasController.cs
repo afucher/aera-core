@@ -27,10 +27,21 @@ namespace aera_core.Controllers
         [HttpGet("{id}")]
         public TurmaDTO Get(int id)
         {
+            var today = DateTime.Today;
+            var primeiroDiaDoMesAtual = new DateTime(today.Year, today.Month, 1);       
             var turma = _turmasServiço.Obter(id);
             var professor = _professoresServiço.Obter(turma.teacher_id);
-            
-            return TurmaDTO.De(turma, professor);
+            var turmasExtras = _turmasServiço.
+                ObterTurmasDosAlunos(turma.Alunos.Select(a => a.id).ToList())
+                .Where(t => t.id != id && t.end_date >= primeiroDiaDoMesAtual );
+           var turmaDto = TurmaDTO.De(turma, professor);
+           foreach (var aluno in turmaDto.Alunos)
+           {
+               aluno.turmas = turmasExtras.Where(t => t.Alunos.Select(a => a.id).Contains(aluno.id))
+                   .Select(t => TurmaDTO.De(t, null)).ToList();
+           }
+
+           return turmaDto;
         }
         
         [HttpPost]
