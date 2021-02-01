@@ -45,8 +45,11 @@
   </div>
 </po-modal>
 
-<po-modal p-title="Matricular" [p-primary-action]="geraPagamentos" [p-secondary-action]="fechaPagamentos" #modalPagamentos>
+<po-modal p-title="Gerar pagamentos" [p-primary-action]="geraPagamentos" [p-secondary-action]="fechaPagamentos" #modalPagamentos>
   <div >
-    <p>Teste</p>
+    <po-dynamic-form #formGerarPagamentos
+      [p-fields]= "fieldsPagamentos"
+      [p-value]="geraPagamentoModel">
+  </po-dynamic-form>
   </div>
 </po-modal>

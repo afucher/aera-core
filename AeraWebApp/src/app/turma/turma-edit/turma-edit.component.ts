@@ -44,7 +44,12 @@ export class TurmaEditComponent implements OnInit {
 
   geraPagamentos: PoModalAction = {
     action: () => {
-      this.modalPagamentos.close();
+      this.turmaService
+        .gerarPagamentos(this.turma,
+          this.geraPagamentoModel.dataVencimento,
+          this.geraPagamentoModel.valor,
+          this.geraPagamentoModel.parcelas)
+        .subscribe((_) => this.modalPagamentos.close());
     },
     label: 'Gerar'
   };
@@ -61,6 +66,12 @@ export class TurmaEditComponent implements OnInit {
       {property: 'dataFinal'}
     ]}}
   ];
+  fieldsPagamentos: Array<PoDynamicFormField> = [
+    { property: 'dataVencimento', label: 'Data Vencimento 1a parcela', gridColumns: 4, gridSmColumns: 12, type: 'date', required: true},
+    { property: 'valor', label: 'Valor parcela', gridColumns: 4, gridSmColumns: 12, type: 'currency', format: 'BRL', required: true},
+    { property: 'parcelas', label: 'Número de parcelas', gridColumns: 4, gridSmColumns: 12, type: 'number', required: true},
+  ];
+  geraPagamentoModel: {parcelas: number, valor: number, dataVencimento: Date} = {parcelas: 1, valor: undefined, dataVencimento: undefined};
   fields: Array<PoDynamicFormField> = [
     {
       property: 'id',

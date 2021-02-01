@@ -31,6 +31,12 @@ namespace aera_core.Persistencia
             return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
         }
 
+        public void AdicionarPagamentos(List<PagamentoDB> pagamentos)
+        {
+            _contexto.Pagamentos.AddRange(pagamentos);
+            _contexto.SaveChanges();
+        }
+
         public IReadOnlyCollection<PagamentoDB> ObterDoAlunoDaTurma(int turmaId, int alunoId)
         {
             return  _contexto.Pagamentos

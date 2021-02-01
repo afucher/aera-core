@@ -43,6 +43,14 @@ export class TurmaService {
       );
   }
 
+  gerarPagamentos(turma: Turma, dataVencimento: Date, valor: number, parcelas: number): Observable<Turma> {
+    const url = `${this.url}/${turma.id}/pagamentos?dataVencimento=${dataVencimento}&valor=${valor}&parcelas=${parcelas}`;
+    return this.http.post<Turma>(url, {})
+      .pipe(
+        catchError(this.handleError('matricularAluno', turma))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

@@ -15,13 +15,16 @@ namespace aera_core.Controllers
         private readonly CursosServiço _cursoServiço;
         private readonly ProfessoresServiço _professoresServiço;
         private readonly ClientesServiço _clientesServiço;
+        private readonly PagamentosServiço _pagamentosServiço;
 
-        public TurmasController(TurmasServiço turmasServiço, CursosServiço cursoServiço, ProfessoresServiço professoresServiço, ClientesServiço clientesServiço)
+
+        public TurmasController(TurmasServiço turmasServiço, CursosServiço cursoServiço, ProfessoresServiço professoresServiço, ClientesServiço clientesServiço, PagamentosServiço pagamentosServiço)
         {
             _turmasServiço = turmasServiço;
             _cursoServiço = cursoServiço;
             _professoresServiço = professoresServiço;
             _clientesServiço = clientesServiço;
+            _pagamentosServiço = pagamentosServiço;
         }
 
         [HttpGet("{id}")]
@@ -100,6 +103,17 @@ namespace aera_core.Controllers
             var professor = _professoresServiço.Obter(turmaAtualizada.teacher_id);
             
             return TurmaDTO.De(turmaAtualizada, professor);
+        }
+
+        [HttpPost("{id}/pagamentos")]
+        public ActionResult<TurmaDTO> GerarPagamentos(int id, [FromQuery]int parcelas,[FromQuery] decimal valor,[FromQuery] DateTime dataVencimento)
+        {
+            var turma = _turmasServiço.Obter(id);
+            if (turma == null) return BadRequest("Turma não existe");
+            
+            _pagamentosServiço.GerarPagamentos(turma, parcelas, valor, dataVencimento);
+            
+            return TurmaDTO.De(_turmasServiço.Obter(id), null);
         }
     }
 }

@@ -90,6 +90,7 @@ namespace aera_core.Controllers
                 CodigoAuxiliar = cliente.CódigoAntigo,
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
+                    Id = t.id,
                     Curso = t.Curso.name,
                     EmAndamento = t.end_date >= DateTime.Now,
                     DataInicial = t.start_date.ToString("yyyy-MM-dd"),
