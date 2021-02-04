@@ -1,7 +1,17 @@
-Lista de Presença
-Curso: @Model.Curso.name
-
+<p>Lista de Presença</p>
+<p>Início: @Model.start_date.ToString("dd/MM/yyyy") - Término: @Model.end_date.ToString("dd/MM/yyyy")</p>
+<table style="width: 100%;">
+    <tr>
+        <td>Curso: @Model.Curso.name</td>
+        <td>Data: __/__/____</td>
+    </tr>
+</table>
 @foreach (var aluno in @Model.Alunos)
 {
-   <p>@aluno.name</p> 
+<table style="width: 100%;">
+    <tr>
+        <td>@aluno.name</td> 
+        <td>Assinatura: ____________________________</td>
+    </tr>
+</table>
 }
