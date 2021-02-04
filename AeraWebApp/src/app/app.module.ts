@@ -19,6 +19,7 @@ import { ClienteNovoComponent } from './cliente/cliente-novo/cliente-novo.compon
 import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.component';
 import { PagamentoDetalhesComponent } from './cliente/pagamento-detalhes/pagamento-detalhes.component';
 import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
+import { TesteDownloadComponent } from './download/teste-download/teste-download.component';
 
 @NgModule({
 
@@ -34,7 +35,8 @@ import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.
     ClienteNovoComponent,
     ClienteAlteraComponent,
     PagamentoDetalhesComponent,
-    ClienteResumoComponent
+    ClienteResumoComponent,
+    TesteDownloadComponent
   ],
   imports: [
     BrowserModule,

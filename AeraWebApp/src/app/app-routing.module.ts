@@ -10,6 +10,7 @@ import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
 import { CursoListComponent } from './curso/curso-list/curso-list.component';
 import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
+import { TesteDownloadComponent } from './download/teste-download/teste-download.component';
 
 const routes: Routes = [
   {path: 'clientes', component: ClientListComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'cursos', component: CursoListComponent},
   {path: 'cursos/:id', component: CursoEditComponent},
   {path: 'pagamentos', component: PagamentoListComponent},
+  {path: 'downloads', component: TesteDownloadComponent},
 ];
 
 @NgModule({
