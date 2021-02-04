@@ -72,7 +72,7 @@ namespace aera_core.Persistencia
                 HorárioNascimento = birth_hour,
                 LocalNascimento = birth_place,
                 Observação = note,
-                Turmas = Turmas.ToList()
+                Turmas = Turmas == null ? new List<TurmaDB>() : Turmas.ToList()
             };
         }
 

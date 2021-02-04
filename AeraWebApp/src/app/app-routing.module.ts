@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'turmas/:id', component: TurmaEditComponent},
   {path: 'cursos', component: CursoListComponent},
   {path: 'cursos/:id', component: CursoEditComponent},
-  {path: 'pagamentos', component: PagamentoListComponent},
+  {path: 'pagamentos', component: PagamentoListComponent}
 ];
 
 @NgModule({
