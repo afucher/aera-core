@@ -43,6 +43,7 @@ namespace aera_core.Persistencia
             return _contexto.Turmas
                 .Include(t => t.Curso)
                 .Include(t => t.Alunos)
+                .Include(t => t.Professor)
                 .FirstOrDefault(t => t.id == id);
         }
 

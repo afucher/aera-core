@@ -33,7 +33,7 @@ export class DownloadListaComponent implements OnInit {
     this.estaCarregando = true;
     this._downloadService.listaDePresenca(this.turma.id)
       .subscribe(data => this.downloadFile(data),
-                 error => console.log('Error downloading the file.'),
+                 error => this.estaCarregando = false,
                  () => this.estaCarregando = false);
   }
 

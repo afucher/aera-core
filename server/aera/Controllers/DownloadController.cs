@@ -35,7 +35,9 @@ namespace aera_core.Controllers
             var razorEngine = new RazorEngine();
             var template = razorEngine.Compile(await System.IO.File.ReadAllTextAsync("Templates/ListaDePresenca.cshtml"));
 
-            string result = template.Run(_turmasServiço.Obter(id));
+            var turma = _turmasServiço.Obter(id);
+            turma.Alunos = turma.Alunos.OrderBy(a => a.name).ToList();
+            string result = template.Run(turma);
 
             var pdf = await renderer.RenderHtmlAsPdfAsync(result);
             return new FileStreamResult(new MemoryStream(pdf.BinaryData),"application/pdf");

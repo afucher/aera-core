@@ -33,15 +33,19 @@ namespace aera_core.Controllers
             var today = DateTime.Today;
             var primeiroDiaDoMesAtual = new DateTime(today.Year, today.Month, 1);       
             var turma = _turmasServiço.Obter(id);
-            var professor = _professoresServiço.Obter(turma.teacher_id);
             var turmasExtras = _turmasServiço.
                 ObterTurmasDosAlunos(turma.Alunos.Select(a => a.id).ToList())
-                .Where(t => t.id != id && t.end_date >= primeiroDiaDoMesAtual );
-           var turmaDto = TurmaDTO.De(turma, professor);
+                .Where(t => t.id != id && t.end_date >= primeiroDiaDoMesAtual )
+                .ToList();
+           var turmaDto = TurmaDTO.De(turma);
            foreach (var aluno in turmaDto.Alunos)
            {
-               aluno.turmas = turmasExtras.Where(t => t.Alunos.Select(a => a.id).Contains(aluno.id))
-                   .Select(t => TurmaDTO.De(t, null)).ToList();
+               aluno.turmas = 
+                   turmasExtras
+                    .Where(t => t.Alunos.Select(a => a.id)
+                                                .Contains(aluno.id))
+                    .Select(TurmaDTO.De)
+                    .ToList();
            }
 
            return turmaDto;
@@ -59,7 +63,7 @@ namespace aera_core.Controllers
             
             if (turmaCriada == null) return BadRequest("Erro ao salvar");
             
-            return TurmaDTO.De(turmaCriada, professor);
+            return TurmaDTO.De(turmaCriada);
         }
         
         [HttpPut("{id}")]
@@ -72,7 +76,7 @@ namespace aera_core.Controllers
             
             if (turmaAtualizada == null) return BadRequest("Erro ao salvar");
             
-            return TurmaDTO.De(turmaAtualizada, professor);
+            return TurmaDTO.De(turmaAtualizada);
         }
 
         [HttpGet]
@@ -84,9 +88,9 @@ namespace aera_core.Controllers
                 LimitePágina = pageSize,
             };
             var turmas = _turmasServiço.ObterTurmas(opções);
-            var turmasDTO = turmas.Select(t => TurmaDTO.De(t, null)).ToArray();
+            var turmasDto = turmas.Select(TurmaDTO.De).ToArray();
 
-            return new POUIListResponse<TurmaDTO>(turmasDTO, turmas.TemMaisItens);
+            return new POUIListResponse<TurmaDTO>(turmasDto, turmas.TemMaisItens);
         }
         
         [HttpPost("{id}/matricular")]
@@ -100,9 +104,8 @@ namespace aera_core.Controllers
             var turmaAtualizada = _turmasServiço.MatricularAluno(turma, aluno);
             
             if (turmaAtualizada == null) return BadRequest("Erro ao salvar");
-            var professor = _professoresServiço.Obter(turmaAtualizada.teacher_id);
             
-            return TurmaDTO.De(turmaAtualizada, professor);
+            return TurmaDTO.De(turmaAtualizada);
         }
 
         [HttpPost("{id}/pagamentos")]
@@ -113,7 +116,7 @@ namespace aera_core.Controllers
             
             _pagamentosServiço.GerarPagamentos(turma, parcelas, valor, dataVencimento);
             
-            return TurmaDTO.De(_turmasServiço.Obter(id), null);
+            return TurmaDTO.De(_turmasServiço.Obter(id));
         }
     }
 }

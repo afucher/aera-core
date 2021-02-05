@@ -42,7 +42,12 @@ namespace aera_core.Persistencia
                 .HasOne(t => t.Curso)
                 .WithMany(t => t.Turmas)
                 .HasForeignKey(x => x.course_id);
-            
+
+            modelBuilder.Entity<TurmaDB>()
+                .HasOne(t => t.Professor)
+                .WithMany()
+                .HasForeignKey(t => t.teacher_id);
+
             modelBuilder.Entity<PagamentoDB>(entity =>
             {
                 entity.HasKey(e => new { e.ClientGroupId, e.Installment })

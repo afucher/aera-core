@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using aera_core.Domain;
 using aera_core.Persistencia;
 
 namespace aera_core.Controllers
@@ -30,7 +29,7 @@ namespace aera_core.Controllers
             public List<TurmaDTO> turmas {get; set; }
         }
 
-        public static TurmaDTO De(TurmaDB turma, Cliente professor){
+        public static TurmaDTO De(TurmaDB turma){
             return new TurmaDTO
             {
                 Id = turma.id,
@@ -41,7 +40,7 @@ namespace aera_core.Controllers
                 HorárioInicial = turma.start_hour.ToString(@"hh\:mm"),
                 HorárioFinal = turma.end_hour.ToString(@"hh\:mm"),
                 QuantidadeDeAulas = turma.classes,
-                Professor = professor?.Nome,
+                Professor = turma.Professor?.name,
                 ProfessorId = turma.teacher_id,
                 Alunos = turma.Alunos?.Select(a =>
                 {
