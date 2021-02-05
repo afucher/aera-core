@@ -6,9 +6,16 @@
   <div class="po-row">
     <po-button
       class="po-md-3"
-      p-label="Criar"
+      p-label="Salvar"
       [p-disabled]="clienteForm?.form.invalid"
-      (p-click)="onSubmit(clienteForm);"
+      (p-click)="salvar(clienteForm);"
+    >
+    </po-button>
+    <po-button
+      class="po-md-3"
+      p-label="Salvar e criar novo"
+      [p-disabled]="clienteForm?.form.invalid"
+      (p-click)="salvarECriarNovo(clienteForm); clienteForm.form.reset()"
     >
     </po-button>
   </div>
