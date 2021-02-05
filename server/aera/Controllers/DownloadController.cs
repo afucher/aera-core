@@ -20,14 +20,37 @@ namespace aera_core.Controllers
     public class DownloadController : ControllerBase
     {
         private readonly TurmasServiço _turmasServiço;
+        private readonly ClientesServiço _clientesServiço;
 
-        public DownloadController(TurmasServiço turmasServiço)
+        public DownloadController(TurmasServiço turmasServiço, ClientesServiço clientesServiço)
         {
             _turmasServiço = turmasServiço;
+            _clientesServiço = clientesServiço;
         }
 
+        [HttpGet("atestado/{alunoId}")]
+        public async Task<IActionResult> geraAtestado(int alunoId) 
+        {
+            var renderer = new HtmlToPdf();
+            renderer.PrintOptions.Title = "Lista de Presença";
+            
+            var razorEngine = new RazorEngine();
+            var template = razorEngine.Compile(await System.IO.File.ReadAllTextAsync("Templates/Atestado.cshtml"));
+
+            var aluno = _clientesServiço.Obter(alunoId);
+            var turmas = _turmasServiço.ObterTurmasDosAlunos(new List<int> {aluno.Id});
+            string result = template.Run( new
+            {
+                Aluno = aluno,
+                Turmas = turmas
+            });
+
+            var pdf = await renderer.RenderHtmlAsPdfAsync(result);
+            return new FileStreamResult(new MemoryStream(pdf.BinaryData),"application/pdf");
+        }
+        
         [HttpGet("listaDePresenca/{id}")]
-        public async Task<IActionResult> geraPDF(int id) 
+        public async Task<IActionResult> geraLista(int id) 
         {
             var renderer = new HtmlToPdf();
             renderer.PrintOptions.Title = "Lista de Presença";

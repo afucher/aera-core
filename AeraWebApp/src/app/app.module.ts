@@ -20,6 +20,7 @@ import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.
 import { PagamentoDetalhesComponent } from './cliente/pagamento-detalhes/pagamento-detalhes.component';
 import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
 import { DownloadListaComponent } from './download/download-list/download-lista.component';
+import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component'
 
 @NgModule({
 
@@ -36,7 +37,8 @@ import { DownloadListaComponent } from './download/download-list/download-lista.
     ClienteAlteraComponent,
     PagamentoDetalhesComponent,
     ClienteResumoComponent,
-    DownloadListaComponent
+    DownloadListaComponent,
+    DownloadAtestadoComponent
   ],
   imports: [
     BrowserModule,

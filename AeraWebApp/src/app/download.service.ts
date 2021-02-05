@@ -22,6 +22,15 @@ export class DownloadService {
     return this.http.get(`${this.url}/listaDePresenca/${turmaId}`, requestOptions);
   }
 
+  atestado(alunoId: number): Observable<Blob> {
+    const headerOptions = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/pdf'
+    });
+    const requestOptions = {headers : headerOptions, responseType: 'blob' as 'blob'};
+    return this.http.get(`${this.url}/atestado/${alunoId}`, requestOptions);
+  }
+
 
 
   private handleError<T>(operation = 'operation', result?: T) {
