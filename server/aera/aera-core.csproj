@@ -19,14 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Templates\ListaDePresenca.cshtml">
+    <Content Remove="Templates\ListaDePresenca.cshtml" />
+    <EmbeddedResource Include="Templates\ListaDePresenca.cshtml">
+      <ExcludeFromSingleFile>false</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Templates\Atestado.cshtml" />
+    <EmbeddedResource Include="Templates\Atestado.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Templates\Atestado.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
 
