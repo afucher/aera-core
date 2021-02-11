@@ -51,7 +51,7 @@ export class TurmaNovaComponent implements OnInit {
         horárioInicial: this.formataHorário(e.value.horárioInicial),
         horárioFinal: this.formataHorário(e.value.horárioFinal)})
       .subscribe((t: Turma) => {
-        this.router.navigate([`/turmas/${t.id}/alterar`]);
+        this.router.navigate([`/turmas/${t.id}`]);
         this.poNotification.success('Turma criada com sucesso!');
       });
    }
