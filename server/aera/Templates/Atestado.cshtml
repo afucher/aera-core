@@ -1,7 +1,19 @@
 <h2 style="font-family: Lato">Regulus</h2>
-<p>@Model.Aluno.Nome</p>
+<p>@Model.Aluno.Nome portador(a) do CPF: @Model.Aluno.CPF</p>
 
-@foreach (var matricula in @Model.Matriculas)
-{
-    <p>@matricula.Turma.Curso.name</p>
-}
+<table style="text-align: left;">
+    <tr>
+        <th>Curso</th>
+        <th>Data de Início</th>
+        <th>Data de Término</th>
+    </tr>
+        
+    @foreach (var matricula in @Model.Matriculas)
+    {
+        <tr>
+            <td>@matricula.Turma.Curso.name</td>
+            <td>@matricula.Turma.start_date.ToString("dd/MM/yyyy")</td>
+            <td>@matricula.Turma.end_date.ToString("dd/MM/yyyy")</td>
+        </tr>
+    }
+</table>
