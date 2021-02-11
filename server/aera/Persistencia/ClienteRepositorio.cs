@@ -52,6 +52,16 @@ namespace aera_core.Persistencia
             {
                 consultaClientes = consultaClientes.Where(c => c.name.ToLower().Contains(opções.Filtros["search"].ToLower()));
             }
+            
+            if (opções.Filtros.ContainsKey("nome") && opções.Filtros["nome"] != null)
+            {
+                consultaClientes = consultaClientes.Where(c => c.name.ToLower().Contains(opções.Filtros["nome"].ToLower()));
+            }
+            
+            if (opções.Filtros.ContainsKey("cpf") && opções.Filtros["cpf"] != null)
+            {
+                consultaClientes = consultaClientes.Where(c => c.cpf.Contains(opções.Filtros["cpf"]));
+            }
             var total = consultaClientes.Count();
             var clientes =  consultaClientes
                 .Include(c => c.Turmas)

@@ -32,7 +32,8 @@ namespace aera_core.Controllers
         }
 
         [HttpGet]
-        public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string search, [FromQuery] string filter)
+        public POUIListResponse<ClienteDTO> Get([FromQuery] int page, [FromQuery] int pageSize, 
+            [FromQuery] string search, [FromQuery] string filter, [FromQuery] string nome, [FromQuery] string cpf)
         {
             var filtro = search == null ? filter : search;
             var opções = new OpçõesBusca
@@ -41,7 +42,9 @@ namespace aera_core.Controllers
                 LimitePágina = pageSize,
                 Filtros = new Dictionary<string, string>
                 {
-                    { "search", filtro }
+                    { "search", filtro },
+                    { "nome", nome },
+                    {"cpf", cpf}
                 }
             };
             var clientes = _clientesServiço.ObterClientes(opções);
