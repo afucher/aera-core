@@ -84,5 +84,15 @@ namespace aera_core.Persistencia
 
             return turma;
         }
+
+        public IReadOnlyCollection<TurmaAluno> MatriculasDoAluno(int clientId)
+        {
+            return _contexto.Matriculas
+                            .Include(m => m.Turma)
+                            .Include(m => m.Turma.Curso)
+                            .Include(m => m.Pagamentos)
+                            .Where(m => m.ClienteId == clientId)
+                            .ToList();
+        }
     }
 }

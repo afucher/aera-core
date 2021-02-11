@@ -41,5 +41,10 @@ namespace aera_core.Domain
         {
             return _turmasPort.MatricularAluno(turma, aluno.Id);
         }
+
+        public IReadOnlyCollection<TurmaAluno> ObterMatriculas(int idAluno)
+        {
+            return _turmasPort.MatriculasDoAluno(idAluno);
+        }
     }
 }

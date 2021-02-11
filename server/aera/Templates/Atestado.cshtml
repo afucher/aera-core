@@ -1,3 +1,7 @@
 <h2 style="font-family: Lato">Regulus</h2>
 <p>@Model.Aluno.Nome</p>
-<p>@Model.Turmas[0].Curso.name</p>
+
+@foreach (var matricula in @Model.Matriculas)
+{
+    <p>@matricula.Turma.Curso.name</p>
+}

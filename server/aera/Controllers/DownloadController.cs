@@ -4,12 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using aera_core.Domain;
-using aera_core.Helpers;
-using aera_core.Models;
-using aera_core.Persistencia;
-using aera_core.POUIHelpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using PugPdf.Core;
 using RazorEngineCore;
 
@@ -38,11 +33,12 @@ namespace aera_core.Controllers
             var template = razorEngine.Compile(await System.IO.File.ReadAllTextAsync("Templates/Atestado.cshtml"));
 
             var aluno = _clientesServiço.Obter(alunoId);
-            var turmas = _turmasServiço.ObterTurmasDosAlunos(new List<int> {aluno.Id});
+            var matriculas = _turmasServiço.ObterMatriculas(aluno.Id)
+                .Where(m => m.Pagamentos.All(p => p.Paid ?? false));
             string result = template.Run( new
             {
                 Aluno = aluno,
-                Turmas = turmas
+                Matriculas = matriculas
             });
 
             var pdf = await renderer.RenderHtmlAsPdfAsync(result);
