@@ -10,6 +10,7 @@ import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
 import { CursoListComponent } from './curso/curso-list/curso-list.component';
 import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component'
+import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component'
 import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'turmas/:id', component: TurmaEditComponent},
   {path: 'cursos', component: CursoListComponent},
   {path: 'cursos/novo', component: CursoNovoComponent},
+  {path: 'cursos/:id/detalhes', component: CursoResumoComponent},
   {path: 'cursos/:id', component: CursoEditComponent},
   {path: 'pagamentos', component: PagamentoListComponent}
 ];

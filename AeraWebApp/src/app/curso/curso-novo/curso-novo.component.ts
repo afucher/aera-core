@@ -10,7 +10,7 @@ import { Curso, campos } from 'src/app/models/curso';
   styleUrls: ['./curso-novo.component.css']
 })
 export class CursoNovoComponent implements OnInit {
-  curso: Curso = {nome: ''}
+  curso: Curso = {nome: '', descricao: '', cargaHoraria: 0}
   fields: Array<PoDynamicFormField> = campos.filter(c => c.property !== 'id');
   constructor(
     private cursoService: CursoService,
@@ -23,7 +23,7 @@ export class CursoNovoComponent implements OnInit {
   salvar(form: PoDynamicFormComponent) {
     this.cursoService.criar(form.value)
       .subscribe(c => {
-        this.router.navigate([`/cursos/${c.id}`]);
+        this.router.navigate([`/cursos/${c.id}/detalhes`]);
         this.notification.success(`Curso ${c.nome} criado com sucesso!`);
       },() => this.notification.error('Erro ao criar o curso'))
   }

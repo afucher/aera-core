@@ -10,16 +10,16 @@ namespace aera_core.Controllers
     {
         public int id { get; set; }
         public String Nome { get; set; }
-        public String Descrição { get; set; }
-        public int CargaHorária { get; set; }
+        public String Descricao { get; set; }
+        public int CargaHoraria { get; set; }
 
         public static CursoDTO De(CursoDB curso){
             return new CursoDTO
             {
                 id = curso.id,
                 Nome = curso.name,
-                Descrição = curso.description,
-                CargaHorária = curso.courseLoad
+                Descricao = curso.description,
+                CargaHoraria = curso.courseLoad
             };
         }
 
@@ -29,8 +29,8 @@ namespace aera_core.Controllers
             {
                 id = id,
                 name = Nome,
-                description = Descrição,
-                courseLoad = CargaHorária
+                description = Descricao,
+                courseLoad = CargaHoraria
             };
         }
     }

@@ -21,7 +21,8 @@ import { PagamentoDetalhesComponent } from './cliente/pagamento-detalhes/pagamen
 import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
 import { DownloadListaComponent } from './download/download-list/download-lista.component';
 import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component';
-import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component'
+import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
+import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component'
 
 @NgModule({
 
@@ -40,7 +41,8 @@ import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component'
     ClienteResumoComponent,
     DownloadListaComponent,
     DownloadAtestadoComponent,
-    CursoNovoComponent
+    CursoNovoComponent,
+    CursoResumoComponent
   ],
   imports: [
     BrowserModule,

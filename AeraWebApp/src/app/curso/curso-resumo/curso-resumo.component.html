@@ -1,0 +1,8 @@
+<po-page-default [p-actions]="pageActions" p-title={{curso?.nome}}>
+  <div *ngIf="curso">
+    <div class="container-info">
+      <h3>{{curso.descricao}}</h3>
+      <po-info p-label="Carga horária" p-orientation="horizontal" p-value="{{curso.cargaHoraria}}h"> </po-info>
+    </div>
+  </div>
+</po-page-default>
