@@ -1,0 +1,15 @@
+<po-page-default p-title="Novo curso">
+  <po-dynamic-form #cursoForm
+    [p-fields]= "fields"
+    [p-value]="curso">
+  </po-dynamic-form>
+  <div class="po-row">
+    <po-button
+      class="po-md-3"
+      p-label="Salvar"
+      [p-disabled]="cursoForm?.form.invalid"
+      (p-click)="salvar(cursoForm);"
+    >
+    </po-button>
+  </div>
+</po-page-default>

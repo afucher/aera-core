@@ -22,6 +22,13 @@ export class CursoService {
     );
   }
 
+  criar(curso: Curso): Observable<Curso> {
+    return this.http.post<Curso>(this.url, curso)
+      .pipe(
+        catchError(this.handleError('criarCurso', curso))
+      );
+  }
+
   salvar(curso: Curso): Observable<Curso> {
     return this.http.put<Curso>(`${this.url}/${curso.id}`, curso)
       .pipe(
@@ -39,7 +46,7 @@ export class CursoService {
       console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      throw(error);
     };
   }
 }

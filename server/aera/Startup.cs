@@ -1,7 +1,9 @@
 using System;
 using System.Text.Json.Serialization;
+using aera_core.Controllers;
 using aera_core.Domain;
 using aera_core.Persistencia;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -25,7 +27,8 @@ namespace aera_core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CursoDTOValidator>());
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = ".";

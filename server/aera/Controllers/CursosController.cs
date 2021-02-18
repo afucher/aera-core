@@ -39,6 +39,14 @@ namespace aera_core.Controllers
             var curso = _cursosServiço.Obter(id);
             return CursoDTO.De(curso);
         }
+
+        [HttpPost]
+        public ActionResult<CursoDTO> Post([FromBody] CursoDTO curso)
+        {
+            
+            var cursoAtualizado = _cursosServiço.Criar(curso.ParaModelo());
+            return CursoDTO.De(cursoAtualizado);
+        }
         
         [HttpPut("{id}")]
         public ActionResult<CursoDTO> Put(int id, [FromBody] CursoDTO curso)

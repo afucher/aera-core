@@ -10,11 +10,13 @@ import { PoMenuItem } from '@po-ui/ng-components';
 export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'AERA', link: '/' },
+    {label: 'AERA', link: '/' },
     {label: 'Clientes', link: '/clientes',
       subItems: [{label: 'Todos', link: '/clientes'},
                  {label: 'Novo', link: '/clientes/novo'}]},
-    {label: 'Cursos', link: '/cursos'},
+    {label: 'Cursos', link: '/cursos',
+      subItems: [{label: 'Todos', link: '/cursos'},
+                 {label: 'Novo', link: '/cursos/novo'}]},
     {label: 'Turmas', link: '/turmas',
       subItems: [{label: 'Todas', link: '/turmas'},
                  {label: 'Nova', link: '/turmas/nova'}]},

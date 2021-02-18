@@ -20,7 +20,8 @@ import { ClienteAlteraComponent } from './cliente/cliente-altera/cliente-altera.
 import { PagamentoDetalhesComponent } from './cliente/pagamento-detalhes/pagamento-detalhes.component';
 import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.component';
 import { DownloadListaComponent } from './download/download-list/download-lista.component';
-import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component'
+import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component';
+import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component'
 
 @NgModule({
 
@@ -38,7 +39,8 @@ import { DownloadAtestadoComponent } from './download/download-atestado/download
     PagamentoDetalhesComponent,
     ClienteResumoComponent,
     DownloadListaComponent,
-    DownloadAtestadoComponent
+    DownloadAtestadoComponent,
+    CursoNovoComponent
   ],
   imports: [
     BrowserModule,

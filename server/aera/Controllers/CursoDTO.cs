@@ -1,5 +1,6 @@
 using System;
 using aera_core.Persistencia;
+using FluentValidation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -27,10 +28,19 @@ namespace aera_core.Controllers
             return new CursoDB
             {
                 id = id,
+                name = Nome,
                 description = Descrição,
                 courseLoad = CargaHorária
             };
         }
+    }
+
+    public class CursoDTOValidator : AbstractValidator<CursoDTO>
+    {
+        public CursoDTOValidator()
+        {
+            RuleFor(c => c.Nome).NotEmpty();
+        } 
     }
     
     

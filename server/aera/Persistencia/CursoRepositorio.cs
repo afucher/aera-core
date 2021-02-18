@@ -31,7 +31,15 @@ namespace aera_core.Persistencia
             return _contexto.Cursos
                 .FirstOrDefault(c => c.id == id);
         }
-        
+
+        public CursoDB Criar(CursoDB curso)
+        {
+            var cursoAtualizado = _contexto.Cursos.Add(curso);
+            _contexto.SaveChanges();
+
+            return cursoAtualizado.Entity;
+        }
+
         public CursoDB Atualizar(CursoDB cursoParaAtualizar)
         {
             var curso = Obter(cursoParaAtualizar.id);

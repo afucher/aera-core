@@ -8,6 +8,7 @@ namespace aera_core.Domain
     {
         public ListaPaginada<CursoDB> ObterCursos(OpçõesBusca opçõesBusca);
         public CursoDB Obter(int id);
+        public CursoDB Criar(CursoDB curso);
         public CursoDB Atualizar(CursoDB curso);
     }
 }
