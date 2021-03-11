@@ -37,18 +37,20 @@ namespace aera_core.Controllers
                 ObterTurmasDosAlunos(turma.Alunos.Select(a => a.id).ToList())
                 .Where(t => t.id != id && t.end_date >= primeiroDiaDoMesAtual )
                 .ToList();
-           var turmaDto = TurmaDTO.De(turma);
-           foreach (var aluno in turmaDto.Alunos)
-           {
-               aluno.turmas = 
-                   turmasExtras
-                    .Where(t => t.Alunos.Select(a => a.id)
-                                                .Contains(aluno.id))
-                    .Select(TurmaDTO.De)
-                    .ToList();
-           }
+            var turmaDto = TurmaDTO.De(turma);
+            if (turmaDto.Alunos == null) return turmaDto;
 
-           return turmaDto;
+            foreach (var aluno in turmaDto.Alunos)
+            {
+                aluno.turmas = 
+                    turmasExtras
+                        .Where(t => t.Alunos.Select(a => a.id)
+                            .Contains(aluno.id))
+                        .Select(TurmaDTO.De)
+                        .ToList();
+            }
+
+            return turmaDto;
         }
         
         [HttpPost]

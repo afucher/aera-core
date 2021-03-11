@@ -26,6 +26,7 @@
     p-auto-collapse
     [p-items]="turma?.alunos"
     [p-striped]="true"
+    [p-actions]="actions"
   ></po-table>
 </po-page-default>
 <po-modal p-title="Matricular" [p-primary-action]="confirm" [p-secondary-action]="close" #modalMatricula>
@@ -52,5 +53,16 @@
       [p-fields]= "fieldsPagamentos"
       [p-value]="geraPagamentoModel">
   </po-dynamic-form>
+  </div>
+</po-modal>
+
+<po-modal p-title="Atualizar frequencia" [p-primary-action]="atualizaFrequencia" [p-secondary-action]="fechaFrequencia" #modalFrequencia>
+  <div>
+    <p>{{alunoParaAtualizarFrequencia?.nome}}</p>
+    <form [formGroup]="frequenciaForm">
+      <div class="po-row">
+        <po-number class="po-lg-3" formControlName="frequencia" p-label="Frequencia" p-clean> </po-number>
+      </div>
+    </form>
   </div>
 </po-modal>

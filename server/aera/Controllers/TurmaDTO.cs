@@ -26,7 +26,9 @@ namespace aera_core.Controllers
             public string nome { get; set; }
             public string email { get; set; }
             public string celular { get; set; }
-            public List<TurmaDTO> turmas {get; set; }
+            public int frequencia { get; set; }
+
+        public List<TurmaDTO> turmas {get; set; }
         }
 
         public static TurmaDTO De(TurmaDB turma){
@@ -42,14 +44,15 @@ namespace aera_core.Controllers
                 QuantidadeDeAulas = turma.classes,
                 Professor = turma.Professor?.name,
                 ProfessorId = turma.teacher_id,
-                Alunos = turma.Alunos?.Select(a =>
+                Alunos = turma.TurmaAlunos?.Select(matricula =>
                 {
                     return new TurmaClienteDTO
                     {
-                        id = a.id,
-                        nome = a.name,
-                        celular = a.cel_phone,
-                        email = a.email
+                        id = matricula.Cliente.id,
+                        nome = matricula.Cliente.name,
+                        celular = matricula.Cliente.cel_phone,
+                        email = matricula.Cliente.email,
+                        frequencia = matricula.frequencia
                     };
                 }).ToList()
             };

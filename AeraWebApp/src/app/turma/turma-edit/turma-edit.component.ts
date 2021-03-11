@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PoDynamicFormField, PoLookupColumn, PoModalAction, PoModalComponent, PoNotificationService, PoTableColumn } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoLookupColumn, PoModalAction, PoModalComponent, PoNotificationService, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { Cliente } from 'src/app/models/cliente';
 import { Turma } from 'src/app/models/turma';
 import { TurmaService } from 'src/app/turma.service';
 
@@ -11,7 +12,18 @@ import { TurmaService } from 'src/app/turma.service';
   styleUrls: ['./turma-edit.component.css']
 })
 export class TurmaEditComponent implements OnInit {
+  frequenciaForm: FormGroup;
   alunoParaMatricular: number = undefined;
+  alunoParaAtualizarFrequencia: Cliente = undefined;
+  actions: Array<PoTableAction> = [
+    {label: 'Frequencia', action: (aluno) => {
+      this.frequenciaForm = this.fb.group({
+        frequencia: [aluno.frequencia, Validators.compose([Validators.required, Validators.min(0), Validators.max(this.turma.quantidadeDeAulas)])]
+      });
+      this.alunoParaAtualizarFrequencia = aluno;
+      this.modalFrequencia.open();
+    }
+  }];
   colunasLookup: Array<PoLookupColumn> = [{property: 'nome'}];
   close: PoModalAction = {
     action: () => {
@@ -40,6 +52,20 @@ export class TurmaEditComponent implements OnInit {
       this.modalPagamentos.close();
     },
     label: 'Cancelar'
+  };
+
+  fechaFrequencia: PoModalAction = {
+    action: () => {
+      this.modalFrequencia.close();
+    },
+    label: 'Cancelar'
+  };
+
+  atualizaFrequencia: PoModalAction = {
+    action: () => {
+      this.modalFrequencia.close();
+    },
+    label: 'Atualizar'
   };
 
   geraPagamentos: PoModalAction = {
@@ -105,11 +131,15 @@ export class TurmaEditComponent implements OnInit {
   @ViewChild('optionsForm', { static: true }) form: NgForm;
   @ViewChild('modalMatricula', { static: true }) poModal: PoModalComponent;
   @ViewChild('modalPagamentos', { static: true }) modalPagamentos: PoModalComponent;
+  @ViewChild('modalFrequencia', { static: true }) modalFrequencia: PoModalComponent;
 
   constructor(
     public poNotification: PoNotificationService,
     private route: ActivatedRoute,
-    private turmaService: TurmaService) { }
+    private turmaService: TurmaService,
+    private fb: FormBuilder) {
+      this.frequenciaForm = this.fb.group({frequencia: ['']});
+    }
 
   closeModal() {
     this.alunoParaMatricular = undefined;

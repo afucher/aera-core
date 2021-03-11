@@ -117,5 +117,8 @@ public class TurmaAluno
     public TurmaDB Turma { get; set; }
     public DateTime createdAt { get; set; }
     public DateTime updatedAt { get; set; }
+    
+    [Column("attendance")]
+    public int frequencia { get; set; }
     public virtual ICollection<PagamentoDB> Pagamentos { get; set; }
 }
