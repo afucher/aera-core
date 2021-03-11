@@ -15,8 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
-    <PackageReference Include="PugPDF.Core" Version="1.0.8" />
-    <PackageReference Include="RazorEngineCore" Version="2020.10.1" />
+    <PackageReference Include="RazorEngineCore" Version="2021.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +34,18 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PugPdf.Core, Version=1.0.8.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>pugpdf\PugPdf.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wkhtmltopdf\**\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 
