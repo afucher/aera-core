@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ trunk ]
+    paths:
+    - 'server/**'
+    - 'global.json'
+  pull_request:
+    branches: [ trunk ]
+    paths:
+    - 'server/**'
+    - 'global.json'
+defaults:
+  run:
+    working-directory: server
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: 
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.100'
+
+    - name: Build
+      run: dotnet build --configuration Release 
+          
+    - name: Tool Restore
+      run: dotnet tool restore
+      
+    - name: Test
+      run: dotnet test 
