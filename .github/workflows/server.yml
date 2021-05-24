@@ -6,11 +6,13 @@ on:
     paths:
     - 'server/**'
     - 'global.json'
+    - '.github/workflows/**'
   pull_request:
     branches: [ trunk ]
     paths:
     - 'server/**'
     - 'global.json'
+    - '.github/workflows/**'
 defaults:
   run:
     working-directory: server
