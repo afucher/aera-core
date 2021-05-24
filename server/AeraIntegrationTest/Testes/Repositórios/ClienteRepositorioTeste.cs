@@ -1,6 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using aera_core.Domain;
 using aera_core.Helpers;
 using aera_core.Persistencia;
 using AeraIntegrationTest.Builders;
@@ -11,34 +8,18 @@ using Respawn;
 
 namespace AeraIntegrationTest
 {
-    public class ClienteRepositórioTeste
+    public class ClienteRepositórioTeste : BaseTesteBanco
     {
-        private static string parametrosConexão =
-            "Server=localhost;Port=5432;User Id=postgres;Password=root;Database=aera_test";
-        private AplicaçãoContexto contexto;
-        Checkpoint _checkpoint = new Checkpoint
-        {
-            SchemasToInclude = new []
-            {
-                "public"
-            },
-            DbAdapter = DbAdapter.Postgres
-        };
 
-        [SetUp]
-        public async Task Setup()
+        [TearDown]
+        public void TearDown()
         {
-            contexto = new AplicaçãoContexto(new DbContextOptionsBuilder()
-                .UseNpgsql(parametrosConexão)
-                .Options);
-            contexto.Database.OpenConnection();
-            await _checkpoint.Reset(contexto.Database.GetDbConnection());
+            _contextoParaTestes.Database.EnsureDeleted();
         }
-
         [Test]
         public void DeveRetornarListaDeClientesVazias()
         {
-            var repositório = new ClienteRepositório(contexto);
+            var repositório = new ClienteRepositório(_contextoParaTestes);
             var opções = new OpçõesBusca
             {
                 LimitePágina = 100,
@@ -54,10 +35,10 @@ namespace AeraIntegrationTest
         public void DeveRetornarClientesJáExistentes()
         {
             var cliente = new ClienteDBBuilder().Generate(); 
-            var entityEntry = contexto.Clientes.Add(cliente);
-            contexto.SaveChanges();
+            var entityEntry = _contextoParaTestes.Clientes.Add(cliente);
+            _contextoParaTestes.SaveChanges();
             entityEntry.State = EntityState.Detached;
-            var repositório = new ClienteRepositório(contexto);
+            var repositório = new ClienteRepositório(_contextoParaTestes);
             var opções = new OpçõesBusca
             {
                 LimitePágina = 100,
@@ -73,15 +54,15 @@ namespace AeraIntegrationTest
         public void DeveRetornarClientesRespeitandoQuantidade()
         {
             var clientesDB = new ClienteDBBuilder().Generate(10); 
-            contexto.Clientes.AddRange(clientesDB);
-            contexto.SaveChanges();
+            _contextoParaTestes.Clientes.AddRange(clientesDB);
+            _contextoParaTestes.SaveChanges();
             var opções = new OpçõesBusca
             {
                 LimitePágina = 5,
                 Página = 1
             };
             
-            var repositório = new ClienteRepositório(contexto);
+            var repositório = new ClienteRepositório(_contextoParaTestes);
 
             var clientes = repositório.ObterClientes(opções);
 
@@ -92,10 +73,10 @@ namespace AeraIntegrationTest
         public void DeveRetornarClientePeloId()
         {
             var clientesDB = new ClienteDBBuilder().Generate(10); 
-            contexto.Clientes.AddRange(clientesDB);
-            contexto.SaveChanges();
+            _contextoParaTestes.Clientes.AddRange(clientesDB);
+            _contextoParaTestes.SaveChanges();
             
-            var repositório = new ClienteRepositório(contexto);
+            var repositório = new ClienteRepositório(_contextoParaTestes);
 
             var cliente = repositório.Obter(clientesDB[2].id);
 

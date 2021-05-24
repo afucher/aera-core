@@ -29,7 +29,7 @@ namespace aera_core.Controllers
         public String hora_nascimento { get; set; }
         public string local_nascimento { get; set; }
         public string observacao { get; set; }
-        public string CodigoAuxiliar { get; set; }
+        public string codigoAuxiliar { get; set; }
         
         public List<TurmaDTO> turmas { get; set; }
         public List<PagamentoDTO> pagamentos { get; set; }
@@ -59,7 +59,7 @@ namespace aera_core.Controllers
                 HorárioNascimento = hora_nascimento == null ? (TimeSpan?)null : TimeSpan.Parse(hora_nascimento),
                 LocalNascimento = local_nascimento,
                 Observação = observacao,
-                CódigoAntigo = CodigoAuxiliar
+                CódigoAntigo = codigoAuxiliar
             };
         }
 
@@ -87,7 +87,7 @@ namespace aera_core.Controllers
                 observacao = cliente.Observação,
                 telefone = cliente.Telefone,
                 telefone_comercial = cliente.TelefoneComercial,
-                CodigoAuxiliar = cliente.CódigoAntigo,
+                codigoAuxiliar = cliente.CódigoAntigo,
                 turmas = cliente.Turmas.Select(t => new TurmaDTO
                 {
                     Id = t.id,

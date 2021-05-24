@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace AeraIntegrationTest
 {
     [SetUpFixture]
-    public class AmbienteTeste
+    public class AmbienteDeTestes
     {
         public static WebApplicationFactory<Startup> Factory;
         

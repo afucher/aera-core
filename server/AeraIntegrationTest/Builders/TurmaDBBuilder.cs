@@ -13,7 +13,8 @@ namespace AeraIntegrationTest.Builders
             CustomInstantiator(f => new TurmaDB())
                 .RuleFor(x => x.TurmaAlunos, () => null)
                 .RuleFor(x => x.Alunos, () => null)
-                .RuleFor(x => x.Curso, () => new CursoDBBuilder().Generate())
+                .RuleFor(x => x.Curso, () => new CursoDB())
+                .RuleFor(x => x.Professor, () => new ClienteDB{teacher = true})
                 .RuleFor(x => x.start_date,() => new DateTime(2021,1,1,0,0,0))
                 .RuleFor(x => x.end_date,() => new DateTime(2021,1,1,0,0,0));
         }

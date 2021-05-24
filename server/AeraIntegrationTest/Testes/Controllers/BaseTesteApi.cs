@@ -10,7 +10,7 @@ namespace AeraIntegrationTest
         [SetUp]
         public void ConfiguraHttpClient()
         {
-            _httpClient = AmbienteTeste.Factory.CreateClient();
+            _httpClient = AmbienteDeTestes.Factory.CreateClient();
         }
     }
 }

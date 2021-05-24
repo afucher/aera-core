@@ -11,34 +11,18 @@ using Respawn;
 
 namespace AeraIntegrationTest
 {
-    public class TurmaRepositórioTeste
+    public class TurmaRepositórioTeste : BaseTesteBanco
     {
-        private static string parametrosConexão =
-            "Server=localhost;Port=5432;User Id=postgres;Password=root;Database=aera_test";
-        private AplicaçãoContexto contexto;
-        Checkpoint _checkpoint = new Checkpoint
+        [TearDown]
+        public void TearDown()
         {
-            SchemasToInclude = new []
-            {
-                "public"
-            },
-            DbAdapter = DbAdapter.Postgres
-        };
-
-        [SetUp]
-        public async Task Setup()
-        {
-            contexto = new AplicaçãoContexto(new DbContextOptionsBuilder()
-                .UseNpgsql(parametrosConexão)
-                .Options);
-            contexto.Database.OpenConnection();
-            await _checkpoint.Reset(contexto.Database.GetDbConnection());
+            _contextoParaTestes.Database.EnsureDeleted();
         }
-
+        
         [Test]
         public void DeveRetornarListaDeTurmasVazias()
         {
-            var repositório = new TurmaRepositorio(contexto);
+            var repositório = new TurmaRepositorio(_contextoParaTestes);
             
             var opções = new OpçõesBusca
             {
@@ -55,10 +39,10 @@ namespace AeraIntegrationTest
         public void DeveRetornarTurmasExistentes()
         {
             var turma = new TurmaDBBuilder().Generate(); 
-            var entityEntry = contexto.Turmas.Add(turma);
-            contexto.SaveChanges();
+            var entityEntry = _contextoParaTestes.Turmas.Add(turma);
+            _contextoParaTestes.SaveChanges();
             entityEntry.State = EntityState.Detached;
-            var repositório = new TurmaRepositorio(contexto);
+            var repositório = new TurmaRepositorio(_contextoParaTestes);
             var opções = new OpçõesBusca
             {
                 LimitePágina = 100,
