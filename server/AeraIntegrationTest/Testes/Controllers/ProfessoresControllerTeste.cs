@@ -15,7 +15,7 @@ namespace AeraIntegrationTest
     public class ProfessoresControllerTeste : BaseTesteApi
     {
         [Test]
-        public async Task RetornaClientes()
+        public async Task RetornaProfessores()
         {
             var contexto = AmbienteDeTestes.Factory.Services.CreateScope().ServiceProvider
                 .GetService<AplicaçãoContexto>();
