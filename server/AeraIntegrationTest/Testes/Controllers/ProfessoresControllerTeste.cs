@@ -16,6 +16,7 @@ namespace AeraIntegrationTest
             var professor = new ClienteDB { name = "Nome1", teacher = true };
             var professorCriado = _contextoParaTestes.Clientes.Add(professor);
             _contextoParaTestes.SaveChanges();
+            
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
             resposta.Should()
