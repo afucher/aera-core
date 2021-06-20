@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using aera_core.Persistencia;
 using Bogus;
 

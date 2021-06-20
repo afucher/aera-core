@@ -15,8 +15,7 @@ namespace AeraIntegrationTest
         public async Task RetornaProfessores()
         {
             var professor = ProfessorDBBuilder.Generate();
-            var professorCriado = _contextoParaTestes.Clientes.Add(professor);
-            _contextoParaTestes.SaveChanges();
+            var professorCriado = _contextoParaTestes.AdicionaESalva(professor);
             
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
