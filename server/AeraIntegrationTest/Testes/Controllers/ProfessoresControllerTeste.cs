@@ -17,16 +17,14 @@ namespace AeraIntegrationTest
         [Test]
         public async Task RetornaProfessores()
         {
-            var contexto = AmbienteDeTestes.Factory.Services.CreateScope().ServiceProvider
-                .GetService<AplicaçãoContexto>();
             var professor = new ClienteDB
             {
                 name = "Nome1",
                 teacher = true
                 
             };
-            var professorCriado = contexto.Clientes.Add(professor);
-            contexto.SaveChanges();
+            var professorCriado = _contextoParaTestes.Clientes.Add(professor);
+            _contextoParaTestes.SaveChanges();
             var professorDTO = new ProfessorDTO
             {
                 id = professorCriado.Entity.id,
