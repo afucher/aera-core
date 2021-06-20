@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using aera_core.Controllers;
 using aera_core.Persistencia;
 using aera_core.POUIHelpers;
+using AeraIntegrationTest.Builders;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -13,7 +14,7 @@ namespace AeraIntegrationTest
         [Test]
         public async Task RetornaProfessores()
         {
-            var professor = new ClienteDB { name = "Nome1", teacher = true };
+            var professor = ProfessorDBBuilder.Generate();
             var professorCriado = _contextoParaTestes.Clientes.Add(professor);
             _contextoParaTestes.SaveChanges();
             
@@ -24,7 +25,7 @@ namespace AeraIntegrationTest
                     {
                         model.hasNext.Should().BeFalse();
                         model.items.Should().BeEquivalentTo(
-                            new { professorCriado.Entity.id, nome = "Nome1" }
+                            new { professorCriado.Entity.id, nome = professorCriado.Entity.name }
                         );
                     });
         }
