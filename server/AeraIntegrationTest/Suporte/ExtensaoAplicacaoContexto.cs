@@ -5,11 +5,15 @@ namespace AeraIntegrationTest
 {
     public static class ExtensaoAplicacaoContexto
     {
-        public static EntityEntry<ClienteDB> AdicionaESalva(this AplicaçãoContexto contexto, ClienteDB professor)
+
+        public static EntityEntry<ClienteDB> GravaProfessor(this AplicaçãoContexto contexto, ClienteDB professor) =>
+            GravaCliente(contexto, professor);
+ 
+        public static EntityEntry<ClienteDB> GravaCliente(this AplicaçãoContexto contexto, ClienteDB cliente)
         {
-            var professorCriado = contexto.Clientes.Add(professor);
+            var clienteCriado = contexto.Clientes.Add(cliente);
             contexto.SaveChanges();
-            return professorCriado;
+            return clienteCriado;
         }
     }
 }
