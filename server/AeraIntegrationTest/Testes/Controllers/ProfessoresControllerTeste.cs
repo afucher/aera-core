@@ -23,7 +23,7 @@ namespace AeraIntegrationTest
                     {
                         model.hasNext.Should().BeFalse();
                         model.items.Should().BeEquivalentTo(
-            new { professorCriado.Entity.id, nome = "Nome1" }
+                            new { professorCriado.Entity.id, nome = "Nome1" }
                         );
                     });
         }
