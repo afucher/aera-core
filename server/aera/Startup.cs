@@ -52,15 +52,16 @@ namespace aera_core
             // return ;
             services.AddDbContext<AplicaçãoContexto>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("default")));
-            services.AddScoped(provider => new ClienteRepositório(provider.GetService<AplicaçãoContexto>()));
-            services.AddScoped(provider => new ClientesServiço(provider.GetService<ClienteRepositório>()));
-            services.AddScoped(provider => new TurmaRepositorio(provider.GetService<AplicaçãoContexto>()));
-            services.AddScoped(provider => new TurmasServiço(provider.GetService<TurmaRepositorio>()));
-            services.AddScoped(provider => new CursoRepositório(provider.GetService<AplicaçãoContexto>()));
-            services.AddScoped(provider => new CursosServiço(provider.GetService<CursoRepositório>()));
-            services.AddScoped(provider => new ProfessoresServiço(provider.GetService<ClienteRepositório>()));
-            services.AddScoped(provider => new PagamentoRepositório(provider.GetService<AplicaçãoContexto>()));
-            services.AddScoped(provider => new PagamentosServiço(provider.GetService<PagamentoRepositório>()));
+            services.AddScoped<IClientesPort, ClienteRepositório>();
+            services.AddScoped<IProfessoresPort, ClienteRepositório>();
+            services.AddScoped<ClientesServiço>();
+            services.AddScoped<ITurmasPort, TurmaRepositorio>();
+            services.AddScoped<TurmasServiço>();
+            services.AddScoped<ICursosPort, CursoRepositório>();
+            services.AddScoped<CursosServiço>();
+            services.AddScoped<ProfessoresServiço>();
+            services.AddScoped<IPagamentosPort, PagamentoRepositório>();
+            services.AddScoped<PagamentosServiço>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
