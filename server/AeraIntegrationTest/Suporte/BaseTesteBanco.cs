@@ -26,6 +26,7 @@ namespace AeraIntegrationTest
         public void TearDownScope()
         {
             _scope.Dispose();
+            _contextoParaTestes.Database.EnsureDeleted();
         }
     }
 }
