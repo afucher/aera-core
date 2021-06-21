@@ -12,7 +12,7 @@ namespace AeraIntegrationTest
     public class ProfessoresControllerTeste : BaseTesteApi
     {
         [Test]
-        public async Task RetornaProfessores()
+        public async Task DeveRetornarProfessorComCamposCorretos()
         {
             var professor = ProfessorDBBuilder.Generate();
             var professorCriado = _contextoParaTestes.GravaProfessor(professor);
@@ -26,6 +26,22 @@ namespace AeraIntegrationTest
                         model.items.Should().BeEquivalentTo(
                             new { professorCriado.Entity.id, nome = professorCriado.Entity.name }
                         );
+                    });
+        }
+        
+        [Test]
+        public async Task DeveRetornarDizendoQueTemMaisItensEQuantidadeIgualAoPageSize()
+        {
+            var professores = ProfessorDBBuilder.Generate(11);
+            _contextoParaTestes.GravaProfessores(professores);
+            
+            var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
+
+            resposta.Should()
+                .Satisfy<POUIListResponse<ProfessorDTO>>( model =>
+                    {
+                        model.hasNext.Should().BeTrue();
+                        model.items.Should().HaveCount(10);
                     });
         }
     }
