@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using aera_core.Controllers;
@@ -5,7 +6,10 @@ using aera_core.Persistencia;
 using aera_core.POUIHelpers;
 using AeraIntegrationTest.Builders;
 using FluentAssertions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace AeraIntegrationTest
 {
@@ -20,12 +24,18 @@ namespace AeraIntegrationTest
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
             resposta.Should()
-                .Satisfy<POUIListResponse<ProfessorDTO>>( model =>
-                    {
-                        model.hasNext.Should().BeFalse();
-                        model.items.Should().BeEquivalentTo(
-                            new { professorCriado.Entity.id, nome = professorCriado.Entity.name }
-                        );
+                .SatisfyJTokenContent( response =>
+                {
+                    var teste = JToken.Parse(JsonSerializer.Serialize(
+                        new {
+                            items = new
+                            {
+                                professorCriado.Entity.id, 
+                                nome = professorCriado.Entity.name,
+                            },
+                            hasNext = false
+                        }));
+                    response.Should().BeEquivalentTo(teste);
                     });
         }
         
