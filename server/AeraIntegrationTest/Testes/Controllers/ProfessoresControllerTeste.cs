@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using FluentAssertions.Json;
 
 namespace AeraIntegrationTest
 {
@@ -26,16 +27,15 @@ namespace AeraIntegrationTest
             resposta.Should()
                 .SatisfyJTokenContent( response =>
                 {
-                    var teste = JToken.Parse(JsonSerializer.Serialize(
+                    var esperado = JToken.Parse(JsonSerializer.Serialize(
                         new {
-                            items = new
+                            items = new[]
                             {
-                                professorCriado.Entity.id, 
-                                nome = professorCriado.Entity.name,
+                                new { professorCriado.Entity.id, nome = professorCriado.Entity.name }
                             },
                             hasNext = false
                         }));
-                    response.Should().BeEquivalentTo(teste);
+                    response.Should().BeEquivalentTo(esperado);
                     });
         }
         
