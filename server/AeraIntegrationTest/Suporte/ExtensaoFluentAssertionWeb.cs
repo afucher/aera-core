@@ -11,12 +11,12 @@ namespace AeraIntegrationTest
     public static class ExtensaoFluentAssertionWeb
     {
         public static AndConstraint<HttpResponseMessageAssertions> SatisfyJTokenContent(
-            this HttpResponseMessageAssertions assertions, Action<JToken> condicao)
+            this HttpResponseMessageAssertions assertions, JToken jTokenParaValidar)
         {
             assertions.Satisfy(async response =>
             {
                 var stringContent = await response.Content.ReadAsStringAsync();
-                condicao(JToken.Parse(stringContent));
+                JToken.Parse(stringContent).DeveSerEquivalenteAoJToken(jTokenParaValidar);
             });
 
             return new AndConstraint<HttpResponseMessageAssertions>(assertions);

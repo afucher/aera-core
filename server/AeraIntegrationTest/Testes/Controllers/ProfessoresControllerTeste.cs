@@ -24,18 +24,16 @@ namespace AeraIntegrationTest
 
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
-            resposta.Should().SatisfyJTokenContent(response =>
-            {
-                response.DeveSerEquivalenteAoJToken(
-                    new
+            resposta.Should().SatisfyJTokenContent(
+                new
+                {
+                    items = new[]
                     {
-                        items = new[]
-                        {
-                            new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
-                        },
-                        hasNext = false
-                    }.SerializarComoJToken());
-            });
+                        new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
+                    },
+                    hasNext = false
+                }.SerializarComoJToken()
+            );
         }
 
         [Test]
