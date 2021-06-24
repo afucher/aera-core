@@ -24,20 +24,18 @@ namespace AeraIntegrationTest
 
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
-            resposta.Should()
-                .SatisfyJTokenContent(response =>
-                {
-                    var esperado = JToken.Parse(JsonSerializer.Serialize(
-                        new
+            resposta.Should().SatisfyJTokenContent(response =>
+            {
+                response.DeveSerEquivalenteAoJToken(
+                    new
+                    {
+                        items = new[]
                         {
-                            items = new[]
-                            {
-                                new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
-                            },
-                            hasNext = false
-                        }));
-                    response.Should().BeEquivalentTo(esperado);
-                });
+                            new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
+                        },
+                        hasNext = false
+                    }.SerializarComoJToken());
+            });
         }
 
         [Test]

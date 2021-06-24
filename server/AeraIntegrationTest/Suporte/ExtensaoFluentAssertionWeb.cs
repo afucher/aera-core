@@ -1,7 +1,10 @@
 using System;
+using System.Text.Json;
 using FluentAssertions;
 using FluentAssertions.Web;
 using Newtonsoft.Json.Linq;
+using FluentAssertions.Json;
+using NSubstitute.Core;
 
 namespace AeraIntegrationTest
 {
@@ -18,5 +21,22 @@ namespace AeraIntegrationTest
 
             return new AndConstraint<HttpResponseMessageAssertions>(assertions);
         }
+
+        public static void DeveSerEquivalenteAoJToken(this JToken jToken, JToken jTokenParaComparação)
+        {
+            jToken.Should().BeEquivalentTo(jTokenParaComparação);
+        }
+
+        public static JToken SerializarComoJToken(this object objeto)
+        {
+            if (objeto is string)
+            {
+                throw new ArgumentException("Já é string, ta errado");
+            }
+
+            return JToken.Parse(JsonSerializer.Serialize(objeto));
+        }
     }
+    
+    
 }
