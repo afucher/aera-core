@@ -21,38 +21,39 @@ namespace AeraIntegrationTest
         {
             var professor = ProfessorDBBuilder.Generate();
             var professorCriado = _contextoParaTestes.GravaProfessor(professor);
-            
+
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
             resposta.Should()
-                .SatisfyJTokenContent( response =>
+                .SatisfyJTokenContent(response =>
                 {
                     var esperado = JToken.Parse(JsonSerializer.Serialize(
-                        new {
+                        new
+                        {
                             items = new[]
                             {
-                                new { professorCriado.Entity.id, nome = professorCriado.Entity.name }
+                                new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
                             },
                             hasNext = false
                         }));
                     response.Should().BeEquivalentTo(esperado);
-                    });
+                });
         }
-        
+
         [Test]
         public async Task DeveRetornarDizendoQueTemMaisItensEQuantidadeIgualAoPageSize()
         {
             var professores = ProfessorDBBuilder.Generate(11);
             _contextoParaTestes.GravaProfessores(professores);
-            
+
             var resposta = await _httpClient.GetAsync("/api/professores?pageSize=10");
 
             resposta.Should()
-                .Satisfy<POUIListResponse<ProfessorDTO>>( model =>
-                    {
-                        model.hasNext.Should().BeTrue();
-                        model.items.Should().HaveCount(10);
-                    });
+                .Satisfy<POUIListResponse<ProfessorDTO>>(model =>
+                {
+                    model.hasNext.Should().BeTrue();
+                    model.items.Should().HaveCount(10);
+                });
         }
     }
 }
