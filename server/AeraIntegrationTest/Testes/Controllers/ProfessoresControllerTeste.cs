@@ -32,7 +32,7 @@ namespace AeraIntegrationTest
                         new {professorCriado.Entity.id, nome = professorCriado.Entity.name}
                     },
                     hasNext = false
-                }.SerializarComoJToken()
+                }
             );
         }
 
