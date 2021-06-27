@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using aera_core.Controllers;
 using aera_core.Domain;
 using aera_core.Persistencia;
@@ -70,7 +71,7 @@ namespace aera_core
                 Emissor = "AERA"
             };
 
-            var key = new byte[] { 0x1 };
+            var key = Encoding.ASCII.GetBytes("secret-bem-longa");
 
             services.AddAuthentication(x =>
             {
@@ -116,6 +117,7 @@ namespace aera_core
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
