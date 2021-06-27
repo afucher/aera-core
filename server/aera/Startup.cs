@@ -1,17 +1,19 @@
 using System;
-using System.Text.Json.Serialization;
 using aera_core.Controllers;
 using aera_core.Domain;
 using aera_core.Persistencia;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Npgsql;
+using Microsoft.IdentityModel.Tokens;
 
 namespace aera_core
 {
@@ -27,8 +29,7 @@ namespace aera_core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CursoDTOValidator>());
+           
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = ".";
@@ -62,6 +63,39 @@ namespace aera_core
             services.AddScoped<ProfessoresServiço>();
             services.AddScoped<IPagamentosPort, PagamentoRepositório>();
             services.AddScoped<PagamentosServiço>();
+
+            var appSettings = new
+            {
+                ValidoEm = "a",
+                Emissor = "AERA"
+            };
+
+            var key = new byte[] { 0x1 };
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = appSettings.ValidoEm,
+                    ValidIssuer = appSettings.Emissor
+                };
+            });
+            services.AddAuthorization();
+
+            services.AddControllers(o => {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                o.Filters.Add(new AuthorizeFilter(policy));
+            })
+               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CursoDTOValidator>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
