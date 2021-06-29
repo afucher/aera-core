@@ -1,7 +1,5 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
-using aera_core.Persistencia;
-using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace AeraIntegrationTest
