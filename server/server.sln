@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aera-core", "aera\aera-core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeraIntegrationTest", "AeraIntegrationTest\AeraIntegrationTest.csproj", "{20F9A3AD-C51A-48D0-9327-AB61877DCF5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeraUnitTest", "AeraUnitTest\AeraUnitTest.csproj", "{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{20F9A3AD-C51A-48D0-9327-AB61877DCF5A}.Release|x64.Build.0 = Release|Any CPU
 		{20F9A3AD-C51A-48D0-9327-AB61877DCF5A}.Release|x86.ActiveCfg = Release|Any CPU
 		{20F9A3AD-C51A-48D0-9327-AB61877DCF5A}.Release|x86.Build.0 = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|x64.Build.0 = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Debug|x86.Build.0 = Debug|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|x64.ActiveCfg = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|x64.Build.0 = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|x86.ActiveCfg = Release|Any CPU
+		{41E95EDE-6AE2-45BA-BDE5-42E546D98F26}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
