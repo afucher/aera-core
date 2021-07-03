@@ -16,6 +16,8 @@ namespace aera_core.Persistencia
         public DbSet<CursoDB> Cursos { get; set; }
         public DbSet<PagamentoDB> Pagamentos { get; set; }
         public DbSet<TurmaAluno> Matriculas { get; set; }
+        
+        public DbSet<User> Usuarios { get; set; }
         public AplicaçãoContexto(DbContextOptions opções) : base(opções) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -88,6 +90,33 @@ namespace aera_core.Persistencia
                     .HasForeignKey(d => d.ClientGroupId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fkey_group_client");
+            });
+            
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("createdAt");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(255)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updatedAt");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .HasColumnName("username");
             });
 
         }

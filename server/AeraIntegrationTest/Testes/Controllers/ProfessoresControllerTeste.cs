@@ -6,6 +6,7 @@ using aera_core.POUIHelpers;
 using AeraIntegrationTest.Builders;
 using FluentAssertions;
 using NUnit.Framework;
+using BCrypt.Net;
 
 namespace AeraIntegrationTest
 {
