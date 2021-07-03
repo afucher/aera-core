@@ -5,7 +5,7 @@ using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace AeraIntegrationTest.Testes.Domain
+namespace AeraUnitTest.Domain
 {
     public class AutenticacaoServicoTeste
     {
