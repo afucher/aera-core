@@ -18,5 +18,10 @@ namespace aera_core
         public string Email { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public virtual bool ValidaSenha(string senha)
+        {
+            return BCrypt.Net.BCrypt.Verify(senha, this.Password);
+        }
     }
 }
