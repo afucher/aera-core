@@ -64,6 +64,7 @@ namespace aera_core
             services.AddScoped<ProfessoresServiço>();
             services.AddScoped<IPagamentosPort, PagamentoRepositório>();
             services.AddScoped<PagamentosServiço>();
+            services.AddScoped<IUsuarioPort, UsuarioRepositorio>();
 
             var appSettings = new
             {

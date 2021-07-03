@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="AutoBogus" Version="2.13.0" />
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
 		<PackageReference Include="FluentAssertions.Web" Version="1.0.138" />
 		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
