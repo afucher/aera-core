@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AutenticacaoService } from './autenticacao.service';
 import { Component } from '@angular/core';
 
 import { PoMenuItem } from '@po-ui/ng-components';
@@ -8,6 +10,8 @@ import { PoMenuItem } from '@po-ui/ng-components';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(private autenticacao: AutenticacaoService, private router: Router) {}
 
   readonly menus: Array<PoMenuItem> = [
     {label: 'AERA', link: '/' },
@@ -21,5 +25,13 @@ export class AppComponent {
       subItems: [{label: 'Todas', link: '/turmas'},
                  {label: 'Nova', link: '/turmas/nova'}]},
     {label: 'Pagamentos', link: '/pagamentos'},
+    {label: 'Logout', action: () => {
+      this.autenticacao.logout();
+      this.router.navigate(['/login']);
+    }}
   ];
+
+  mostraMenu() {
+    return this.autenticacao.estaLogado();
+  }
 }
