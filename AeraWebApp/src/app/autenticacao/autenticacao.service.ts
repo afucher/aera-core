@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 
 type Autenticacao = {
   access_token: string
-}
+};
 
 @Injectable({
   providedIn: 'root',

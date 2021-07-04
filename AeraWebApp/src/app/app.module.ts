@@ -1,4 +1,4 @@
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './autenticacao/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { PoModule } from '@po-ui/ng-components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientListComponent } from './client-list/client-list.component';
-import { PoPageDynamicTableModule, PoPageLoginModule, PoTemplatesModule } from '@po-ui/ng-templates';
+import { PoPageLoginModule, PoTemplatesModule } from '@po-ui/ng-templates';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
@@ -23,8 +23,8 @@ import { ClienteResumoComponent } from './cliente/cliente-resumo/cliente-resumo.
 import { DownloadListaComponent } from './download/download-list/download-lista.component';
 import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component';
 import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
-import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component'
-import { AutenticacaoInterceptor } from './AutenticacaoInterceptor';
+import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component';
+import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor';
 
 @NgModule({
 
