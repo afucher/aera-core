@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AutenticacaoService } from './autenticacao.service';
+import { AutenticacaoService } from './autenticacao/autenticacao.service';
 import { Component } from '@angular/core';
 
 import { PoMenuItem } from '@po-ui/ng-components';

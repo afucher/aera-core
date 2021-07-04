@@ -1,4 +1,4 @@
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './autenticacao/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientListComponent } from './client-list/client-list.component';
@@ -13,21 +13,22 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
 import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component';
 import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
+import { AuthGuardService } from './autenticacao/auth-guard.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'clientes', component: ClientListComponent},
-  {path: 'clientes/novo', component: ClienteNovoComponent},
-  {path: 'clientes/:id/alterar', component: ClienteAlteraComponent},
-  {path: 'clientes/:id/detalhes', component: ClienteResumoComponent},
-  {path: 'turmas', component: TurmaListComponent},
-  {path: 'turmas/nova', component: TurmaNovaComponent},
-  {path: 'turmas/:id', component: TurmaEditComponent},
-  {path: 'cursos', component: CursoListComponent},
-  {path: 'cursos/novo', component: CursoNovoComponent},
-  {path: 'cursos/:id/detalhes', component: CursoResumoComponent},
-  {path: 'cursos/:id', component: CursoEditComponent},
-  {path: 'pagamentos', component: PagamentoListComponent}
+  {path: 'clientes', component: ClientListComponent, canActivate: [AuthGuardService]},
+  {path: 'clientes/novo', component: ClienteNovoComponent, canActivate: [AuthGuardService]},
+  {path: 'clientes/:id/alterar', component: ClienteAlteraComponent, canActivate: [AuthGuardService]},
+  {path: 'clientes/:id/detalhes', component: ClienteResumoComponent, canActivate: [AuthGuardService]},
+  {path: 'turmas', component: TurmaListComponent, canActivate: [AuthGuardService]},
+  {path: 'turmas/nova', component: TurmaNovaComponent, canActivate: [AuthGuardService]},
+  {path: 'turmas/:id', component: TurmaEditComponent, canActivate: [AuthGuardService]},
+  {path: 'cursos', component: CursoListComponent, canActivate: [AuthGuardService]},
+  {path: 'cursos/novo', component: CursoNovoComponent, canActivate: [AuthGuardService]},
+  {path: 'cursos/:id/detalhes', component: CursoResumoComponent, canActivate: [AuthGuardService]},
+  {path: 'cursos/:id', component: CursoEditComponent, canActivate: [AuthGuardService]},
+  {path: 'pagamentos', component: PagamentoListComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
