@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { PoModule } from '@po-ui/ng-components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientListComponent } from './client-list/client-list.component';
-import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
+import { PoPageDynamicTableModule, PoPageLoginModule, PoTemplatesModule } from '@po-ui/ng-templates';
 import { HttpClientModule } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
@@ -47,12 +47,14 @@ import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PoModule,
-    PoPageDynamicTableModule,
     HttpClientModule,
     CommonModule,
+    PoModule,
+    PoPageDynamicTableModule,
+    PoTemplatesModule,
+    PoPageLoginModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
