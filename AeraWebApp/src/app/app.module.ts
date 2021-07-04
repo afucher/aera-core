@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { PoModule } from '@po-ui/ng-components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientListComponent } from './client-list/client-list.component';
 import { PoPageDynamicTableModule, PoPageLoginModule, PoTemplatesModule } from '@po-ui/ng-templates';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaEditComponent } from './turma/turma-edit/turma-edit.component';
 import { TurmaNovaComponent } from './turma/turma-nova/turma-nova.component';
@@ -23,6 +24,7 @@ import { DownloadListaComponent } from './download/download-list/download-lista.
 import { DownloadAtestadoComponent } from './download/download-atestado/download-atestado.component';
 import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
 import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component'
+import { AutenticacaoInterceptor } from './AutenticacaoInterceptor';
 
 @NgModule({
 
@@ -42,7 +44,8 @@ import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.componen
     DownloadListaComponent,
     DownloadAtestadoComponent,
     CursoNovoComponent,
-    CursoResumoComponent
+    CursoResumoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,13 +53,16 @@ import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.componen
     HttpClientModule,
     CommonModule,
     PoModule,
-    PoPageDynamicTableModule,
     PoTemplatesModule,
     PoPageLoginModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AutenticacaoInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
