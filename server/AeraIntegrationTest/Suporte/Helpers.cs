@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using aera_core;
 
 namespace AeraIntegrationTest
 {
@@ -10,9 +11,9 @@ namespace AeraIntegrationTest
     }
     public static class Helpers
     {
-        public static async Task<string> obterAccessToken(HttpClient httpClient)
+        public static async Task<string> obterAccessToken(HttpClient httpClient, string usuario, string senha)
         {
-            var response = await httpClient.PostAsJsonAsync("/api/autenticacao/login", "");
+            var response = await httpClient.PostAsJsonAsync("/api/autenticacao/login", new {usuario, senha});
             var token = await response.Content.ReadAsAsync<AccessToken>();
             return token.access_token;
         }

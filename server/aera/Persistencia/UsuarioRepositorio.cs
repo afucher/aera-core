@@ -26,7 +26,7 @@ namespace aera_core.Persistencia
 
         public Task<User> ObterPor(string nomeDoUsuario)
         {
-            return _contexto.Usuarios.Where(u => u.Username.Equals(nomeDoUsuario)).SingleAsync();
+            return _contexto.Usuarios.Where(u => u.Username.Equals(nomeDoUsuario)).SingleOrDefaultAsync();
         }
     }
 }

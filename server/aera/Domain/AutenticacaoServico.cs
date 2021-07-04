@@ -13,7 +13,7 @@ namespace aera_core.Domain
         {
             var usuario = await _usuarioPort.ObterPor(nomeDeUsuario);
             
-            if (usuario.ValidaSenha(senha))
+            if (usuario != null && usuario.ValidaSenha(senha))
             {
                 return usuario;
             }

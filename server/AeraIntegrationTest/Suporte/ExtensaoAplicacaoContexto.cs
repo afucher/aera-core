@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using aera_core;
 using aera_core.Persistencia;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -24,6 +25,13 @@ namespace AeraIntegrationTest
         {
             contexto.Clientes.AddRange(clientes);
             contexto.SaveChanges();
+        }
+        
+        public static EntityEntry<User> GravaUsuario(this AplicaçãoContexto contexto, User usuario)
+        {
+            var clienteCriado = contexto.Usuarios.Add(usuario);
+            contexto.SaveChanges();
+            return clienteCriado;
         }
     }
 }

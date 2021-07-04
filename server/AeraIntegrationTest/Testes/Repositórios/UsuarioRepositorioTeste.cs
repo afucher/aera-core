@@ -43,5 +43,14 @@ namespace AeraIntegrationTest
 
             usuarioDoBanco.Should().NotBeNull().And.BeEquivalentTo(usuario);
         }
+        
+        [Test]
+        public async Task NãoDeveRetornarQuandoUsuarioNãoExiste()
+        {
+            var repositorio = GetService<IUsuarioPort>();
+            var usuarioDoBanco = await repositorio.ObterPor("nao_existe");
+
+            usuarioDoBanco.Should().BeNull();
+        }
     }
 }
