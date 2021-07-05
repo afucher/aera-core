@@ -37,7 +37,7 @@ export class AutenticacaoService {
   private obterExpiracao(): DateTime {
     const expiracao = localStorage.getItem('expires_at');
 
-    return DateTime.fromSeconds(JSON.parse(expiracao) || 0);
+    return DateTime.fromSeconds(JSON.parse(expiracao) || 0, {zone: 'utc'});
 
   }
 

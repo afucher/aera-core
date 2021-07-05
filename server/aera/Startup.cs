@@ -66,14 +66,12 @@ namespace aera_core
             services.AddScoped<PagamentosServiço>();
             services.AddScoped<IUsuarioPort, UsuarioRepositorio>();
             services.AddScoped<AutenticacaoServico>();
-
-            var appSettings = new
-            {
-                ValidoEm = "a",
-                Emissor = "AERA"
-            };
-
-            var key = Encoding.ASCII.GetBytes("secret-bem-longa");
+            
+            var configTokenSection = Configuration.GetSection("TokenSettings");
+            var configToken = configTokenSection.Get<TokenSettings>();
+            services.Configure<TokenSettings>(configTokenSection);
+            
+            var key = Encoding.ASCII.GetBytes(configToken.Secret);
 
             services.AddAuthentication(x =>
             {
@@ -88,8 +86,8 @@ namespace aera_core
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidAudience = appSettings.ValidoEm,
-                    ValidIssuer = appSettings.Emissor
+                    ValidAudience = configToken.ValidoEm,
+                    ValidIssuer = configToken.Emissor
                 };
             });
             services.AddAuthorization();
@@ -141,5 +139,13 @@ namespace aera_core
                 }
             });   
         }
+    }
+
+    public class TokenSettings
+    {
+        public string ValidoEm { get; set; }
+        public string Secret { get; set; }
+        public int ExpiracaoMinutos { get; set; }
+        public string Emissor { get; set; }
     }
 }
