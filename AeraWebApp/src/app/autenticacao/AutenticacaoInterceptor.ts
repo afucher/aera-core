@@ -1,3 +1,4 @@
+import { AutenticacaoService } from './autenticacao.service';
 import { tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AutenticacaoInterceptor implements HttpInterceptor {
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private autenticacao: AutenticacaoService) {}
 
     intercept(req: HttpRequest<any>,
               next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,6 +26,7 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             if (err.status !== 401) { return; }
 
+            this.autenticacao.logout();
             this.router.navigate(['login']);
           }
         }));
