@@ -14,9 +14,9 @@ namespace AeraIntegrationTest
     public class AutenticacaoControllerTeste : BaseTesteApi
     {
         [Test]
-        public async Task DeveRetornarAccessToken()
+        public async Task DeveRetornarAccessTokenQuandoNomeDoUsuarioESenhaEstãoCorretos()
         {
-            var usuario = UsuarioBuilder.Generate();
+            var usuario = UsuarioBuilder.Gerar("senha");
             _contextoParaTestes.GravaUsuario(usuario);
             var resposta = await _httpClient.PostAsJsonAsync("/api/autenticacao/login", new {usuario = usuario.Username, senha = "senha"} );
 
@@ -27,6 +27,17 @@ namespace AeraIntegrationTest
             {
                 model.access_token.Should().NotBeNull();
             });
+        }
+        
+        [Test]
+        public async Task DeveRetornarNãoAutorizadoQuandoSenhaEstáErrada()
+        {
+            var usuario = UsuarioBuilder.Gerar("senha");
+            _contextoParaTestes.GravaUsuario(usuario);
+            var resposta = await _httpClient.PostAsJsonAsync("/api/autenticacao/login",
+                new {usuario = usuario.Username, senha = "senha_que_nao_existe"} );
+
+            resposta.Should().Be401Unauthorized();
         }
         
         [Test]

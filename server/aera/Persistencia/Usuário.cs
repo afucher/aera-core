@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace aera_core
 {
     [Table("Users")]
-    public class User
+    public class Usuário
     {
-        public User()
+        public Usuário()
         {
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;

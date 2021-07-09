@@ -27,7 +27,7 @@ namespace AeraIntegrationTest
             contexto.SaveChanges();
         }
         
-        public static EntityEntry<User> GravaUsuario(this AplicaçãoContexto contexto, User usuario)
+        public static EntityEntry<Usuário> GravaUsuario(this AplicaçãoContexto contexto, Usuário usuario)
         {
             var clienteCriado = contexto.Usuarios.Add(usuario);
             contexto.SaveChanges();

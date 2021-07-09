@@ -17,7 +17,7 @@ namespace aera_core.Persistencia
         public DbSet<PagamentoDB> Pagamentos { get; set; }
         public DbSet<TurmaAluno> Matriculas { get; set; }
         
-        public DbSet<User> Usuarios { get; set; }
+        public DbSet<Usuário> Usuarios { get; set; }
         public AplicaçãoContexto(DbContextOptions opções) : base(opções) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -92,7 +92,7 @@ namespace aera_core.Persistencia
                     .HasConstraintName("fkey_group_client");
             });
             
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Usuário>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 

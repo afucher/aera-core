@@ -12,14 +12,14 @@ namespace AeraIntegrationTest
         [Test]
         public void DeveFazerHashDaSenha()
         {
-            var usuario = new User
+            var usuario = new Usuário
             {
                 Email = "a@a.com.br",
                 Username = "a",
                 Password = "senha"
             };
-            var repositorio = GetService<IUsuarioPort>();
-            repositorio.CriaUsuario(usuario);
+            var repositorio = GetService<IUsuárioPort>();
+            repositorio.Criar(usuario);
 
             var usuarioBanco = _contextoParaTestes.Usuarios.First();
             usuarioBanco.Password.Should().NotBe("senha");
@@ -29,16 +29,15 @@ namespace AeraIntegrationTest
         [Test]
         public async Task DeveBuscarPorNomeDeUsuario()
         {
-            var usuario = new User
+            var usuario = new Usuário
             {
                 Username = "nome de usuario",
                 Password = "senhaaa",
                 Email = "a@a.com.br"
             };
-            _contextoParaTestes.Usuarios.Add(usuario);
-            _contextoParaTestes.SaveChanges();
+            _contextoParaTestes.GravaUsuario(usuario);
             
-            var repositorio = GetService<IUsuarioPort>();
+            var repositorio = GetService<IUsuárioPort>();
             var usuarioDoBanco = await repositorio.ObterPor(usuario.Username);
 
             usuarioDoBanco.Should().NotBeNull().And.BeEquivalentTo(usuario);
@@ -47,7 +46,14 @@ namespace AeraIntegrationTest
         [Test]
         public async Task NãoDeveRetornarQuandoUsuarioNãoExiste()
         {
-            var repositorio = GetService<IUsuarioPort>();
+            var usuario = new Usuário
+            {
+                Username = "nome de usuario",
+                Password = "senhaaa",
+                Email = "a@a.com.br"
+            };
+            _contextoParaTestes.GravaUsuario(usuario);
+            var repositorio = GetService<IUsuárioPort>();
             var usuarioDoBanco = await repositorio.ObterPor("nao_existe");
 
             usuarioDoBanco.Should().BeNull();

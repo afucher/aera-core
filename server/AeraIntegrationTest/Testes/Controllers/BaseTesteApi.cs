@@ -10,15 +10,15 @@ namespace AeraIntegrationTest
     {
         protected HttpClient _httpClient;
         protected string _token;
-        protected User usuarioLogado;
+        protected Usuário usuarioLogado;
 
         [SetUp]
         public void ConfiguraHttpClient()
         {
             _httpClient = AmbienteDeTestes.Factory.CreateClient();
-            usuarioLogado = new User {Username = "usuarioTeste", Password = "senhaTeste"};
-            GetService<IUsuarioPort>().CriaUsuario(usuarioLogado);
-            _token = Helpers.obterAccessToken(_httpClient, "usuarioTeste", "senhaTeste").Result;
+            usuarioLogado = new Usuário {Username = "usuarioTeste", Password = "senhaTeste"};
+            GetService<IUsuárioPort>().Criar(usuarioLogado);
+            _token = Helpers.ObterAccessToken(_httpClient, "usuarioTeste", "senhaTeste").Result;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
         }
     }
