@@ -11,7 +11,7 @@ namespace AeraIntegrationTest
     }
     public static class Helpers
     {
-        public static async Task<string> obterAccessToken(HttpClient httpClient, string usuario, string senha)
+        public static async Task<string> ObterAccessToken(HttpClient httpClient, string usuario, string senha)
         {
             var response = await httpClient.PostAsJsonAsync("/api/autenticacao/login", new {usuario, senha});
             var token = await response.Content.ReadAsAsync<AccessToken>();
