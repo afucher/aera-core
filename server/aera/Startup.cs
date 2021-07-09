@@ -64,8 +64,8 @@ namespace aera_core
             services.AddScoped<ProfessoresServiço>();
             services.AddScoped<IPagamentosPort, PagamentoRepositório>();
             services.AddScoped<PagamentosServiço>();
-            services.AddScoped<IUsuarioPort, UsuarioRepositorio>();
-            services.AddScoped<AutenticacaoServico>();
+            services.AddScoped<IUsuárioPort, UsuárioRepositório>();
+            services.AddScoped<Autenticador>();
             
             var configTokenSection = Configuration.GetSection("TokenSettings");
             var configToken = configTokenSection.Get<TokenSettings>();
@@ -139,13 +139,5 @@ namespace aera_core
                 }
             });   
         }
-    }
-
-    public class TokenSettings
-    {
-        public string ValidoEm { get; set; }
-        public string Secret { get; set; }
-        public int ExpiracaoMinutos { get; set; }
-        public string Emissor { get; set; }
     }
 }

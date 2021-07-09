@@ -12,11 +12,11 @@ namespace AeraUnitTest.Domain
         [Test]
         public async Task DeveRetornarUsuarioQuandoAutenticar()
         {
-            var usuario = Substitute.For<User>();
+            var usuario = Substitute.For<Usuário>();
             usuario.ValidaSenha("senha").Returns(true);
-            var mockUsuarioRepo = Substitute.For<IUsuarioPort>();
+            var mockUsuarioRepo = Substitute.For<IUsuárioPort>();
             mockUsuarioRepo.ObterPor("usuario").Returns(usuario);
-            var servico = new AutenticacaoServico(mockUsuarioRepo);
+            var servico = new Autenticador(mockUsuarioRepo);
 
             var usuarioLogado = await servico.Login("usuario","senha");
 
@@ -26,11 +26,11 @@ namespace AeraUnitTest.Domain
         [Test]
         public async Task DeveRetornarNuloQuandoNãoAutenticar()
         {
-            var usuario = Substitute.For<User>();
+            var usuario = Substitute.For<Usuário>();
             usuario.ValidaSenha("senha").Returns(false);
-            var mockUsuarioRepo = Substitute.For<IUsuarioPort>();
+            var mockUsuarioRepo = Substitute.For<IUsuárioPort>();
             mockUsuarioRepo.ObterPor("usuario").Returns(usuario);
-            var servico = new AutenticacaoServico(mockUsuarioRepo);
+            var servico = new Autenticador(mockUsuarioRepo);
 
             var usuarioLogado = await servico.Login("usuario","senha");
 

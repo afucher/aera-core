@@ -6,9 +6,10 @@ namespace AeraIntegrationTest.Builders
 {
     public class UsuarioBuilder
     {
-        static Faker<User> _faker => new Faker<User>()
-              .RuleFor(p => p.Password, _ => BCrypt.Net.BCrypt.HashPassword("senha"))
+        static Faker<Usuário> _faker => new Faker<Usuário>()
               .RuleFor(p => p.Username, f => f.Name.FirstName());
-        public static User Generate() => _faker.Generate();
+        public static Usuário Gerar(string senha) => _faker
+          .RuleFor(p => p.Password, _ => BCrypt.Net.BCrypt.HashPassword(senha))
+          .Generate();
     }
 }

@@ -17,12 +17,12 @@ namespace aera_core.Controllers
     [Route("api/[controller]")]
     public class AutenticacaoController : ControllerBase
     {
-        private AutenticacaoServico _autenticacaoServico;
+        private Autenticador _autenticador;
         private readonly IOptions<TokenSettings> _tokenSettings;
 
-        public AutenticacaoController(AutenticacaoServico autenticacaoServico, IOptions<TokenSettings> tokenSettings)
+        public AutenticacaoController(Autenticador autenticador, IOptions<TokenSettings> tokenSettings)
         {
-            _autenticacaoServico = autenticacaoServico;
+            _autenticador = autenticador;
             _tokenSettings = tokenSettings;
         }
 
@@ -30,7 +30,7 @@ namespace aera_core.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginDTO login)
         {
-            var usuario = await _autenticacaoServico.Login(login.Usuario, login.Senha);
+            var usuario = await _autenticador.Login(login.Usuario, login.Senha);
             if (usuario == null) return Unauthorized();
             return Ok(new {access_token = geraJWT()});
         }
@@ -45,7 +45,7 @@ namespace aera_core.Controllers
                 Subject = identityClaims,
                 Issuer = _tokenSettings.Value.Emissor,
                 Audience = _tokenSettings.Value.ValidoEm,
-                Expires = DateTime.UtcNow.AddMinutes(_tokenSettings.Value.ExpiracaoMinutos),
+                Expires = DateTime.UtcNow.AddMinutes(_tokenSettings.Value.MinutosParaExpirar),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
