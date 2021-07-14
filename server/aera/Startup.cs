@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 
 namespace aera_core
 {
@@ -35,25 +36,7 @@ namespace aera_core
             {
                 configuration.RootPath = ".";
             });
-            // var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-            // Console.WriteLine(">>>>>> " + databaseUrl);
-            // var databaseUri = new Uri(databaseUrl);
-            // var userInfo = databaseUri.UserInfo.Split(':');
-            //
-            // var builder = new NpgsqlConnectionStringBuilder
-            // {
-            //     Host = databaseUri.Host,
-            //     Port = databaseUri.Port,
-            //     Username = userInfo[0],
-            //     Password = userInfo[1],
-            //     Database = databaseUri.LocalPath.TrimStart('/')
-            // };
-            //
-            // services.AddDbContext<AplicaçãoContexto>(options => 
-            //     options.UseNpgsql(builder.ToString()));
-            // return ;
-            services.AddDbContext<AplicaçãoContexto>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("default")));
+            services.ConfiguraDbContext(Configuration);
             services.AddScoped<IClientesPort, ClienteRepositório>();
             services.AddScoped<IProfessoresPort, ClienteRepositório>();
             services.AddScoped<ClientesServiço>();
