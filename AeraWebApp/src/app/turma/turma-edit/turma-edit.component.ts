@@ -1,6 +1,7 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoDynamicFormField, PoLookupColumn, PoModalAction, PoModalComponent, PoNotificationService, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Cliente } from 'src/app/models/cliente';
 import { Turma } from 'src/app/models/turma';
@@ -136,6 +137,7 @@ export class TurmaEditComponent implements OnInit {
   constructor(
     public poNotification: PoNotificationService,
     private route: ActivatedRoute,
+    private router: Router,
     private turmaService: TurmaService,
     private fb: FormBuilder) {
       this.frequenciaForm = this.fb.group({frequencia: ['']});
@@ -154,6 +156,10 @@ export class TurmaEditComponent implements OnInit {
     this.modalPagamentos.open();
   }
 
+  listaPresenca() {
+    window.open(`impressao/lista-presenca/${this.turma.id}`, '_blank');
+  }
+
   formataHorário(horario: string) {
     if (horario.length === 4) { return horario.slice(0, 2) + ':' + horario.slice(2); }
     return horario;
@@ -168,8 +174,7 @@ export class TurmaEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // tslint:disable-next-line: radix
-    const id = parseInt(this.route.snapshot.paramMap.get('id'));
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.turmaService.obter(id)
       .subscribe(turma => this.turma = turma);
   }

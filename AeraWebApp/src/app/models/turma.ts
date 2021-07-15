@@ -10,4 +10,5 @@ export interface Turma {
   dataFinal?: string;
   quantidadeDeAulas?: number;
   alunos?: Cliente[];
+  professor?: string;
 }

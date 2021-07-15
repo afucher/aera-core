@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AutenticacaoService } from './autenticacao/autenticacao.service';
 import { Component } from '@angular/core';
 
@@ -11,7 +11,7 @@ import { PoMenuItem } from '@po-ui/ng-components';
 })
 export class AppComponent {
 
-  constructor(private autenticacao: AutenticacaoService, private router: Router) {}
+  constructor(private autenticacao: AutenticacaoService, private router: Router, private route: ActivatedRoute) {}
 
   readonly menus: Array<PoMenuItem> = [
     {label: 'AERA', link: '/' },
@@ -32,6 +32,6 @@ export class AppComponent {
   ];
 
   mostraMenu() {
-    return this.autenticacao.estaLogado();
+    return this.autenticacao.estaLogado() && !this.router.url.includes('/impressao');
   }
 }

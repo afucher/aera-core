@@ -1,3 +1,4 @@
+import { ListaPresencaComponent } from './impressao/lista-presenca/lista-presenca.component';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor'
     CursoNovoComponent,
     CursoResumoComponent,
     LoginComponent,
+    ListaPresencaComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@
   <div class="po-row">
     <po-button p-label="Matricular aluno" (p-click)="abreMatricular()"> </po-button>
     <po-button p-label="Gerar pagamentos" (p-click)="abrePagamentos()"> </po-button>
-    <botao-download-lista-presenca [turma]="turma"></botao-download-lista-presenca>
+    <po-button p-label="Lista de presença" (p-click)="listaPresenca()" p-icon="po-icon-export"></po-button>
   </div>
   <po-table
     p-sort="true"
