@@ -17,6 +17,7 @@ import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-lis
 import { AuthGuardService } from './autenticacao/auth-guard.service';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'clientes', component: ClientListComponent, canActivate: [AuthGuardService]},
   {path: 'clientes/novo', component: ClienteNovoComponent, canActivate: [AuthGuardService]},
