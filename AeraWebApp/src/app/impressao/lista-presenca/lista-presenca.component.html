@@ -1,0 +1,19 @@
+<h2 style="font-family: Lato">Regulus</h2>
+<p>Lista de Presença do curso: {{turma.curso}}</p>
+<p>Início: {{turma.dataInicial}} - Término: {{turma.dataFinal}}</p>
+<table style="width: 100%;">
+    <tr>
+        <td>Professor(a): {{turma.professor}}</td>
+        <td>Data: __/__/____</td>
+    </tr>
+</table>
+<hr />
+<br>
+
+<table style="width: 100%;">
+    <tr *ngFor="let aluno of turma.alunos">
+        <td style="width: 50%">{{aluno.nome}}</td>
+        <td style="width: 50%">Assinatura: ____________________________</td>
+    </tr>
+</table>
+
