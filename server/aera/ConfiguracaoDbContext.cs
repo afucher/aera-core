@@ -27,9 +27,9 @@ namespace aera_core
         {
             try
             {
-                return Environment.GetEnvironmentVariable("DATABASE_URL") != "";
+                return Environment.GetEnvironmentVariable("DATABASE_URL") != null;
             }
-            catch (ArgumentNullException _)
+            catch (Exception e)
             {
                 return false;
             }
