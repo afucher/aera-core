@@ -23,8 +23,7 @@ export class PagamentoDetalhesComponent implements OnInit {
     private clienteService: ClienteService) { }
 
   ngOnInit(): void {
-    // tslint:disable-next-line: radix
-    const id = parseInt(this.route.snapshot.paramMap.get('id'));
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.clienteService.obterDetalhePagamentos(id)
       .subscribe(c => this.cliente = c);
   }
