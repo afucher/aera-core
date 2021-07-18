@@ -11,6 +11,7 @@ namespace aera_core.Domain
         public PagamentoDB Obter(int id);
         public PagamentoDB Pagar(int groupId, int installment);
         public IReadOnlyCollection<PagamentoDB> ObterDoAlunoDaTurma(int turmaId, int alunoId);
+        public IReadOnlyCollection<PagamentoDB> ObterPorMatricula(int matriculaId);
 
         public void AdicionarPagamentos(List<PagamentoDB> pagamentos);
     }
