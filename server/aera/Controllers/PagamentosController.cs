@@ -36,6 +36,13 @@ namespace aera_core.Controllers
             return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
         }
         
+        [HttpGet("matricula/{matriculaId}")]
+        public List<PagamentoDTO> Get(int matriculaId)
+        {
+            var pagamentos = _pagamentosServiço.ObterPorMatricula(matriculaId);
+            return pagamentos.Select(PagamentoDTO.De).ToList();
+        }
+        
         [HttpGet("turma/{turmaId}/aluno/{alunoId}")]
         public List<PagamentoDTO> Get(int turmaId, int alunoId)
         {

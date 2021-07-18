@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using aera_core;
+using aera_core.Models;
 using aera_core.Persistencia;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -18,6 +19,12 @@ namespace AeraIntegrationTest
             return clienteCriado;
         }
 
+        public static EntityEntry<PagamentoDB> GravaPagamento(this AplicaçãoContexto contexto, PagamentoDB pagamento)
+        {
+            var pagamentoCriado = contexto.Pagamentos.Add(pagamento);
+            contexto.SaveChanges();
+            return pagamentoCriado;
+        }
         public static void
             GravaProfessores(this AplicaçãoContexto contexto, IReadOnlyCollection<ClienteDB> professores) =>
             GravaClientes(contexto, professores);

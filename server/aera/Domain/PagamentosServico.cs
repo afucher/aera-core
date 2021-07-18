@@ -32,6 +32,10 @@ namespace aera_core.Domain
             return _pagamentosPort.ObterDoAlunoDaTurma(turmaId, alunoId);
         }
 
+        public IReadOnlyCollection<PagamentoDB> ObterPorMatricula(int matriculaId)
+        {
+            return _pagamentosPort.ObterPorMatricula(matriculaId);
+        }
         public void GerarPagamentos(TurmaDB turma, int parcelas, decimal valor, DateTime data)
         {
             var pagamentos =
