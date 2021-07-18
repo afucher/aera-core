@@ -4,4 +4,19 @@
   [p-actions]="actions"
   [p-fields]="fields"
   p-title="Pagamentos">
+
 </po-page-dynamic-table>
+
+<po-modal p-click-out="true" p-title="Pagamentos" #modalMatricula>
+  <div class="po-row">
+    <po-number class="po-sm-2" p-label="Valor" [(ngModel)]="valor"></po-number>
+    <po-number class="po-sm-2" p-label="Parcelas" [(ngModel)]="numeroDeParcelas"></po-number>
+    <po-datepicker class="po-sm-4" p-label="Data Inicial" [(ngModel)]="dataInicial"></po-datepicker>
+  </div>
+  <po-button p-label="Gerar" (p-click)="gerarPagamentos()"></po-button>
+  <po-table
+    p-container="shadow"
+    [p-columns]="pagamentoColumns"
+    [p-items]="pagamentos"></po-table>
+
+</po-modal>

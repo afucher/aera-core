@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { PagamentoService } from 'src/app/pagamento.service';
+import { Pagamento } from './../../models/pagamento';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoDynamicFormField } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { PoPageDynamicTableActions, PoPageDynamicTableCustomTableAction, PoPageDynamicTableFilters } from '@po-ui/ng-templates';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-pagamento-list',
@@ -11,9 +14,9 @@ import { PoPageDynamicTableActions, PoPageDynamicTableCustomTableAction, PoPageD
 export class PagamentoListComponent implements OnInit {
 
   readonly actions: PoPageDynamicTableActions = {};
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _pagamentos: PagamentoService) { }
   tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
-    { label: 'Alterar', action: ({id}) => this.router.navigate([`/pagamentos/${id}`]) }
+    { label: 'Alterar', action: ({idMatricula}) => this.abreModal(idMatricula)}
   ];
 
   public readonly fields: Array<PoPageDynamicTableFilters> = [
@@ -21,10 +24,55 @@ export class PagamentoListComponent implements OnInit {
     { property: 'valor', label: 'Valor', type: 'currency', format: 'BRL'},
     { property: 'parcela', label: 'Parcela' },
     { property: 'totalDeParcelas', label: 'Total de parcelas' },
+    { property: 'dataDeVencimento', label: 'Vencimento', type: 'date' },
     { property: 'pago', label: 'Pago', type: 'boolean', booleanFalse: 'Em aberto', booleanTrue: 'Pago' },
   ];
 
+  pagamentoColumns: Array<any> = [
+    {property: 'dataDeVencimento', label: 'Vencimento', type: 'date', readonly: true},
+    {property: 'valor', label: 'Valor', type: 'currency', format: 'BRL', readonly: true},
+    {property: 'parcela', label: 'Parcela', readonly: true},
+    {property: 'totalDeParcelas', label: 'Parcelas', readonly: true},
+    {property: 'pago', label: 'Pago?', type: 'boolean', boolean: {trueLabel: 'Pago', falseLabel: 'Em aberto'}, readonly: true},
+  ];
+  pagamentoActions: Array<PoTableAction> = [
+    { action: () => {}, label: 'Atualizar', disabled: pagamento => pagamento.pago }
+  ];
+
+  pagamentos: Pagamento[] = [];
+  numeroDeParcelas: number;
+  valor: number;
+  dataInicial: string;
+
+  @ViewChild('modalMatricula', { static: true }) poModal: PoModalComponent;
+
+
   ngOnInit(): void {
+  }
+
+  gerarPagamentos() {
+    this.pagamentos = Array(this.numeroDeParcelas).fill(null).map((_, index) => {
+      return {
+        dataDeVencimento: DateTime.fromFormat(this.dataInicial, 'yyyy-MM-dd').plus({month: 1 * index}).toFormat('yyyy-MM-dd'),
+        idMatricula: 1,
+        pago: false,
+        parcela: index + 1,
+        totalDeParcelas: this.numeroDeParcelas,
+        valor: this.valor
+      };
+    });
+  }
+
+  abreModal(matriculaId: number) {
+    this._pagamentos.obterPorMatricula(matriculaId).subscribe(
+      p => {
+        this.pagamentos = p;
+        this.numeroDeParcelas = this.pagamentos[0].totalDeParcelas;
+        this.valor = this.pagamentos[0].valor;
+        this.dataInicial = this.pagamentos[0].dataDeVencimento;
+        this.poModal.open();
+      }
+    );
   }
 
 }
