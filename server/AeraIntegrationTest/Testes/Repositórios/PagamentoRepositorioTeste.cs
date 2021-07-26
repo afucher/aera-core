@@ -32,7 +32,7 @@ namespace AeraIntegrationTest
         [Test]
         public void ObterPorMatricula_DeveRetornarListaDePagamentos()
         {
-            var pagamentosBanco = PagamentoBuilder.ParaMatricula(2).Generate(2);
+            var pagamentosBanco = PagamentoBuilder.ParaMatricula(2).GerarParcelas(2);
             _contextoParaTestes.Pagamentos.AddRange(pagamentosBanco);
             _contextoParaTestes.SaveChanges();
             var repositório = GetService<IPagamentosPort>();
