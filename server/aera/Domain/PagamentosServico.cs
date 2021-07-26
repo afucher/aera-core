@@ -16,12 +16,15 @@ namespace aera_core.Domain
             _pagamentosPort = pagamentosPort;
         }
 
-        
         public ListaPaginada<PagamentoDB> ObterPagamentos(OpçõesBusca opções)
         {
             return _pagamentosPort.ObterPagamentos(opções);
         }
 
+        public ListaPaginada<PagamentoDB> ObterPagamentosPendentes(OpçõesBusca opções)
+        {
+            return _pagamentosPort.ObterPagamentosPendentes(opções);
+        }
         public PagamentoDB Pagar(int clientGroupId, int installment)
         {
             return _pagamentosPort.Pagar(clientGroupId, installment);

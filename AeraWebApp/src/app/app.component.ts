@@ -24,7 +24,12 @@ export class AppComponent {
     {label: 'Turmas', link: '/turmas',
       subItems: [{label: 'Todas', link: '/turmas'},
                  {label: 'Nova', link: '/turmas/nova'}]},
-    {label: 'Pagamentos', link: '/pagamentos'},
+    {label: 'Turmas', link: '/turmas',
+      subItems: [{label: 'Todas', link: '/turmas'},
+                 {label: 'Nova', link: '/turmas/nova'}]},
+    {label: 'Pagamentos', link: '/pagamentos',
+      subItems: [{label: 'Todos', link: '/pagamentos'},
+                 {label: 'Pendentes', link: '/pagamentos/pendentes'}]},
     {label: 'Logout', action: () => {
       this.autenticacao.logout();
       this.router.navigate(['/login']);

@@ -1,3 +1,4 @@
+import { ListaPendentesComponent } from './pagamento/lista-pendentes/lista-pendentes.component';
 import { ListaPresencaComponent } from './impressao/lista-presenca/lista-presenca.component';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,7 +48,9 @@ import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor'
     CursoNovoComponent,
     CursoResumoComponent,
     LoginComponent,
-    ListaPresencaComponent
+    ListaPresencaComponent,
+    PagamentoListComponent,
+    ListaPendentesComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,10 @@ import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor'
     PoTemplatesModule,
     PoPageLoginModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    PagamentoListComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

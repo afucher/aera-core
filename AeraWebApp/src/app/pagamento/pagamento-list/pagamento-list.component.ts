@@ -1,9 +1,9 @@
 import { PagamentoService } from 'src/app/pagamento.service';
 import { Pagamento } from './../../models/pagamento';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoDynamicFormField, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
-import { PoPageDynamicTableActions, PoPageDynamicTableCustomTableAction, PoPageDynamicTableFilters } from '@po-ui/ng-templates';
+import { PoModalComponent, PoTableAction } from '@po-ui/ng-components';
+import { PoPageDynamicTableActions, PoPageDynamicTableComponent, PoPageDynamicTableCustomTableAction, PoPageDynamicTableFilters } from '@po-ui/ng-templates';
 import { DateTime } from 'luxon';
 
 @Component({
@@ -18,6 +18,9 @@ export class PagamentoListComponent implements OnInit {
   tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
     { label: 'Alterar', action: ({idMatricula}) => this.abreModal(idMatricula)}
   ];
+  url: string;
+
+  @Input() somentePendentes = false;
 
   public readonly fields: Array<PoPageDynamicTableFilters> = [
     { property: 'nomeAluno', label: 'Aluno'},
@@ -45,9 +48,15 @@ export class PagamentoListComponent implements OnInit {
   dataInicial: string;
 
   @ViewChild('modalMatricula', { static: true }) poModal: PoModalComponent;
+  @ViewChild(PoPageDynamicTableComponent, { static: true }) table: PoPageDynamicTableComponent;
 
 
   ngOnInit(): void {
+    if(this.somentePendentes) {
+      this.url = '/api/pagamentos/pendentes';
+    } else {
+      this.url = '/api/pagamentos';
+    }
   }
 
   gerarPagamentos() {

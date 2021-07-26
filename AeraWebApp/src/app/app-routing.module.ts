@@ -1,3 +1,4 @@
+import { ListaPendentesComponent } from './pagamento/lista-pendentes/lista-pendentes.component';
 import { ListaPresencaComponent } from './impressao/lista-presenca/lista-presenca.component';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { NgModule } from '@angular/core';
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'cursos/:id/detalhes', component: CursoResumoComponent, canActivate: [AuthGuardService]},
   {path: 'cursos/:id', component: CursoEditComponent, canActivate: [AuthGuardService]},
   {path: 'pagamentos', component: PagamentoListComponent, canActivate: [AuthGuardService]},
+  {path: 'pagamentos/pendentes', component: ListaPendentesComponent, canActivate: [AuthGuardService]},
   {path: 'impressao/lista-presenca/:turmaId', component: ListaPresencaComponent}
 ];
 

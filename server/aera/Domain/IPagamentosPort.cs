@@ -8,6 +8,7 @@ namespace aera_core.Domain
     public interface IPagamentosPort
     {
         public ListaPaginada<PagamentoDB> ObterPagamentos(OpçõesBusca opçõesBusca);
+        public ListaPaginada<PagamentoDB> ObterPagamentosPendentes(OpçõesBusca opçõesBusca);
         public PagamentoDB Obter(int id);
         public PagamentoDB Pagar(int groupId, int installment);
         public IReadOnlyCollection<PagamentoDB> ObterDoAlunoDaTurma(int turmaId, int alunoId);

@@ -36,6 +36,20 @@ namespace aera_core.Controllers
             return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
         }
         
+        [HttpGet("pendentes")]
+        public POUIListResponse<PagamentoDTO> Pendentes([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string search)
+        {
+            var opções = new OpçõesBusca
+            {
+                Página = page,
+                LimitePágina = pageSize,
+            };
+            var pagamentos = _pagamentosServiço.ObterPagamentosPendentes(opções);
+            var pagamentosDTO = pagamentos.Select(PagamentoDTO.De).ToArray();
+
+            return new POUIListResponse<PagamentoDTO>(pagamentosDTO, pagamentos.TemMaisItens);
+        }
+        
         [HttpGet("matricula/{matriculaId}")]
         public List<PagamentoDTO> Get(int matriculaId)
         {

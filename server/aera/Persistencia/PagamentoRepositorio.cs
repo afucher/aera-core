@@ -31,6 +31,19 @@ namespace aera_core.Persistencia
             return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
         }
 
+        public ListaPaginada<PagamentoDB> ObterPagamentosPendentes(OpçõesBusca opções)
+        {
+            var total = _contexto.Pagamentos.Count();
+            var pagamentos =  _contexto.Pagamentos
+                .Where(p => p.Paid == false || p.Paid == null)
+                .OrderBy(p => p.DueDate)
+                .Skip((opções.Página-1) * opções.LimitePágina)
+                .Take(opções.LimitePágina)
+                .Include(p => p.TurmaAluno)
+                .ThenInclude(ta => ta.Cliente)
+                .ToList();
+            return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
+        }
         public IReadOnlyCollection<PagamentoDB> ObterPorMatricula(int matriculaId)
         {
             return _contexto.Pagamentos
