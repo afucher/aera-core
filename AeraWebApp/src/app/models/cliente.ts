@@ -38,5 +38,6 @@ export const clienteFields: Array<PoDynamicFormField> = [
   { property: 'hora_nascimento', label: 'Hora de Nascimento', gridColumns: 2, gridSmColumns: 12, type: 'time'},
   { property: 'local_nascimento', label: 'Local de Nascimento', gridColumns: 4, gridSmColumns: 12},
   { property: 'codigoAuxiliar', label: 'Código Auxiliar', gridColumns: 4, gridSmColumns: 12},
-  { property: 'observacao', label: 'Observação', gridColumns: 6, gridSmColumns: 12, rows: 3}
+  { property: 'observacao', label: 'Observação', gridColumns: 6, gridSmColumns: 12, rows: 3},
+  { property: 'professor', label: 'Professor', type: 'boolean'}
 ];
