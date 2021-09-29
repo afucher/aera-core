@@ -40,5 +40,12 @@ namespace AeraIntegrationTest
             contexto.SaveChanges();
             return clienteCriado;
         }
+        
+        public static EntityEntry<TurmaDB> GravaTurma(this AplicaçãoContexto contexto, TurmaDB turma)
+        {
+            var turmaCriada = contexto.Turmas.Add(turma);
+            contexto.SaveChanges();
+            return turmaCriada;
+        }
     }
 }
