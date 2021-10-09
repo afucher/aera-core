@@ -45,6 +45,7 @@ export class ClienteNovoComponent implements OnInit {
       .subscribe(
         (c) => {
           this.poNotification.success('Cliente criado com sucesso!');
+          e.form.reset();
         },
         (err) => this.poNotification.error((err.error as string).split('/n')[0])
       );
