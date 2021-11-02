@@ -94,6 +94,40 @@ namespace aera_core.Controllers
 
             return new POUIListResponse<TurmaDTO>(turmasDto, turmas.TemMaisItens);
         }
+
+        [HttpGet("pagamentos")]
+        public ActionResult<object> Pagamentos(DateTime De, DateTime Ate)
+        {
+            var turmas = _pagamentosServiço.ObterTurmasComPagamentoAberto(De, Ate);
+            return turmas.Select(t => new
+            {
+                t.id,
+                DataInicial = t.start_date.ToString("yyyy-MM-dd"),
+                DataFinal = t.end_date.ToString("yyyy-MM-dd"),
+                HorárioInicial = t.start_hour.ToString(@"hh\:mm"),
+                HorárioFinal = t.end_hour.ToString(@"hh\:mm"),
+                NomeCurso = t.Curso.name,
+                DiaDaSemana = t.start_date.DayOfWeek,
+                Matriculas = t.TurmaAlunos
+                    .Select(m => new
+                    {
+                        m.id,
+                        pagamentos = m.Pagamentos.Select(p => new
+                        {
+                            Pago = p.Paid,
+                            DataDeVencimento = p.DueDate,
+                            Parcela = p.Installment,
+                            TotalDeParcelas = p.NumberInstallments,
+                            Valor = p.Value
+                        }), 
+                        aluno = new
+                        {
+                            m.Cliente.id,
+                            Nome = m.Cliente.name
+                        }
+                    })
+            }).ToList();
+        }
         
         [HttpPost("{id}/matricular")]
         public ActionResult<TurmaDTO> Matricular(int id, [FromBody] int alunoId)

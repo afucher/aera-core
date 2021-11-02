@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using aera_core.Domain;
 using aera_core.Helpers;
@@ -44,6 +43,7 @@ namespace aera_core.Persistencia
                 .ToList();
             return new ListaPaginada<PagamentoDB>(pagamentos, total, opções.Página, opções.LimitePágina);
         }
+
         public IReadOnlyCollection<PagamentoDB> ObterPorMatricula(int matriculaId)
         {
             return _contexto.Pagamentos

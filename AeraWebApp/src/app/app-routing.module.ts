@@ -16,6 +16,7 @@ import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
 import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component';
 import { PagamentoListComponent } from './pagamento/pagamento-list/pagamento-list.component';
 import { AuthGuardService } from './autenticacao/auth-guard.service';
+import { PagamentoListFilterComponent } from './pagamento/pagamento-list-filter/pagamento-list-filter.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
@@ -31,9 +32,9 @@ const routes: Routes = [
   {path: 'cursos/novo', component: CursoNovoComponent, canActivate: [AuthGuardService]},
   {path: 'cursos/:id/detalhes', component: CursoResumoComponent, canActivate: [AuthGuardService]},
   {path: 'cursos/:id', component: CursoEditComponent, canActivate: [AuthGuardService]},
-  {path: 'pagamentos', component: PagamentoListComponent, canActivate: [AuthGuardService]},
+  {path: 'pagamentos', component: PagamentoListFilterComponent, canActivate: [AuthGuardService]},
   {path: 'pagamentos/pendentes', component: ListaPendentesComponent, canActivate: [AuthGuardService]},
-  {path: 'impressao/lista-presenca/:turmaId', component: ListaPresencaComponent}
+  {path: 'impressao/lista-presenca/:turmaId', component: ListaPresencaComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

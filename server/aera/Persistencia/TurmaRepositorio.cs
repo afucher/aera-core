@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using aera_core.Domain;
@@ -93,6 +94,18 @@ namespace aera_core.Persistencia
                             .Include(m => m.Pagamentos)
                             .Where(m => m.ClienteId == clientId)
                             .ToList();
+        }
+
+        public IReadOnlyCollection<TurmaDB> ObterPagamentos(DateTime De, DateTime Até)
+        {
+            return _contexto.Turmas
+                .Include(t => t.Curso)
+                .Include(t => t.TurmaAlunos)
+                .ThenInclude(m => m.Pagamentos.Where(p => p.Paid == null || p.Paid == false).Where(p => p.DueDate <= Até && p.DueDate >= De))
+                .Include(t => t.TurmaAlunos)
+                .ThenInclude(m => m.Cliente)
+                .Where(t => t.TurmaAlunos.Any(m => m.Pagamentos.Any(p => p.Paid == false && p.DueDate <= Até && p.DueDate >= De)))
+                .ToList();
         }
     }
 }

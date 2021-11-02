@@ -25,8 +25,7 @@ export class AppComponent {
       subItems: [{label: 'Todas', link: '/turmas'},
                  {label: 'Nova', link: '/turmas/nova'}]},
     {label: 'Pagamentos', link: '/pagamentos',
-      subItems: [{label: 'Todos', link: '/pagamentos'},
-                 {label: 'Pendentes', link: '/pagamentos/pendentes'}]},
+      subItems: [{label: 'Pendentes', link: '/pagamentos'}]},
     {label: 'Logout', action: () => {
       this.autenticacao.logout();
       this.router.navigate(['/login']);

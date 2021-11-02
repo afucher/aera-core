@@ -27,6 +27,7 @@ import { DownloadAtestadoComponent } from './download/download-atestado/download
 import { CursoNovoComponent } from './curso/curso-novo/curso-novo.component';
 import { CursoResumoComponent } from './curso/curso-resumo/curso-resumo.component';
 import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor';
+import { PagamentoListFilterComponent } from './pagamento/pagamento-list-filter/pagamento-list-filter.component';
 
 @NgModule({
 
@@ -49,8 +50,8 @@ import { AutenticacaoInterceptor } from './autenticacao/AutenticacaoInterceptor'
     CursoResumoComponent,
     LoginComponent,
     ListaPresencaComponent,
-    PagamentoListComponent,
-    ListaPendentesComponent
+    ListaPendentesComponent,
+    PagamentoListFilterComponent,
   ],
   imports: [
     BrowserModule,

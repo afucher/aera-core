@@ -10,10 +10,12 @@ namespace aera_core.Domain
     public class PagamentosServiço
     {
         private readonly IPagamentosPort _pagamentosPort;
+        private readonly ITurmasPort _turmasPort;
 
-        public PagamentosServiço(IPagamentosPort pagamentosPort)
+        public PagamentosServiço(IPagamentosPort pagamentosPort, ITurmasPort turmasPort)
         {
             _pagamentosPort = pagamentosPort;
+            _turmasPort = turmasPort;
         }
 
         public ListaPaginada<PagamentoDB> ObterPagamentos(OpçõesBusca opções)
@@ -38,6 +40,11 @@ namespace aera_core.Domain
         public IReadOnlyCollection<PagamentoDB> ObterPorMatricula(int matriculaId)
         {
             return _pagamentosPort.ObterPorMatricula(matriculaId);
+        }
+        
+        public IReadOnlyCollection<TurmaDB> ObterTurmasComPagamentoAberto(DateTime De, DateTime Até)
+        {
+            return _turmasPort.ObterPagamentos(De, Até);
         }
         public void GerarPagamentos(TurmaDB turma, int parcelas, decimal valor, DateTime data)
         {

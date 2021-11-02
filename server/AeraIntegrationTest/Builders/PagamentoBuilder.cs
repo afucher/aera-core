@@ -9,11 +9,19 @@ namespace AeraIntegrationTest.Builders
     public static class PagamentoBuilder
     {
         static Faker<PagamentoDB> _faker => new Faker<PagamentoDB>()
-            .RuleFor(p => p.Installment, f => f.Random.Number());
+            .RuleFor(p => p.Installment, f => f.Random.Number())
+            .RuleFor(p => p.DueDate, f => f.Date.Recent());
 
         public static Faker<PagamentoDB> ParaMatricula(int matricula) => _faker
             .RuleFor(p => p.ClientGroupId, _ => matricula);
 
+        public static List<PagamentoDB> GerarParcelas(int numeroDeParcelas)
+        {
+            var parcela = 1;
+            return _faker
+                .RuleFor(p => p.Installment, _ => parcela++)
+                .Generate(numeroDeParcelas);
+        }
         public static List<PagamentoDB> GerarParcelas(this Faker<PagamentoDB> faker, int numeroDeParcelas)
         {
             var parcela = 1;

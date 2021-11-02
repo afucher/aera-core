@@ -1,0 +1,19 @@
+<po-page-list p-title="Lista de pagamentos">
+  <div class="po-row">
+    <po-datepicker-range
+        class="po-md-3"
+        name="datepickerRange"
+        p-label="Data"
+        [(ngModel)]="periodo"
+        (p-change)="obterPagamentos"> </po-datepicker-range>
+      <po-button p-label="Atualizar" (p-click)="obterPagamentos()"></po-button>
+  </div>
+  <div class="po-row">
+    <po-disclaimer-group [p-disclaimers]="disclaimers" (p-remove)="remove($event)"> </po-disclaimer-group>
+  </div>
+  <po-table [p-items]="pagamentosFiltrados"
+            [p-columns]="pagamentoColumns"
+            [p-actions]="pagamentoActions">
+
+  </po-table>
+</po-page-list>

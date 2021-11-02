@@ -11,6 +11,7 @@ namespace AeraIntegrationTest.Builders
         public TurmaDBBuilder()
         {
             CustomInstantiator(f => new TurmaDB())
+                .RuleFor(x => x.id, f => f.Random.Int())
                 .RuleFor(x => x.TurmaAlunos, () => null)
                 .RuleFor(x => x.Alunos, () => null)
                 .RuleFor(x => x.Curso, () => new CursoDB())
